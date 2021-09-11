@@ -32,10 +32,3 @@
 
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__author/footer__author.css);
-
-* {
-  outline-width: 1px;
-  outline-style: solid;
-  outline-color: red;
-}
-
