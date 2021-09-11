@@ -1,7 +1,24 @@
 @import url(../vendor/normalize.css);
 @import url(../vendor/fonts/fonts.css);
+
 @import url(../blocks/page/page.css);
+@import url(../blocks/page/__header/page__header.css);
+
 @import url(../blocks/header/header.css);
+
+@import url(../blocks/logo/logo.css);
+
+@import url(../blocks/link/link.css);
+
 @import url(../blocks/profile/profile.css);
+
 @import url(../blocks/cards/cards.css);
+
 @import url(../blocks/footer/footer.css);
+
+/* * {
+  outline-width: 1px;
+  outline-style: solid;
+  outline-color: red;
+}
+ */
