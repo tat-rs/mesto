@@ -1,0 +1,12 @@
+.cards__link {
+  display: inline-block;
+  width: 22px;
+  height: 19px;
+  background-image: url(../../../images/like.svg);
+  margin-right: 5px;
+}
+
+.cards__link:active {
+  opacity: 1;
+  background-image: url(../../../images/like-active.svg);
+}
