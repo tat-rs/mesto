@@ -5,6 +5,7 @@
 @import url(../blocks/page/__section/page__section.css);
 @import url(../blocks/page/__header/page__header.css);
 @import url(../blocks/page/__portfolio/page__portfolio.css);
+@import url(../blocks/page/__cards/page__cards.css);
 
 @import url(../blocks/header/header.css);
 
@@ -30,6 +31,7 @@
 @import url(../blocks/cards/__link/cards__link.css);
 
 @import url(../blocks/footer/footer.css);
+@import url(../blocks/footer/__author/footer__author.css);
 
 * {
   outline-width: 1px;
