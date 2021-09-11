@@ -1,0 +1,10 @@
+.profile__link {
+  display: block;
+  box-sizing: border-box;
+  padding: 11px;
+  border: 1px solid #FFF;
+  background-image: url('../../../images/edit-button.svg');
+  background-size: 10px 10px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
