@@ -1,0 +1,10 @@
+.form {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  background-color: #fff;
+  width: 100%;
+  max-width: 430px;
+  padding: 34px 36px 37px;
+}
