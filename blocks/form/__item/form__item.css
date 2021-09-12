@@ -6,6 +6,7 @@
   line-height: 17px;
   border: 0;
   border-bottom: 1px solid #000000;
+  color: #000000;
 }
 
 .form__item:last-of-type {
