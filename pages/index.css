@@ -44,10 +44,3 @@
 @import url(../blocks/form/__item/form__item.css);
 
 @import url(../blocks/button/button.css);
-
-* {
-  outline-width: 1px;
-  outline-style: solid;
-  outline-color: red;
-}
-
