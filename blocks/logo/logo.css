@@ -1,6 +1,13 @@
 .logo {
   display: block;
   background-image: url(../../images/logo.svg);
+  background-size: cover;
   width: 142px;
   height: 33px;
+}
+
+@media (max-width: 590px) {
+  .logo {
+    margin-left: 8px;
+  }
 }

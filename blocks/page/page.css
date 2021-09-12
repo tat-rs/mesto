@@ -8,3 +8,9 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+@media (max-width: 580px) {
+  .page {
+    padding: 28px 0 36px;
+  }
+}

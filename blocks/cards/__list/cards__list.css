@@ -6,3 +6,15 @@
   margin: 0;
   padding: 0;
 }
+
+@media (max-width: 976px) {
+  .cards__list {
+    grid-template-columns: repeat(auto-fill, minmax(222px, 1fr));
+  }
+}
+
+@media (max-width: 590px) {
+  .cards__list {
+    gap: 20px;
+  }
+}

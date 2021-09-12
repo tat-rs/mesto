@@ -2,3 +2,9 @@
   margin-bottom: 40px;
   border-bottom: 1px solid #545454;
 }
+
+@media (max-width: 590px) {
+  .page__header {
+    margin-bottom: 40px;
+  }
+}

@@ -7,4 +7,13 @@
   background-size: 10px 10px;
   background-repeat: no-repeat;
   background-position: center;
+  position: absolute;
+  top: 0;
+  right: -42px;
+}
+
+@media (max-width: 705px) {
+  .profile__link {
+    right: -34px;
+  }
 }

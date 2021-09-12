@@ -5,3 +5,9 @@
   border-radius: 50%;
   margin-right: 30px;
 }
+
+@media (max-width: 590px) {
+  .profile__image {
+    margin: 0 0 26px 0;
+  }
+}

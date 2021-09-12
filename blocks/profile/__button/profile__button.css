@@ -1,11 +1,20 @@
 .profile__button {
-  display: block;
+  padding: 0;
+  max-width: 150px;
+  width: 100%;
   background-color: inherit;
   background-image: url('../../../images/add-button.svg');
   background-size: 22px;
   background-position: center;
   background-repeat: no-repeat;
-  box-sizing: border-box;
-  padding: 24px 74px;
+  min-height: 50px;
+  color: #fff;
+  background-color: #000;
   border: 1px solid #fff;
+}
+
+@media (max-width: 590px) {
+  .profile__button {
+    max-width: 100%;
+  }
 }

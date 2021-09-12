@@ -4,3 +4,9 @@
   align-items: center;
   color: #FFF;
 }
+
+@media (max-width: 590px) {
+  .profile {
+    flex-direction: column;
+  }
+}

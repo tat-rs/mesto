@@ -3,3 +3,9 @@
   align-items: center;
   margin: 0;
 }
+
+@media (max-width: 590px) {
+  .profile__container {
+    flex-direction: column;
+  }
+}

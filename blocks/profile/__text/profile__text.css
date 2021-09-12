@@ -5,3 +5,16 @@
   font-size: 18px;
   line-height: 22px;
 }
+
+@media (max-width: 705px) {
+  .profile__text {
+    font-size: 14px;
+    line-height: 17px;
+  }
+}
+
+@media (max-width: 590px) {
+  .profile__text {
+    margin: 0 auto 36px;
+  }
+}
