@@ -9,7 +9,7 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-@media (max-width: 580px) {
+@media (max-width: 976px) {
   .page {
     padding: 28px 0 36px;
   }

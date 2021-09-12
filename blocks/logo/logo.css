@@ -6,6 +6,13 @@
   height: 33px;
 }
 
+@media (max-width: 976px) {
+  .logo {
+    width: 103.74px;
+    height: 24.4px;
+  }
+}
+
 @media (max-width: 590px) {
   .logo {
     margin-left: 8px;

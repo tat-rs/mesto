@@ -1,5 +1,6 @@
 .button {
-  padding: 0;
+  box-sizing: border-box;
+  padding: 14px 132px 18px;
   min-height: 50px;
   font-weight: normal;
   font-size: 18px;
@@ -15,4 +16,12 @@
 
 .button:hover {
   opacity: .8;
+}
+
+@media (max-width:590px) {
+  .button {
+    padding: 14px 82px 14px;
+    font-size: 14px;
+    line-height: 17px;
+  }
 }

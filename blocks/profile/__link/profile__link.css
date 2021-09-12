@@ -14,6 +14,10 @@
 
 @media (max-width: 705px) {
   .profile__link {
-    right: -34px;
+    background-size: 7.5px 7.5px;
+    padding: 8px;
+    bottom: 0;
+    top: 14.67px;
+    right: -28px;
   }
 }

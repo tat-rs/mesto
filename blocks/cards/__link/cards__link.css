@@ -4,6 +4,7 @@
   height: 19px;
   background-image: url(../../../images/like.svg);
   margin-right: 5px;
+  align-self: center;
 }
 
 .cards__link:active {

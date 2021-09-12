@@ -2,3 +2,9 @@
   box-sizing: border-box;
   padding-bottom: 40px;
 }
+
+@media (max-width: 976px) {
+  .header {
+    padding-bottom: 31.6px;
+  }
+}

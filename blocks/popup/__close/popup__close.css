@@ -6,3 +6,12 @@
   top: -40px;
   right: -40px;
 }
+
+@media (max-width:590px) {
+  .popup__close {
+    width: 20px;
+    height: 20px;
+    top: -36px;
+    right: 0px;
+  }
+}
