@@ -7,7 +7,7 @@
   background-image: url(../../../images/like.svg);
   background-repeat: no-repeat;
   background-position: center;
-  background-size: cover;
+  background-size: 100%;
   margin-right: 5px;
   align-self: center;
 }
