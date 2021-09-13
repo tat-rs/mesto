@@ -4,6 +4,7 @@
   width: 22px;
   height: 19px;
   background-image: url(../../../images/like.svg);
+  background-repeat: no-repeat;
   margin-right: 5px;
   align-self: center;
 }
