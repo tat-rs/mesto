@@ -13,6 +13,6 @@
 * файловая структура БЭМ nested.
 
 
-* [Ссылка на сайт в GitHub Pages](https://tat-rs.github.io/mesto/)
+[Ссылка на сайт в GitHub Pages](https://tat-rs.github.io/mesto/)
 
 
