@@ -1,26 +1,22 @@
-.profile__title {
-  /* margin: 0 18px 16px 0; */
+.profile__name {
   margin: 0;
   min-height: 26px;
   font-weight: 500;
   font-size: 42px;
   line-height: 114%;
-  /* text-align: center; */
- /*  justify-self: center; */
-  /* position: relative; */
 }
 
 
 @media (max-width: 976px) {
-  .profile__title {
+  .profile__name {
     font-size: 27px;
     line-height: 33px;
   }
 }
 
 @media (max-width: 590px) {
-  .profile__title {
-    justify-self: center;
+  .profile__name {
+    text-align: center;
   }
 }
 

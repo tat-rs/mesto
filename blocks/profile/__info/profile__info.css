@@ -1,7 +1,12 @@
 .profile__info {
-  max-width: 336px;
   display: grid;
-  grid-template-columns: repeat(2, minmax(min-content,max-content));
+  grid-template-columns: max-content min-content;
+  grid-template-rows: repeat(2, min-content);
   gap: 16px 18px;
 }
 
+@media (max-width: 590px) {
+  .profile__info {
+    gap: 10px 14px;
+  }
+}

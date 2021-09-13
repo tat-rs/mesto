@@ -1,5 +1,4 @@
-.profile__link {
-  display: block;
+.profile__edit {
   box-sizing: border-box;
   padding: 11px;
   border: 1px solid #FFF;
@@ -9,17 +8,11 @@
   background-position: center;
   background-color: #000;
   align-self: center;
-  /* position: absolute;
-  top: 0;
-  right: -42px; */
 }
 
 @media (max-width: 705px) {
-  .profile__link {
+  .profile__edit {
     background-size: 7.5px 7.5px;
     padding: 8px;
-    /* bottom: 0;
-    top: 14.67px;
-    right: -28px; */
   }
 }

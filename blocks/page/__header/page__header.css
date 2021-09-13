@@ -3,3 +3,8 @@
   border-bottom: 1px solid #545454;
 }
 
+@media (max-width: 590px) {
+  .page__header {
+    margin-bottom: 42px;
+  }
+}

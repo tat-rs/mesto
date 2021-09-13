@@ -1,26 +1,24 @@
-.button {
+.form__button {
   box-sizing: border-box;
-  padding: 14px 132px 18px;
+  border: 0;
+  padding: 14px 132px 14px;
   min-height: 50px;
   font-weight: normal;
   font-size: 18px;
   line-height: 22px;
   color: #fff;
   background-color: #000;
-  border: 0;
   border-radius: 2px;
   overflow: hidden;
-  transition: opacity 0.2s;
-  cursor: pointer;
 }
 
-.button:hover {
+.form__button:hover {
   opacity: .8;
 }
 
 @media (max-width:590px) {
-  .button {
-    padding: 14px 82px 14px;
+  .form__button {
+    padding: 12px 82px;
     font-size: 14px;
     line-height: 17px;
   }

@@ -6,3 +6,9 @@
   justify-content: space-between;
   align-items: flex-end;
 }
+
+@media (max-width:590px) {
+  .cards__desc {
+    padding-bottom: 26px;
+  }
+}
