@@ -21,7 +21,6 @@ formInfoDesc.value = profileDesc.textContent;
 
 function addInfo(evt) {
   evt.preventDefault()
-  /* profileName.innerHTML = `<h1 class="profile__name">${formInfoName.value}</h1>`; */
   profileName.textContent = formInfoName.value;
   profileDesc.innerHTML = formInfoDesc.value;
 }
