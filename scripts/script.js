@@ -7,9 +7,10 @@ let profileDesc = pfofileContainer.querySelector('.profile__text');
 let formInfo = popup.querySelector('.form');
 let formInfoName = formInfo.querySelector('.form__item_type_name');
 let formInfoDesc = formInfo.querySelector('.form__item_type_desc');
+let addButton = popup.querySelector('.button');
 
 function popupToggle() {
-  popup.classList.toggle('popup__opened')
+  popup.classList.toggle('popup__opened');
 }
 
 function clickOverlay(event) {
@@ -32,3 +33,4 @@ function addInfo(evt) {
   profileDesc.innerHTML = `<p class="profile__text">${formInfoDesc.value}</p>`;
 }
 formInfo.addEventListener('submit', addInfo);
+addButton.addEventListener('click', popupToggle);
