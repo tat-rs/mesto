@@ -13,14 +13,6 @@ function popupToggle() {
   popup.classList.toggle('popup__opened');
 }
 
-function clickOverlay(event) {
-  if (event.target === event.currentTarget) {
-    popupToggle();
-  }
-}
-
-popup.addEventListener ('click', clickOverlay);
-
 popupOpenBtn.addEventListener('click', popupToggle);
 popupCloseBtn.addEventListener('click', popupToggle);
 
