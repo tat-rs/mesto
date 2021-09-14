@@ -21,7 +21,7 @@ formInfoDesc.value = profileDesc.textContent;
 function addInfo(evt) {
   evt.preventDefault()
   profileName.textContent = formInfoName.value;
-  profileDesc.innerHTML = formInfoDesc.value;
+  profileDesc.textContent = formInfoDesc.value;
 }
 formInfo.addEventListener('submit', addInfo);
 addButton.addEventListener('click', popupToggle);
