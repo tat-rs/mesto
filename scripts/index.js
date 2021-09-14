@@ -1,13 +1,13 @@
 let popup = document.querySelector('.popup');
 let popupOpenBtn = document.querySelector('.profile__edit');
 let popupCloseBtn = popup.querySelector('.popup__close');
-let pfofileContainer = document.querySelector('.profile__info');
-let profileName = pfofileContainer.querySelector('.profile__name');
-let profileDesc = pfofileContainer.querySelector('.profile__desc');
+let profileName = document.querySelector('.profile__name');
+let profileDesc = document.querySelector('.profile__desc');
 let formInfo = popup.querySelector('.form');
 let formInfoName = formInfo.querySelector('.form__item_type_name');
 let formInfoDesc = formInfo.querySelector('.form__item_type_desc');
 let addButton = popup.querySelector('.form__button');
+let cardsBtn = document.querySelectorAll('.cards__button');
 
 function popupToggle() {
   popup.classList.toggle('popup__opened');

@@ -1,4 +1,4 @@
-.cards__link {
+.cards__button {
   border: 0;
   padding: 0;
   background-color: inherit;
@@ -10,9 +10,4 @@
   background-size: 22px 19px;
   margin-right: 5px;
   align-self: center;
-}
-
-.cards__link:active {
-  opacity: 1;
-  background-image: url(../../../images/like-active.svg);
 }

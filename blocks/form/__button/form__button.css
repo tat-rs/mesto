@@ -10,6 +10,8 @@
   background-color: #000;
   border-radius: 2px;
   overflow: hidden;
+  cursor: pointer;
+  transition: opacity .2s;
 }
 
 .form__button:hover {
