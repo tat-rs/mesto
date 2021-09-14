@@ -7,7 +7,6 @@ let formInfo = popup.querySelector('.form');
 let formInfoName = formInfo.querySelector('.form__item_type_name');
 let formInfoDesc = formInfo.querySelector('.form__item_type_desc');
 let addButton = popup.querySelector('.form__button');
-let cardsBtn = document.querySelectorAll('.cards__button');
 
 function popupToggle() {
   popup.classList.toggle('popup__opened');
