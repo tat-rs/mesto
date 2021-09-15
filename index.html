@@ -16,72 +16,60 @@
 
     <main class="content page__section">
       <section class="profile page__profile">
-        <figure class="profile__container">
+        <div class="profile__container">
           <img class="profile__image" src="./images/avatar.jpg" alt="Жак-Ив Кусто">
-          <figcaption class="profile__info">
+          <div class="profile__info">
             <h1 class="profile__name">Жак-Ив Кусто</h1>
-            <button class="profile__edit link"></button>
+            <button class="profile__edit link" type="button"></button>
             <p class="profile__desc">Исследователь океана</p>
-          </figcaption>
-        </figure>
-        <button class="profile__button link"></button>
+          </div>
+        </div>
+        <button class="profile__button link" type="button"></button>
       </section>
 
       <section class="cards page__cards">
         <ul class="cards__list">
-          <li>
-            <figure class="cards__item">
-              <img class="cards__image" src="./images/karachaevsk.jpg" alt="Сентинский храм в горах Карачаево-Черкесии">
-              <figcaption class="cards__desc">
-                <h2 class="cards__subtitle">Карачаевск</h2>
-                <button class="cards__button link"></button>
-              </figcaption>
-            </figure>
+          <li class="cards__item">
+            <img class="cards__image" src="./images/karachaevsk.jpg" alt="Сентинский храм в горах Карачаево-Черкесии">
+            <div class="cards__desc">
+              <h2 class="cards__subtitle">Карачаевск</h2>
+              <button class="cards__button" type="button"></button>
+            </div>
           </li>
-          <li>
-            <figure class="cards__item">
-              <img class="cards__image" src="./images/elbrus.jpg" alt="Поле при свете заката и гора Эльбрус на заднем плане">
-              <figcaption class="cards__desc">
-                <h2 class="cards__subtitle">Гора Эльбрус</h2>
-                <button class="cards__button link"></button>
-              </figcaption>
-            </figure>
+          <li class="cards__item">
+            <img class="cards__image" src="./images/elbrus.jpg" alt="Поле при свете заката и гора Эльбрус на заднем плане">
+            <div class="cards__desc">
+              <h2 class="cards__subtitle">Гора Эльбрус</h2>
+              <button class="cards__button" type="button"></button>
+            </div>
           </li>
-          <li>
-            <figure class="cards__item">
-              <img class="cards__image" src="./images/dombay.jpg" alt="Верхушки горной территории Домбай, покрытые снегом">
-              <figcaption class="cards__desc">
-                <h2 class="cards__subtitle">Домбай</h2>
-                <button class="cards__button link"></button>
-              </figcaption>
-            </figure>
+          <li class="cards__item">
+            <img class="cards__image" src="./images/dombay.jpg" alt="Верхушки горной территории Домбай, покрытые снегом">
+            <div class="cards__desc">
+              <h2 class="cards__subtitle">Домбай</h2>
+              <button class="cards__button" type="button"></button>
+            </div>
           </li>
-          <li>
-            <figure class="cards__item">
-              <img class="cards__image" src="./images/elbrus.jpg" alt="Поле при свете заката и гора Эльбрус на заднем плане">
-              <figcaption class="cards__desc">
-                <h2 class="cards__subtitle">Гора Эльбрус</h2>
-                <button class="cards__button link"></button>
-              </figcaption>
-            </figure>
+          <li class="cards__item">
+            <img class="cards__image" src="./images/elbrus.jpg" alt="Поле при свете заката и гора Эльбрус на заднем плане">
+            <div class="cards__desc">
+              <h2 class="cards__subtitle">Гора Эльбрус</h2>
+              <button class="cards__button" type="button"></button>
+            </div>
           </li>
-          <li>
-            <figure class="cards__item">
-              <img class="cards__image" src="./images/dombay.jpg" alt="Верхушки горной территории Домбай, покрытые снегом">
-              <figcaption class="cards__desc">
-                <h2 class="cards__subtitle">Домбай</h2>
-                <button class="cards__button link"></button>
-              </figcaption>
-            </figure>
+          <li class="cards__item">
+            <img class="cards__image" src="./images/dombay.jpg" alt="Верхушки горной территории Домбай, покрытые снегом">
+            <div class="cards__desc">
+              <h2 class="cards__subtitle">Домбай</h2>
+              <button class="cards__button" type="button"></button>
+            </div>
           </li>
-          <li>
-            <figure class="cards__item">
-              <img class="cards__image" src="./images/karachaevsk.jpg" alt="Сентинский храм в горах Карачаево-Черкесии">
-              <figcaption class="cards__desc">
-                <h2 class="cards__subtitle">Карачаево-Черкессия</h2>
-                <button class="cards__button link"></button>
-              </figcaption>
-            </figure>
+          <li class="cards__item">
+            <img class="cards__image" src="./images/karachaevsk.jpg" alt="Сентинский храм в горах Карачаево-Черкесии">
+            <div class="cards__desc">
+              <h2 class="cards__subtitle">Карачаево-Черкессия</h2>
+              <button class="cards__button" type="button"></button>
+            </div>
           </li>
         </ul>
       </section>
@@ -91,17 +79,17 @@
       <p class="footer__author">&copy; 2020 Mesto Russia</p>
     </footer>
 
-    <section class="popup">
-      <div class="popup__container page__section">
-        <img class="popup__close link" src="./images/close-icon.svg" alt="Иконка крестик">
-        <form class="popup__form form">
-          <h3 class="form__title">Редактировать профиль</h3>
-          <input class="form__item form__item_type_name" type="text" placeholder="Имя">
-          <input class="form__item form__item_type_desc" type="text" placeholder="О себе">
+    <div class="popup">
+      <div class="popup__container">
+        <button class="popup__close link" type="button"></button>
+        <form class="popup__form form" name="form">
+          <h2 class="form__title">Редактировать профиль</h2>
+          <input class="form__item form__item_type_name" type="text" name="name" placeholder="Имя" required>
+          <input class="form__item form__item_type_desc" type="text" name="description" placeholder="О себе">
           <button class="form__button" type="submit">Сохранить</button>
       </form>
       </div>
-    </section>
+    </div>
   </div>
   <script src="./scripts/index.js"></script>
 </body>

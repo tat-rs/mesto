@@ -10,4 +10,10 @@
   background-size: 22px 19px;
   margin-right: 5px;
   align-self: center;
+  transition: opacity 0.2s;
+  cursor: pointer;
+}
+
+.cards__button:hover {
+  opacity: .5;
 }

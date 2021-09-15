@@ -1,6 +1,6 @@
 .page__header {
   margin-bottom: 40px;
-  border-bottom: 1px solid #545454;
+  border-bottom: 1px solid rgb(84, 84, 84, .7);
 }
 
 @media (max-width: 590px) {
