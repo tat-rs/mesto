@@ -6,22 +6,24 @@ let profileDesc = document.querySelector('.profile__desc');
 let formInfo = popup.querySelector('.form');
 let formInfoName = formInfo.querySelector('.form__item_type_name');
 let formInfoDesc = formInfo.querySelector('.form__item_type_desc');
-let addButton = popup.querySelector('.form__button');
 
-function popupToggle() {
-  popup.classList.toggle('popup__opened');
+function popupOPen() {
+  formInfoName.value = profileName.textContent;
+  formInfoDesc.value = profileDesc.textContent;
+  popup.classList.add('popup_opened');
 }
 
-popupOpenBtn.addEventListener('click', popupToggle);
-popupCloseBtn.addEventListener('click', popupToggle);
-
-formInfoName.value = profileName.textContent;
-formInfoDesc.value = profileDesc.textContent;
+function popupClose() {
+  popup.classList.remove('popup_opened');
+}
 
 function addInfo(evt) {
   evt.preventDefault()
   profileName.textContent = formInfoName.value;
   profileDesc.textContent = formInfoDesc.value;
+  popupClose();
 }
+
+popupOpenBtn.addEventListener('click', popupOPen);
+popupCloseBtn.addEventListener('click', popupClose);
 formInfo.addEventListener('submit', addInfo);
-addButton.addEventListener('click', popupToggle);
