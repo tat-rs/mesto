@@ -9,7 +9,9 @@
   background-repeat: no-repeat;
   min-height: 50px;
   color: #fff;
-  border: 1px solid #fff;
+  border: 2px solid #fff;
+  border-radius: 2px;
+  overflow: hidden;
 }
 
 @media (max-width: 590px) {

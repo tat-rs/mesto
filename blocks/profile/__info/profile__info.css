@@ -1,8 +1,14 @@
 .profile__info {
   display: grid;
-  grid-template-columns: max-content min-content;
-  grid-template-rows: repeat(2, min-content);
+  grid-template-columns: minmax(10px, 1fr) 24px;
+  grid-template-rows: min-content;
   gap: 16px 18px;
+}
+
+@media (max-width: 705px) {
+  .profile__info {
+    grid-template-columns: minmax(10px, 1fr) 18px;
+  }
 }
 
 @media (max-width: 590px) {

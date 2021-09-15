@@ -1,7 +1,8 @@
 .logo {
   display: block;
   background-image: url(../../images/logo.svg);
-  background-size: cover;
+  background-size: 100%;
+  background-repeat: no-repeat;
   width: 142px;
   height: 33px;
   transition: opacity 0.2s;
@@ -20,8 +21,9 @@
   }
 }
 
+
 @media (max-width: 590px) {
   .logo {
-    margin-left: 8px;
+    margin: 0 27px;
   }
 }
