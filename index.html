@@ -27,48 +27,7 @@
 
     <section class="cards page__cards">
       <ul class="cards__list">
-        <li class="cards__item">
-          <img class="cards__image" src="./images/karachaevsk.jpg" alt="Сентинский храм в горах Карачаево-Черкесии">
-          <div class="cards__desc">
-            <h2 class="cards__subtitle">Карачаевск</h2>
-            <button class="cards__button" type="button" aria-label="Лайк"></button>
-          </div>
-        </li>
-        <li class="cards__item">
-          <img class="cards__image" src="./images/elbrus.jpg" alt="Поле при свете заката и гора Эльбрус на заднем плане">
-          <div class="cards__desc">
-            <h2 class="cards__subtitle">Гора Эльбрус</h2>
-            <button class="cards__button" type="button" aria-label="Лайк"></button>
-          </div>
-        </li>
-        <li class="cards__item">
-          <img class="cards__image" src="./images/dombay.jpg" alt="Верхушки горной территории Домбай, покрытые снегом">
-          <div class="cards__desc">
-            <h2 class="cards__subtitle">Домбай</h2>
-            <button class="cards__button" type="button" aria-label="Лайк"></button>
-          </div>
-        </li>
-        <li class="cards__item">
-          <img class="cards__image" src="./images/elbrus.jpg" alt="Поле при свете заката и гора Эльбрус на заднем плане">
-          <div class="cards__desc">
-            <h2 class="cards__subtitle">Гора Эльбрус</h2>
-            <button class="cards__button" type="button" aria-label="Лайк"></button>
-          </div>
-        </li>
-        <li class="cards__item">
-          <img class="cards__image" src="./images/dombay.jpg" alt="Верхушки горной территории Домбай, покрытые снегом">
-          <div class="cards__desc">
-            <h2 class="cards__subtitle">Домбай</h2>
-            <button class="cards__button" type="button" aria-label="Лайк"></button>
-          </div>
-        </li>
-        <li class="cards__item">
-          <img class="cards__image" src="./images/karachaevsk.jpg" alt="Сентинский храм в горах Карачаево-Черкесии">
-          <div class="cards__desc">
-            <h2 class="cards__subtitle">Карачаево-Черкессия</h2>
-            <button class="cards__button" type="button" aria-label="Лайк"></button>
-          </div>
-        </li>
+
       </ul>
     </section>
   </main>
@@ -77,7 +36,7 @@
     <p class="footer__author">&copy; 2020 Mesto Russia</p>
   </footer>
 
-  <div class="popup">
+  <div class="popup popup_type_edit">
     <div class="popup__container">
       <button class="popup__close link" type="button" aria-label="Открытие и закрытие формы"></button>
       <form class="popup__form form" name="form-edit">
@@ -88,6 +47,26 @@
       </form>
     </div>
   </div>
+  <!-- <div class="popup popup_type_new-card">
+    <div class="popup__container">
+      <button class="popup__close link" type="button" aria-label="Открытие и закрытие формы"></button>
+      <form class="popup__form form" name="form-edit">
+        <h2 class="form__title">Новое место</h2>
+        <input class="form__item form__item_type_name" type="text" name="name" placeholder="Название" required>
+        <input class="form__item form__item_type_desc" type="text" name="description" placeholder="Ссылка на картинку">
+        <button class="form__button form__button_place_new-card" type="submit">Создать</button>
+      </form>
+    </div>
+  </div> -->
+  <template class="cards-template">
+    <li class="cards__item">
+      <img class="cards__image" src="./images/karachaevsk.jpg" alt="Фото местности">
+      <div class="cards__desc">
+        <h2 class="cards__subtitle"></h2>
+        <button class="cards__button" type="button" aria-label="Лайк"></button>
+      </div>
+    </li>
+  </template>
   <script src="./scripts/index.js"></script>
 </body>
 </html>
