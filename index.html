@@ -15,14 +15,14 @@
   <main class="content page__section">
     <section class="profile page__profile">
       <div class="profile__container">
-        <img class="profile__image" src="./images/avatar.jpg" alt="Жак-Ив Кусто">
+        <img class="profile__image" src="./images/avatar.jpg" alt="Аватар пользователя">
         <div class="profile__info">
           <h1 class="profile__name">Жак-Ив Кусто</h1>
-          <button class="profile__edit link" type="button"></button>
+          <button class="profile__edit link" type="button" aria-label="Редактировать данные профиля"></button>
           <p class="profile__desc">Исследователь океана</p>
         </div>
       </div>
-      <button class="profile__button link" type="button"></button>
+      <button class="profile__button link" type="button" aria-label="Добавить новую карточку"></button>
     </section>
 
     <section class="cards page__cards">
@@ -31,42 +31,42 @@
           <img class="cards__image" src="./images/karachaevsk.jpg" alt="Сентинский храм в горах Карачаево-Черкесии">
           <div class="cards__desc">
             <h2 class="cards__subtitle">Карачаевск</h2>
-            <button class="cards__button" type="button"></button>
+            <button class="cards__button" type="button" aria-label="Лайк"></button>
           </div>
         </li>
         <li class="cards__item">
           <img class="cards__image" src="./images/elbrus.jpg" alt="Поле при свете заката и гора Эльбрус на заднем плане">
           <div class="cards__desc">
             <h2 class="cards__subtitle">Гора Эльбрус</h2>
-            <button class="cards__button" type="button"></button>
+            <button class="cards__button" type="button" aria-label="Лайк"></button>
           </div>
         </li>
         <li class="cards__item">
           <img class="cards__image" src="./images/dombay.jpg" alt="Верхушки горной территории Домбай, покрытые снегом">
           <div class="cards__desc">
             <h2 class="cards__subtitle">Домбай</h2>
-            <button class="cards__button" type="button"></button>
+            <button class="cards__button" type="button" aria-label="Лайк"></button>
           </div>
         </li>
         <li class="cards__item">
           <img class="cards__image" src="./images/elbrus.jpg" alt="Поле при свете заката и гора Эльбрус на заднем плане">
           <div class="cards__desc">
             <h2 class="cards__subtitle">Гора Эльбрус</h2>
-            <button class="cards__button" type="button"></button>
+            <button class="cards__button" type="button" aria-label="Лайк"></button>
           </div>
         </li>
         <li class="cards__item">
           <img class="cards__image" src="./images/dombay.jpg" alt="Верхушки горной территории Домбай, покрытые снегом">
           <div class="cards__desc">
             <h2 class="cards__subtitle">Домбай</h2>
-            <button class="cards__button" type="button"></button>
+            <button class="cards__button" type="button" aria-label="Лайк"></button>
           </div>
         </li>
         <li class="cards__item">
           <img class="cards__image" src="./images/karachaevsk.jpg" alt="Сентинский храм в горах Карачаево-Черкесии">
           <div class="cards__desc">
             <h2 class="cards__subtitle">Карачаево-Черкессия</h2>
-            <button class="cards__button" type="button"></button>
+            <button class="cards__button" type="button" aria-label="Лайк"></button>
           </div>
         </li>
       </ul>
@@ -79,8 +79,8 @@
 
   <div class="popup">
     <div class="popup__container">
-      <button class="popup__close link" type="button"></button>
-      <form class="popup__form form" name="form">
+      <button class="popup__close link" type="button" aria-label="Открытие и закрытие формы"></button>
+      <form class="popup__form form" name="form-edit">
         <h2 class="form__title">Редактировать профиль</h2>
         <input class="form__item form__item_type_name" type="text" name="name" placeholder="Имя" required>
         <input class="form__item form__item_type_desc" type="text" name="description" placeholder="О себе">
