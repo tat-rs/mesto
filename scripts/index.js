@@ -36,6 +36,18 @@ const initialCards = [
   }
 ]; //массив с первоначальными карточками при загрузке страницы
 
+const cardTemplateElement = document.querySelector('.cards-template')//нашли контейнер template карточек
+const cardListElement = document.querySelector('.cards__list'); //нашли контейнер карточек в разметке
+const popupAddCard = document.querySelector('.popup_type_new-card'); //попап с добавлением новой картчоки
+const popupCardOpenBtn = document.querySelector('.profile__button'); //нашли кнопку открытия попапа добавления карточки
+const popupCardCloseBtn = popupAddCard.querySelector('.popup__close'); //нашли кнопку закрытия попапа добавления карточки
+const formCard = popupAddCard.querySelector('.form'); //форма отправки данных новой карточки
+let formCardSubtitle = formCard.querySelector('.form__item_type_image-subtitle') //поле ввода названя карточки
+let formCardLink = formCard.querySelector('.form__item_type_image-link') //поле ввода ссылки на изображение карточки
+let likeBtn = cardTemplateElement.querySelector('.cards__button'); //кнопка лайк изображения
+let popupCardImage = document.querySelector('.popup_type_image')//попап просмотра изображения
+let cardImageName = popupCardImage.querySelector('.cards__subtitle')
+let CardImageLink = popupCardImage.querySelector('.cards__image')
 
 //объявление функции открытия попапа
 function popupOpen(modal) {
@@ -59,26 +71,17 @@ function addInfo(evt) {
   popupClose(popupEditProfile);
 }
 
-const cardTemplateElement = document.querySelector('.cards-template')//нашли контейнер template карточек
-const cardListElement = document.querySelector('.cards__list'); //нашли контейнер карточек в разметке
-const popupAddCard = document.querySelector('.popup_type_new-card'); //попап с добавлением новой картчоки
-const popupCardOpenBtn = document.querySelector('.profile__button'); //нашли кнопку открытия попапа добавления карточки
-const popupCardCloseBtn = popupAddCard.querySelector('.popup__close'); //нашли кнопку закрытия попапа добавления карточки
-const formCard = popupAddCard.querySelector('.form'); //форма отправки данных новой карточки
-let formCardSubtitle = formCard.querySelector('.form__item_type_image-subtitle') //поле ввода названя карточки
-let formCardLink = formCard.querySelector('.form__item_type_image-link') //поле ввода ссылки на изображение карточки
-let likeBtn = cardTemplateElement.querySelector('.cards__button'); //кнопка лайк изображения
-
 //объявление функции добавления карточек при загрузке страницы
 function renderCards(element) {
   const newCardElement = cardTemplateElement.content.cloneNode(true);//клонируем массив
   //присваиваем значение описания новой карточки равной ключу name массива
   newCardElement.querySelector('.cards__subtitle').textContent = element.name;
-  //присваиваем значение ссылки на изоражение новой карточки равной ключу link массива
+  //присваиваем значение ссылки на изображение новой карточки равной ключу link массива
   newCardElement.querySelector('.cards__image').src = element.link;
-  newCardElement.querySelector('.cards__button').addEventListener('click', (event) => {
-    event.target.classList.toggle('cards__button_active');
-  });
+  //добавили слушатель на кнопку лайк
+  newCardElement.querySelector('.cards__button').addEventListener('click', addLike);
+  newCardElement.querySelector('.cards__delete').addEventListener('click', deleteCard);//добавили слушатель для удаления карточки
+
   // отображаем массив на странице
   cardListElement.prepend(newCardElement);
 }
@@ -89,12 +92,25 @@ function createNewCard(event) {
 //объявляем объект с ключами равными значениям в полях ввода
   let createCard = {
     name: formCardSubtitle.value,
-    link: formCardLink.value};
+    link: formCardLink.value
+  };
   renderCards(createCard);
 
   popupClose(popupAddCard);
 
   event.currentTarget.reset();
+}
+
+//изменяем цвет лайка при нажатии
+function addLike(event) {
+  event.target.classList.toggle('cards__button_active');
+}
+
+//удаление карточки
+function deleteCard(event) {
+  const cardDeleted = event.currentTarget.closest('.cards__item'); //возвращаем ближайший родительский элемент - template
+
+  cardDeleted.remove(); //удаляем блок карточки
 }
 
 initialCards.map(renderCards) //отображаем новый массив карточек на странице
