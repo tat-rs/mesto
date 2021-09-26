@@ -7,6 +7,8 @@ let formInfo = popupEditProfile.querySelector('.form'); //переменная �
 let formInfoName = formInfo.querySelector('.form__item_type_name'); //переменная значения имени профиля
 let formInfoDesc = formInfo.querySelector('.form__item_type_desc'); //переменная значения описания профиля
 
+
+
 const initialCards = [
   {
     name: 'Архыз',
@@ -34,15 +36,6 @@ const initialCards = [
   }
 ]; //массив с первоначальными карточками при загрузке страницы
 
-const cardsListElement = document.querySelector('.cards__list'); //переменная контейнера массива с карточками
-const cardsTemplateElement = document.querySelector('.cards-template'); //находим тег template, где будут новые карточки
-
-const popupAddCards = document.querySelector('.popup_type_new-card'); //попап добавления новой карточки
-const popupOpenBtnCard = document.querySelector('.profile__button'); //кнопка открытия формы добавления карточки
-const popupCloseBtnCard = popupAddCards.querySelector('.popup__close')
-let formCard = popupAddCards.querySelector('.form_type_new-card') //форма добавления новой карточки
-let formSubtitle = popupAddCards.querySelector('.form__item_type_image-subtitle'); //поле ввода описания картинки
-let formImage = popupAddCards.querySelector('.form__item_type_image-link') //поле ввода ссылки на изображение
 
 //объявление функции открытия попапа
 function popupOpen(modal) {
@@ -66,31 +59,49 @@ function addInfo(evt) {
   popupClose(popupEditProfile);
 }
 
+const cardTemplateElement = document.querySelector('.cards-template')//нашли контейнер template карточек
+const cardListElement = document.querySelector('.cards__list'); //нашли контейнер карточек в разметке
+const popupAddCard = document.querySelector('.popup_type_new-card'); //попап с добавлением новой картчоки
+const popupCardOpenBtn = document.querySelector('.profile__button'); //нашли кнопку открытия попапа добавления карточки
+const popupCardCloseBtn = popupAddCard.querySelector('.popup__close'); //нашли кнопку закрытия попапа добавления карточки
+const formCard = popupAddCard.querySelector('.form'); //форма отправки данных новой карточки
+let formCardSubtitle = formCard.querySelector('.form__item_type_image-subtitle') //поле ввода названя карточки
+let formCardLink = formCard.querySelector('.form__item_type_image-link') //поле ввода ссылки на изображение карточки
+let likeBtn = cardTemplateElement.querySelector('.cards__button'); //кнопка лайк изображения
+
 //объявление функции добавления карточек при загрузке страницы
-function renderCards(item) {
-  const newCards = cardsTemplateElement.content.cloneNode(true); //клонируем содержимое тега template
-  newCards.querySelector('.cards__image').src = item.link;// наполняем содержимым
-  newCards.querySelector('.cards__subtitle').textContent = item.name;
-  cardsListElement.append(newCards);// отображаем на странице
+function renderCards(element) {
+  const newCardElement = cardTemplateElement.content.cloneNode(true);//клонируем массив
+  //присваиваем значение описания новой карточки равной ключу name массива
+  newCardElement.querySelector('.cards__subtitle').textContent = element.name;
+  //присваиваем значение ссылки на изоражение новой карточки равной ключу link массива
+  newCardElement.querySelector('.cards__image').src = element.link;
+  newCardElement.querySelector('.cards__button').addEventListener('click', (event) => {
+    event.target.classList.toggle('cards__button_active');
+  });
+  // отображаем массив на странице
+  cardListElement.prepend(newCardElement);
+}
+
+//создание новой карточки на странице
+function createNewCard(event) {
+  event.preventDefault();
+//объявляем объект с ключами равными значениям в полях ввода
+  let createCard = {
+    name: formCardSubtitle.value,
+    link: formCardLink.value};
+  renderCards(createCard);
+
+  popupClose(popupAddCard);
+
+  event.currentTarget.reset();
 }
 
 initialCards.map(renderCards) //отображаем новый массив карточек на странице
 
-/* function addCard(evt) {
-  evt.preventDefault()
-  function createCard({link: placeLinkInput.value, name: placeNameInput.value}) {
-
-  }
-  const addCardsElement = cardsTemplateElement.content.cloneNode(true); //клонируем содержимое тега template
-  addCardsElement.querySelector('.cards__image').src = item.link;// наполняем содержимым
-  addCardsElement.querySelector('.cards__subtitle').textContent = item.name;
-  cardsListElement.append(addCardsElement);// отображаем на странице
-  popupClose(popupAddCards);
-} */
-
 popupOpenBtn.addEventListener('click', () => popupOpen(popupEditProfile));//открытие попапа по клику на кнопку редактирования профиля
 popupCloseBtn.addEventListener('click', () => popupClose(popupEditProfile));//закрытие попапа по клику на кнопку редактирования профиля
 formInfo.addEventListener('submit', addInfo);//сохранение внесенных данных по клику
-popupOpenBtnCard.addEventListener('click', () => popupOpen(popupAddCards));
-popupCloseBtnCard.addEventListener('click', () => popupClose(popupAddCards));
-formCard.addEventListener('submit', addCard);
+popupCardOpenBtn.addEventListener('click', () => popupOpen(popupAddCard)); //открыть попап добавления новой карточки
+popupCardCloseBtn.addEventListener('click', () => popupClose(popupAddCard));//закрыть попап добавления карточки
+formCard.addEventListener('submit', createNewCard); // создание новой карточки
