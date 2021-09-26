@@ -2,4 +2,16 @@
   background-color: #fff;
   border-radius: 10px;
   overflow: hidden;
+  position: relative;
+}
+
+.cards__item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: calc(100% - 282px);
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 1;
 }

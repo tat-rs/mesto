@@ -25,7 +25,7 @@
       <button class="profile__button link" type="button" aria-label="Добавить новую карточку"></button>
     </section>
 
-    <section class="cards page__cards">
+    <section class="cards page__cards" aria-label="Карточки с изображениями">
       <ul class="cards__list">
 
       </ul>
@@ -38,7 +38,7 @@
 
   <div class="popup popup_type_edit">
     <div class="popup__container">
-      <button class="popup__close link" type="button" aria-label="Открытие и закрытие формы"></button>
+      <button class="popup__close link" type="button" aria-label="Закрыть форму"></button>
       <form class="popup__form form" name="form-edit">
         <h2 class="form__title">Редактировать профиль</h2>
         <input class="form__item form__item_type_name" type="text" name="name" placeholder="Имя" required>
@@ -47,19 +47,20 @@
       </form>
     </div>
   </div>
-  <!-- <div class="popup popup_type_new-card">
+  <div class="popup popup_type_new-card">
     <div class="popup__container">
-      <button class="popup__close link" type="button" aria-label="Открытие и закрытие формы"></button>
-      <form class="popup__form form" name="form-edit">
+      <button class="popup__close link" type="button" aria-label="Закрыть форму"></button>
+      <form class="popup__form form" name="form-add">
         <h2 class="form__title">Новое место</h2>
-        <input class="form__item form__item_type_name" type="text" name="name" placeholder="Название" required>
-        <input class="form__item form__item_type_desc" type="text" name="description" placeholder="Ссылка на картинку">
+        <input class="form__item form__item_type_image-subtitle" type="text" name="subtitle" placeholder="Название" required>
+        <input class="form__item form__item_type_image-link" type="text" name="link" placeholder="Ссылка на картинку">
         <button class="form__button form__button_place_new-card" type="submit">Создать</button>
       </form>
     </div>
-  </div> -->
+  </div>
   <template class="cards-template">
     <li class="cards__item">
+      <button class="cards__delete" type="button" aria-label="Удалить"></button>
       <img class="cards__image" src="./images/karachaevsk.jpg" alt="Фото местности">
       <div class="cards__desc">
         <h2 class="cards__subtitle"></h2>

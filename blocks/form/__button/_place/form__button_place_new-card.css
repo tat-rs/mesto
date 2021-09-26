@@ -1,3 +1,9 @@
 .form__button_place_new-card {
   padding: 14px 143px 14px;
 }
+
+@media (max-width:590px) {
+  .form__button_place_new-card {
+    padding: 14px 91px;
+  }
+}
