@@ -7,6 +7,7 @@ let formInfo = popupEditProfile.querySelector('.form'); //переменная �
 let formInfoName = formInfo.querySelector('.form__item_type_name'); //переменная значения имени профиля
 let formInfoDesc = formInfo.querySelector('.form__item_type_desc'); //переменная значения описания профиля
 
+//массив с первоначальными карточками при загрузке страницы
 const initialCards = [
   {
     name: 'Архыз',
@@ -32,21 +33,21 @@ const initialCards = [
     name: 'Байкал',
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
   }
-]; //массив с первоначальными карточками при загрузке страницы
+];
 
-const cardTemplateElement = document.querySelector('.cards-template')//нашли контейнер template карточек
-const cardListElement = document.querySelector('.cards__list'); //нашли контейнер карточек в разметке
-const popupAddCard = document.querySelector('.popup_type_new-card'); //попап с добавлением новой картчоки
-const popupCardOpenBtn = document.querySelector('.profile__button'); //нашли кнопку открытия попапа добавления карточки
-const popupCardCloseBtn = popupAddCard.querySelector('.popup__close'); //нашли кнопку закрытия попапа добавления карточки
-const formCard = popupAddCard.querySelector('.form'); //форма отправки данных новой карточки
-let formCardSubtitle = formCard.querySelector('.form__item_type_image-subtitle') //поле ввода названя карточки
-let formCardLink = formCard.querySelector('.form__item_type_image-link') //поле ввода ссылки на изображение карточки
+const cardTemplateElement = document.querySelector('.cards-template');//контейнер template карточек
+const cardListElement = document.querySelector('.cards__list'); //контейнер карточек в разметке
+const popupCreateCard = document.querySelector('.popup_type_new-card'); //попап с добавлением новой картчоки
+const popupCardOpenBtn = document.querySelector('.profile__button'); //кнопка открытия попапа добавления карточки
+const popupCardCloseBtn = popupCreateCard.querySelector('.popup__close'); //кнопка закрытия попапа добавления карточки
+const formCard = popupCreateCard.querySelector('.form'); //форма отправки данных новой карточки
+let formCardSubtitle = formCard.querySelector('.form__item_type_image-subtitle'); //поле ввода названя карточки
+let formImageLink = formCard.querySelector('.form__item_type_image-link'); //поле ввода ссылки на изображение карточки
 let likeBtn = cardTemplateElement.querySelector('.cards__button'); //кнопка лайк изображения
-const popupCardImage = document.querySelector('.popup_type_image')//попап просмотра изображения
-const popupCardImageCloseBtn = popupCardImage.querySelector('.popup__close')//кнопка закрытия попапа просмотра изображения
-let cardImageName = popupCardImage.querySelector('.popup__subtitle')//описание картинки в попапе просмотра изображения
-let cardImageLink = popupCardImage.querySelector('.popup__image')//картинка в попапе просмотра изображения
+const popupOpenImage = document.querySelector('.popup_type_image'); //попап просмотра изображения
+const popupOpenImageCloseBtn = popupOpenImage.querySelector('.popup__close'); //кнопка закрытия попапа просмотра изображения
+let popupImageName = popupOpenImage.querySelector('.popup__subtitle'); //поле ввода описания картинки в попапе просмотра изображения
+let popupImageLink = popupOpenImage.querySelector('.popup__image'); //поле ввода ссылки на картинку в попапе просмотра изображения
 
 //объявление функции открытия попапа
 function popupOpen(modal) {
@@ -58,6 +59,7 @@ function popupClose(modal) {
   modal.classList.remove('popup_opened')
 }
 
+//объявление функции открытия попапа редактирования профиля
 function addStartInfo() {
   popupOpen(popupEditProfile)
   formInfoName.value = profileName.textContent;
@@ -72,28 +74,16 @@ function addInfo(evt) {
   popupClose(popupEditProfile);
 }
 
-//объявление функции добавления карточек при загрузке страницы
-function renderCards(element) {
-  const newCardElement = cardTemplateElement.content.cloneNode(true);//клонируем массив
-  //присваиваем значение описания новой карточки равной ключу name массива
-  newCardElement.querySelector('.cards__subtitle').textContent = element.name;
-  //присваиваем значение ссылки на изображение новой карточки равной ключу link массива
-  newCardElement.querySelector('.cards__image').src = element.link;
-  newCardElement.querySelector('.cards__button').addEventListener('click', addLike);//добавили слушатель на кнопку лайк
-  newCardElement.querySelector('.cards__delete').addEventListener('click', deleteCard);//добавили слушатель для удаления карточки
-  newCardElement.querySelector('.cards__image').addEventListener('click', showImage);
-  cardListElement.prepend(newCardElement);// отображаем массив на странице
-}
-
 //создание новой карточки на странице
 function createNewCard(event) {
   event.preventDefault();
 //объявляем объект с ключами равными значениям в полях ввода
-  let createCard = {
+  let newCards = {
     name: formCardSubtitle.value,
     link: formCardLink.value
   };
-  renderCards(createCard);
+
+  renderCards(newCards);
 
   popupClose(popupAddCard);
 
@@ -112,11 +102,25 @@ function deleteCard(event) {
   cardDeleted.remove(); //удаляем блок карточки
 }
 
+//открытие попапа просмотра изображения
 function showImage(event) {
-  popupOpen(popupCardImage)
-  let mainElement = event.currentTarget.closest('.cards__item')
-  cardImageName.textContent = mainElement.querySelector('.cards__subtitle').textContent
-  cardImageLink.src = mainElement.querySelector('.cards__image').src
+  popupOpen(popupOpenImage)
+  let mainElement = event.currentTarget.closest('.cards__item') //возвращаем ближайщий родительский элемент
+  popupImageName.textContent = mainElement.querySelector('.cards__subtitle').textContent //приравниваем текстовые содержания
+  popupImageLink.src = mainElement.querySelector('.cards__image').src //приравниваем ссылки на изображения
+}
+
+//объявление функции добавления карточек при загрузке страницы
+function renderCards(element) {
+  const newCardElement = cardTemplateElement.content.cloneNode(true);//клонируем массив
+  //присваиваем значение описания новой карточки равной ключу name массива
+  newCardElement.querySelector('.cards__subtitle').textContent = element.name;
+  //присваиваем значение ссылки на изображение новой карточки равной ключу link массива
+  newCardElement.querySelector('.cards__image').src = element.link;
+  newCardElement.querySelector('.cards__button').addEventListener('click', addLike);//добавили слушатель на кнопку лайк
+  newCardElement.querySelector('.cards__delete').addEventListener('click', deleteCard);//добавили слушатель для удаления карточки
+  newCardElement.querySelector('.cards__image').addEventListener('click', showImage);
+  cardListElement.prepend(newCardElement);// отображаем массив на странице
 }
 
 initialCards.map(renderCards) //отображаем новый массив карточек на странице
@@ -124,7 +128,7 @@ initialCards.map(renderCards) //отображаем новый массив к�
 popupOpenBtn.addEventListener('click', addStartInfo);//открытие попапа по клику на кнопку редактирования профиля
 popupCloseBtn.addEventListener('click', () => popupClose(popupEditProfile));//закрытие попапа по клику на кнопку редактирования профиля
 formInfo.addEventListener('submit', addInfo);//сохранение внесенных данных по клику
-popupCardOpenBtn.addEventListener('click', () => popupOpen(popupAddCard)); //открыть попап добавления новой карточки
-popupCardCloseBtn.addEventListener('click', () => popupClose(popupAddCard));//закрыть попап добавления карточки
+popupCardOpenBtn.addEventListener('click', () => popupOpen(popupCreateCard)); //открыть попап добавления новой карточки
+popupCardCloseBtn.addEventListener('click', () => popupClose(popupCreateCard));//закрыть попап добавления карточки
 formCard.addEventListener('submit', createNewCard); // создание новой карточки
-popupCardImageCloseBtn.addEventListener('click', () => popupClose(popupCardImage))//закрыть попап просмотра изображения
+popupOpenImageCloseBtn.addEventListener('click', () => popupClose(popupOpenImage))//закрыть попап просмотра изображения
