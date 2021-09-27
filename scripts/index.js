@@ -1,11 +1,11 @@
 const popupEditProfile = document.querySelector('.popup_type_edit'); //переменная попап с формой редактированя профиля
 const popupOpenBtn = document.querySelector('.profile__edit'); //переменная кнопки редактирования профиля
 const popupCloseBtn = popupEditProfile.querySelector('.popup__close'); //переменная кнопки закрытия редактирования профиля
-let profileName = document.querySelector('.profile__name'); //переменная имени пользователя
-let profileDesc = document.querySelector('.profile__desc'); //переменная описания профиля
-let formInfo = popupEditProfile.querySelector('.form'); //переменная формы редактирования профиля
-let formInfoName = formInfo.querySelector('.form__item_type_name'); //переменная значения имени профиля
-let formInfoDesc = formInfo.querySelector('.form__item_type_desc'); //переменная значения описания профиля
+const profileName = document.querySelector('.profile__name'); //переменная имени пользователя
+const profileDesc = document.querySelector('.profile__desc'); //переменная описания профиля
+const formInfo = popupEditProfile.querySelector('.form'); //переменная формы редактирования профиля
+const formInfoName = formInfo.querySelector('.form__item_type_name'); //переменная значения имени профиля
+const formInfoDesc = formInfo.querySelector('.form__item_type_desc'); //переменная значения описания профиля
 
 //массив с первоначальными карточками при загрузке страницы
 const initialCards = [
@@ -41,13 +41,13 @@ const popupCreateCard = document.querySelector('.popup_type_new-card'); //поп
 const popupCardOpenBtn = document.querySelector('.profile__button'); //кнопка открытия попапа добавления карточки
 const popupCardCloseBtn = popupCreateCard.querySelector('.popup__close'); //кнопка закрытия попапа добавления карточки
 const formCard = popupCreateCard.querySelector('.form'); //форма отправки данных новой карточки
-let formCardSubtitle = formCard.querySelector('.form__item_type_image-subtitle'); //поле ввода названя карточки
-let formImageLink = formCard.querySelector('.form__item_type_image-link'); //поле ввода ссылки на изображение карточки
-let likeBtn = cardTemplateElement.querySelector('.cards__button'); //кнопка лайк изображения
+const formCardSubtitle = formCard.querySelector('.form__item_type_image-subtitle'); //поле ввода названя карточки
+const formImageLink = formCard.querySelector('.form__item_type_image-link'); //поле ввода ссылки на изображение карточки
+const likeBtn = cardTemplateElement.querySelector('.cards__button'); //кнопка лайк изображения
 const popupOpenImage = document.querySelector('.popup_type_image'); //попап просмотра изображения
 const popupOpenImageCloseBtn = popupOpenImage.querySelector('.popup__close'); //кнопка закрытия попапа просмотра изображения
-let popupImageName = popupOpenImage.querySelector('.popup__subtitle'); //поле ввода описания картинки в попапе просмотра изображения
-let popupImageLink = popupOpenImage.querySelector('.popup__image'); //поле ввода ссылки на картинку в попапе просмотра изображения
+const popupImageName = popupOpenImage.querySelector('.popup__subtitle'); //поле ввода описания картинки в попапе просмотра изображения
+const popupImageLink = popupOpenImage.querySelector('.popup__image'); //поле ввода ссылки на картинку в попапе просмотра изображения
 
 //объявление функции открытия попапа
 function popupOpen(modal) {
@@ -78,7 +78,7 @@ function addInfo(evt) {
 function createNewCard(event) {
   event.preventDefault();
 //объявляем объект с ключами равными значениям в полях ввода
-  let newCards = {
+  const newCards = {
     name: formCardSubtitle.value,
     link: formImageLink.value
   };
@@ -105,7 +105,7 @@ function deleteCard(event) {
 //открытие попапа просмотра изображения
 function showImage(event) {
   popupOpen(popupOpenImage)
-  let mainElement = event.currentTarget.closest('.cards__item') //возвращаем ближайщий родительский элемент
+  const mainElement = event.currentTarget.closest('.cards__item') //возвращаем ближайщий родительский элемент
   popupImageName.textContent = mainElement.querySelector('.cards__subtitle').textContent //приравниваем текстовые содержания
   popupImageLink.src = mainElement.querySelector('.cards__image').src //приравниваем ссылки на изображения
 }
