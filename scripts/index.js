@@ -80,7 +80,7 @@ function createNewCard(event) {
 //объявляем объект с ключами равными значениям в полях ввода
   let newCards = {
     name: formCardSubtitle.value,
-    link: formCardLink.value
+    link: formImageLink.value
   };
 
   renderCards(newCards);
