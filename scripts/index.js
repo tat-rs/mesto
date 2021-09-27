@@ -1,4 +1,4 @@
-import { initialCards } from "./array.js"; // импорт массива с первоначальными карточками при загрузке страницы
+import { initialCards } from "./array.js"; // импорт массива с первоначальными карточками страницы
 
 const popupEditProfile = document.querySelector('.popup_type_edit'); //переменная попап с формой редактированя профиля
 const popupOpenBtn = document.querySelector('.profile__edit'); //переменная кнопки редактирования профиля
@@ -48,22 +48,6 @@ function addInfo(evt) {
   popupClose(popupEditProfile);
 }
 
-//создание новой карточки на странице
-function createNewCard(event) {
-  event.preventDefault();
-//объявляем объект с ключами равными значениям в полях ввода
-  const newCards = {
-    name: formCardSubtitle.value,
-    link: formImageLink.value
-  };
-
-  renderCards(newCards);
-
-  popupClose(popupCreateCard);
-
-  event.currentTarget.reset();
-}
-
 //изменяем цвет лайка при нажатии
 function addLike(event) {
   event.target.classList.toggle('cards__button_active'); //добавляем или убираем класс cards__button_active у элемента
@@ -97,10 +81,26 @@ function createCard(element) {
   return newCardElement
 }
 
-//функция добавленя новых карточек
+//функция отображения карточек
 function renderCards(element) {
   const newElement = createCard(element)
   cardListElement.prepend(newElement);
+}
+
+//добавление новой карточки на страницу из попапа добавить карточку
+function createNewCard(event) {
+  event.preventDefault();
+//объявляем объект с ключами равными значениям в полях ввода
+  const newCards = {
+    name: formCardSubtitle.value,
+    link: formImageLink.value
+  };
+
+  renderCards(newCards);
+
+  popupClose(popupCreateCard);
+
+  event.currentTarget.reset();
 }
 
 initialCards.map(renderCards) //отображаем новый массив карточек на странице
