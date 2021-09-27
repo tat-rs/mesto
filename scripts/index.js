@@ -51,12 +51,12 @@ let popupImageLink = popupOpenImage.querySelector('.popup__image'); //поле �
 
 //объявление функции открытия попапа
 function popupOpen(modal) {
-  modal.classList.add('popup_opened')
+  modal.classList.add('popup_opened') //присваиваем класс модификатора popup_opened
 }
 
 //объявление функции закрытия попапа
 function popupClose(modal) {
-  modal.classList.remove('popup_opened')
+  modal.classList.remove('popup_opened') //удаляем класс модификатора popup_opened
 }
 
 //объявление функции открытия попапа редактирования профиля
@@ -92,7 +92,7 @@ function createNewCard(event) {
 
 //изменяем цвет лайка при нажатии
 function addLike(event) {
-  event.target.classList.toggle('cards__button_active');
+  event.target.classList.toggle('cards__button_active'); //добавляем или убираем класс cards__button_active у элемента
 }
 
 //удаление карточки
