@@ -81,7 +81,7 @@ function createCard(element) {
   return newCardElement
 }
 
-//функция отображения карточек
+//функция добавления карточек
 function renderCards(element) {
   const newElement = createCard(element)
   cardListElement.prepend(newElement);
