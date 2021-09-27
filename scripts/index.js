@@ -85,7 +85,7 @@ function createNewCard(event) {
 
   renderCards(newCards);
 
-  popupClose(popupAddCard);
+  popupClose(popupCreateCard);
 
   event.currentTarget.reset();
 }
