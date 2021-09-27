@@ -7,8 +7,6 @@ let formInfo = popupEditProfile.querySelector('.form'); //переменная �
 let formInfoName = formInfo.querySelector('.form__item_type_name'); //переменная значения имени профиля
 let formInfoDesc = formInfo.querySelector('.form__item_type_desc'); //переменная значения описания профиля
 
-
-
 const initialCards = [
   {
     name: 'Архыз',
@@ -45,22 +43,25 @@ const formCard = popupAddCard.querySelector('.form'); //форма отправ�
 let formCardSubtitle = formCard.querySelector('.form__item_type_image-subtitle') //поле ввода названя карточки
 let formCardLink = formCard.querySelector('.form__item_type_image-link') //поле ввода ссылки на изображение карточки
 let likeBtn = cardTemplateElement.querySelector('.cards__button'); //кнопка лайк изображения
-let popupCardImage = document.querySelector('.popup_type_image')//попап просмотра изображения
-let cardImageName = popupCardImage.querySelector('.cards__subtitle')
-let CardImageLink = popupCardImage.querySelector('.cards__image')
+const popupCardImage = document.querySelector('.popup_type_image')//попап просмотра изображения
+const popupCardImageCloseBtn = popupCardImage.querySelector('.popup__close')//кнопка закрытия попапа просмотра изображения
+let cardImageName = popupCardImage.querySelector('.popup__subtitle')//описание картинки в попапе просмотра изображения
+let cardImageLink = popupCardImage.querySelector('.popup__image')//картинка в попапе просмотра изображения
 
 //объявление функции открытия попапа
 function popupOpen(modal) {
   modal.classList.add('popup_opened')
-  if (modal === popupEditProfile) {
-    formInfoName.value = profileName.textContent;
-    formInfoDesc.value = profileDesc.textContent;
-  }
 }
 
 //объявление функции закрытия попапа
 function popupClose(modal) {
-  modal.classList.remove('popup_opened');
+  modal.classList.remove('popup_opened')
+}
+
+function addStartInfo() {
+  popupOpen(popupEditProfile)
+  formInfoName.value = profileName.textContent;
+  formInfoDesc.value = profileDesc.textContent;
 }
 
 //объявление функции сохранения новых данных в форме редактирования профиля
@@ -78,12 +79,10 @@ function renderCards(element) {
   newCardElement.querySelector('.cards__subtitle').textContent = element.name;
   //присваиваем значение ссылки на изображение новой карточки равной ключу link массива
   newCardElement.querySelector('.cards__image').src = element.link;
-  //добавили слушатель на кнопку лайк
-  newCardElement.querySelector('.cards__button').addEventListener('click', addLike);
+  newCardElement.querySelector('.cards__button').addEventListener('click', addLike);//добавили слушатель на кнопку лайк
   newCardElement.querySelector('.cards__delete').addEventListener('click', deleteCard);//добавили слушатель для удаления карточки
-
-  // отображаем массив на странице
-  cardListElement.prepend(newCardElement);
+  newCardElement.querySelector('.cards__image').addEventListener('click', showImage);
+  cardListElement.prepend(newCardElement);// отображаем массив на странице
 }
 
 //создание новой карточки на странице
@@ -113,11 +112,19 @@ function deleteCard(event) {
   cardDeleted.remove(); //удаляем блок карточки
 }
 
+function showImage(event) {
+  popupOpen(popupCardImage)
+  let mainElement = event.currentTarget.closest('.cards__item')
+  cardImageName.textContent = mainElement.querySelector('.cards__subtitle').textContent
+  cardImageLink.src = mainElement.querySelector('.cards__image').src
+}
+
 initialCards.map(renderCards) //отображаем новый массив карточек на странице
 
-popupOpenBtn.addEventListener('click', () => popupOpen(popupEditProfile));//открытие попапа по клику на кнопку редактирования профиля
+popupOpenBtn.addEventListener('click', addStartInfo);//открытие попапа по клику на кнопку редактирования профиля
 popupCloseBtn.addEventListener('click', () => popupClose(popupEditProfile));//закрытие попапа по клику на кнопку редактирования профиля
 formInfo.addEventListener('submit', addInfo);//сохранение внесенных данных по клику
 popupCardOpenBtn.addEventListener('click', () => popupOpen(popupAddCard)); //открыть попап добавления новой карточки
 popupCardCloseBtn.addEventListener('click', () => popupClose(popupAddCard));//закрыть попап добавления карточки
 formCard.addEventListener('submit', createNewCard); // создание новой карточки
+popupCardImageCloseBtn.addEventListener('click', () => popupClose(popupCardImage))//закрыть попап просмотра изображения
