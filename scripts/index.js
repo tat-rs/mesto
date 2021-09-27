@@ -110,8 +110,8 @@ function showImage(event) {
   popupImageLink.src = mainElement.querySelector('.cards__image').src //приравниваем ссылки на изображения
 }
 
-//объявление функции добавления карточек при загрузке страницы
-function renderCards(element) {
+//функция создания новой карточки
+function createCard(element) {
   const newCardElement = cardTemplateElement.content.cloneNode(true);//клонируем массив
   //присваиваем значение описания новой карточки равной ключу name массива
   newCardElement.querySelector('.cards__subtitle').textContent = element.name;
@@ -120,7 +120,13 @@ function renderCards(element) {
   newCardElement.querySelector('.cards__button').addEventListener('click', addLike);//добавили слушатель на кнопку лайк
   newCardElement.querySelector('.cards__delete').addEventListener('click', deleteCard);//добавили слушатель для удаления карточки
   newCardElement.querySelector('.cards__image').addEventListener('click', showImage);
-  cardListElement.prepend(newCardElement);// отображаем массив на странице
+  return newCardElement
+}
+
+//функция добавленя новых карточек
+function renderCards(element) {
+  const newElement = createCard(element)
+  cardListElement.prepend(newElement);
 }
 
 initialCards.map(renderCards) //отображаем новый массив карточек на странице
