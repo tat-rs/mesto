@@ -1,24 +1,33 @@
+//передаваемый объект настроек всех нужных классов и селекторов элементов
+const validationConfig = {
+  formSelector: '.form',
+  inputSelector: '.form__item',
+  submitButtonSelector: '.form__button',
+  inactiveButtonClass: 'form__button_disabled',
+  inputErrorClass: 'form__item_state_invalid',
+};
+
 //показать ошибку
-const showError = (errorElement, inputElement) => {
+const showError = (errorElement, inputElement, config) => {
   errorElement.textContent = inputElement.validationMessage; //присвоили стандратный текст ошибки
-  inputElement.classList.add('form__item_state_invalid'); //добавили класс со стилем ошибки
+  inputElement.classList.add(config.inputErrorClass); //добавили класс со стилем ошибки
 }
 
 //скрыть ошибку
-const hideError = (errorElement, inputElement) => {
+const hideError = (errorElement, inputElement, config) => {
   errorElement.textContent = ''; //удалили стандратный текст ошибки
-  inputElement.classList.remove('form__item_state_invalid'); //удалили класс со стилем ошибки
+  inputElement.classList.remove(config.inputErrorClass); //удалили класс со стилем ошибки
 }
 
 //функция проверки валидности поля ввода формы
-const checkInputValidity = (formElement, inputElement) => {
+const checkInputValidity = (formElement, inputElement, config) => {
   const isInputNotValid = !inputElement.validity.valid; //переменная с невалидным полем
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`)//находим элемент с ошибкой в момент ввода в поле
 //определяем показывать или скрывать ошибку в зависимости от валидности
   if (isInputNotValid) {
-    showError(errorElement, inputElement);
+    showError(errorElement, inputElement, config);
   } else {
-    hideError(errorElement, inputElement);
+    hideError(errorElement, inputElement, config);
   }
 }
 
@@ -31,27 +40,27 @@ const hasInvalidInput = (inputList) => {
 };
 
 //включение и отключение кнопки в зависимости от валидности формы
-const toggleButtonState = (inputList, button) => {
+const toggleButtonState = (inputList, button, config) => {
   // Если есть хотя бы одно поле ввода невалидно
-  if (hasInvalidInput(inputList)) {
-    button.classList.add('form__button_disabled'); //добавляем класс со стилем неактивной кнопки
+  if (hasInvalidInput(inputList, config)) {
+    button.classList.add(config.inactiveButtonClass); //добавляем класс со стилем неактивной кнопки
     button.disabled = 'disabled';
   } else {
-    button.classList.remove('form__button_disabled'); // иначе убираем класс со стилем неактивной кнопки
+    button.classList.remove(config.inactiveButtonClass); // иначе убираем класс со стилем неактивной кнопки
     button.disabled = false;
   }
 };
 
 //устанавливаем обработчик полям ввода формы
-const setEventListener = (formElement) => {
-  const inputList = Array.from(formElement.querySelectorAll('.form__item')); //находм все поля вводы формы в передаваемой форме и создаем массив
-  const submitButton = formElement.querySelector('.form__button')
-  toggleButtonState(inputList, submitButton);
+const setEventListener = (formElement, config) => {
+  const inputList = Array.from(formElement.querySelectorAll(config.inputSelector)); //находм все поля вводы формы в передаваемой форме и создаем массив
+  const submitButton = formElement.querySelector(config.submitButtonSelector)
+  toggleButtonState(inputList, submitButton, config);
 
   inputList.forEach((inputElement) => {
     inputElement.addEventListener('input', () => {
-      checkInputValidity(formElement, inputElement);
-      toggleButtonState(inputList, submitButton); // Вызовем toggleButtonState и передадим ей массив полей и кнопку
+      checkInputValidity(formElement, inputElement, config);
+      toggleButtonState(inputList, submitButton, config); // Вызовем toggleButtonState и передадим ей массив полей и кнопку
     });
   });
 
@@ -61,12 +70,13 @@ const setEventListener = (formElement) => {
   });
 };
 
-const enableValidation = () => {
-  const forms = Array.from(document.querySelectorAll('.form')); //находим все формы в документе
+//функция валидации всех форм на странице
+const enableValidation = (config) => {
+  const forms = Array.from(document.querySelectorAll(config.formSelector)); //находим все формы в документе
   //добавим обработчика для каждого элемента формы
   forms.forEach(formElement => {
-    setEventListener(formElement); //добавляем обработчик всем полям ввода формы
+    setEventListener(formElement, config); //добавляем обработчик всем полям ввода формы
   });
 };
 
-enableValidation()
+enableValidation(validationConfig) //включение валидации форм на странице

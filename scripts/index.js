@@ -51,6 +51,7 @@ function popupOpen(modal) {
 function popupClose(modal) {
   modal.classList.remove('popup_opened') //удаляем класс модификатора popup_opened
   window.removeEventListener('keydown', close); //удаляем обработчик закрытия
+  modal.removeEventListener('mousedown', clickOverlay); //удаляем обработчик закрытия попапа по оверлею
 };
 
 //объявление функции открытия попапа редактирования профиля
