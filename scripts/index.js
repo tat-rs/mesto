@@ -23,23 +23,34 @@ const popupOpenImageCloseBtn = popupOpenImage.querySelector('.popup__close'); //
 const popupImageName = popupOpenImage.querySelector('.popup__subtitle'); //поле ввода описания картинки в попапе просмотра изображения
 const popupImageLink = popupOpenImage.querySelector('.popup__image'); //поле ввода ссылки на картинку в попапе просмотра изображения
 
-
-const close = (evt) => {
+//функция закрытия попапа по кнопке esc
+function close (evt) {
   const popup = document.querySelector('.popup_opened')
-    if (evt.key === 'Escape') {
+  //если событие esc, то попап закрывается
+  if (evt.key === 'Escape') {
       popupClose(popup)
     }
+}
+
+//функция закрытия попапа при нажатии на оверлей
+function clickOverlay(evt) {
+  const popup = document.querySelector('.popup_opened')
+  if (evt.target === evt.currentTarget) {
+    popupClose(popup)
+  }
 }
 
 //объявление функции открытия попапа
 function popupOpen(modal) {
   modal.classList.add('popup_opened'); //присваиваем класс модификатора popup_opened
-  window.addEventListener('keydown', close);
+  window.addEventListener('keydown', close); //присваиваем обработчик закрытия
+  modal.addEventListener('mousedown', clickOverlay); //присваиваем обработчик закрытия попапа по оверлею
 };
 
 //объявление функции закрытия попапа
 function popupClose(modal) {
   modal.classList.remove('popup_opened') //удаляем класс модификатора popup_opened
+  window.removeEventListener('keydown', close); //удаляем обработчик закрытия
 };
 
 //объявление функции открытия попапа редактирования профиля
@@ -120,12 +131,3 @@ popupCardOpenBtn.addEventListener('click', () => popupOpen(popupCreateCard)); //
 popupCardCloseBtn.addEventListener('click', () => popupClose(popupCreateCard));//закрыть попап добавления карточки
 formCard.addEventListener('submit', createNewCard); // создание новой карточки
 popupOpenImageCloseBtn.addEventListener('click', () => popupClose(popupOpenImage))//закрыть попап просмотра изображения
-
-/* const close = (evt) => {
-  let popup = document.querySelector('.popup_opened')
-    if (evt.key === 'Escape') {
-      popup.classList.remove('popup_opened')
-    }
-}
-
-document.addEventListener('keydown', close) */
