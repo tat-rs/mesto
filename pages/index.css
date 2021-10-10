@@ -56,6 +56,13 @@
 @import url(../blocks/form/__item/_type/form__item_type_desc.css);
 @import url(../blocks/form/__item/_type/form__item_type_image-subtitle.css);
 @import url(../blocks/form/__item/_type/form__item_type_image-link.css);
+@import url(../blocks/form/__item/_state/form__item_state_invalid.css);
+@import url(../blocks/form/__error/form__error.css);
 @import url(../blocks/form/__button/form__button.css);
+@import url(../blocks/form/__button/_disabled/form__button_disabled.css);
 @import url(../blocks/form/__button/_place/form__button_place_new-card.css);
 
+@import url(../blocks/name-profile-error/name-profile-error.css);
+@import url(../blocks/desc-profile-error/desc-profile-error.css);
+@import url(../blocks/image-subtitle-error/image-subtitle-error.css);
+@import url(../blocks/image-link-error/image-link-error.css);

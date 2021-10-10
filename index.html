@@ -39,10 +39,12 @@
   <div class="popup popup_type_edit">
     <div class="popup__container">
       <button class="popup__close link" type="button" aria-label="Закрыть форму"></button>
-      <form class="popup__form form" name="form-edit">
+      <form class="popup__form form" name="form-edit" novalidate>
         <h2 class="form__title">Редактировать профиль</h2>
-        <input class="form__item form__item_type_name" type="text" name="name" placeholder="Имя" required>
-        <input class="form__item form__item_type_desc" type="text" name="description" placeholder="О себе">
+        <input class="form__item form__item_type_name" id="name-profile" type="text" name="name" placeholder="Имя" minlength="2" maxlength="40" required>
+        <span class="form__error name-profile-error"></span>
+        <input class="form__item form__item_type_desc" id="desc-profile" type="text" name="description" placeholder="О себе" minlength="2" maxlength="200" required>
+        <span class="form__error desc-profile-error"></span>
         <button class="form__button" type="submit">Сохранить</button>
       </form>
     </div>
@@ -50,10 +52,12 @@
   <div class="popup popup_type_new-card">
     <div class="popup__container">
       <button class="popup__close link" type="button" aria-label="Закрыть форму"></button>
-      <form class="popup__form form" name="form-add">
+      <form class="popup__form form" name="form-add" novalidate>
         <h2 class="form__title">Новое место</h2>
-        <input class="form__item form__item_type_image-subtitle" type="text" name="subtitle" placeholder="Название" required>
-        <input class="form__item form__item_type_image-link" type="text" name="link" placeholder="Ссылка на картинку">
+        <input class="form__item form__item_type_image-subtitle" id="image-subtitle" type="text" name="subtitle" placeholder="Название" required>
+        <span class="form__error image-subtitle-error"></span>
+        <input class="form__item form__item_type_image-link" id="image-link" type="url" name="link" placeholder="Ссылка на картинку" required>
+        <span class="form__error image-link-error"></span>
         <button class="form__button form__button_place_new-card" type="submit">Создать</button>
       </form>
     </div>
@@ -76,5 +80,6 @@
     </li>
   </template>
   <script type="module" src="./scripts/index.js"></script>
+  <script src="./scripts/validate.js"></script>
 </body>
 </html>
