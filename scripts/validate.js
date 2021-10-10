@@ -14,7 +14,7 @@ const hideError = (errorElement, inputElement) => {
 const checkInputValidity = (formElement, inputElement) => {
   const isInputNotValid = !inputElement.validity.valid; //переменная с невалидным полем
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`)//находим элемент с ошибкой в момент ввода в поле
-
+//определяем показывать или скрывать ошибку в зависимости от валидности
   if (isInputNotValid) {
     showError(errorElement, inputElement);
   } else {
@@ -49,7 +49,7 @@ const setEventListener = (formElement) => {
   toggleButtonState(inputList, submitButton);
 
   inputList.forEach((inputElement) => {
-    inputElement.addEventListener('input', (evt) => {
+    inputElement.addEventListener('input', () => {
       checkInputValidity(formElement, inputElement);
       toggleButtonState(inputList, submitButton); // Вызовем toggleButtonState и передадим ей массив полей и кнопку
     });

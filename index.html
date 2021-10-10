@@ -54,7 +54,7 @@
       <button class="popup__close link" type="button" aria-label="Закрыть форму"></button>
       <form class="popup__form form" name="form-add" novalidate>
         <h2 class="form__title">Новое место</h2>
-        <input class="form__item form__item_type_image-subtitle" id="image-subtitle" type="text" name="subtitle" placeholder="Название" required>
+        <input class="form__item form__item_type_image-subtitle" id="image-subtitle" type="text" name="subtitle" placeholder="Название" minlength="2" maxlength="30" required>
         <span class="form__error image-subtitle-error"></span>
         <input class="form__item form__item_type_image-link" id="image-link" type="url" name="link" placeholder="Ссылка на картинку" required>
         <span class="form__error image-link-error"></span>
