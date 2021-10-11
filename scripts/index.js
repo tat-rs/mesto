@@ -83,21 +83,26 @@ function deleteCard(event) {
 //открытие попапа просмотра изображения
 function showImage(event) {
   openPopup(popupOpenImage)
-  const mainElement = event.currentTarget.closest('.cards__item') //возвращаем ближайщий родительский элемент
-  popupImageName.textContent = mainElement.querySelector('.cards__subtitle').textContent //приравниваем текстовые содержания
-  popupImageLink.src = mainElement.querySelector('.cards__image').src //приравниваем ссылки на изображения
+  const mainElement = event.currentTarget.closest('.cards__item'); //возвращаем ближайщий родительский элемент
+  const namePicture = mainElement.querySelector('.cards__subtitle'); // переменная с названием карточки
+  popupImageName.textContent = namePicture.textContent; //приравниваем текстовые содержания
+  popupImageLink.src = mainElement.querySelector('.cards__image').src; //приравниваем ссылки на изображения
+  popupImageLink.alt = namePicture.textContent; //заполняем альт названием карточки
 }
 
 //функция создания новой карточки
 function createCard(element) {
   const newCardElement = cardTemplateElement.content.cloneNode(true);//клонируем массив
   //присваиваем значение описания новой карточки равной ключу name массива
+  const newCardImage = newCardElement.querySelector('.cards__image');// переменная с элементом изображение
+
   newCardElement.querySelector('.cards__subtitle').textContent = element.name;
   //присваиваем значение ссылки на изображение новой карточки равной ключу link массива
-  newCardElement.querySelector('.cards__image').src = element.link;
+  newCardImage.src = element.link; // добавили адрес изображение из массива карточек
+  newCardImage.alt = element.name; // добавили описание в атрибут alt, равное названию карточки
   newCardElement.querySelector('.cards__button').addEventListener('click', toggleLike);//добавили слушатель на кнопку лайк
   newCardElement.querySelector('.cards__delete').addEventListener('click', deleteCard);//добавили слушатель для удаления карточки
-  newCardElement.querySelector('.cards__image').addEventListener('click', showImage);
+  newCardImage.addEventListener('click', showImage);//добавили обработчик на картинку, чтобы открывался попап с данным изображением
   return newCardElement
 }
 
