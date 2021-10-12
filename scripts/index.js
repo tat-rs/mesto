@@ -115,6 +115,8 @@ function renderCard(element) {
 //добавление новой карточки на страницу из попапа добавить карточку
 function createNewCard(event) {
   event.preventDefault();
+
+  const submitButton = event.currentTarget.querySelector('.form__button'); //нашли кнопку сабмита
 //объявляем объект с ключами равными значениям в полях ввода
   const newCards = {
     name: formCardSubtitle.value,
@@ -124,6 +126,9 @@ function createNewCard(event) {
   renderCard(newCards);
 
   closePopup(popupCreateCard);
+
+  submitButton.disabled = 'disabled';
+  submitButton.classList.add('form__button_disabled'); //добавили стиль неактивной кнопки
 
   event.currentTarget.reset();
 }
