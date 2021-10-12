@@ -17,7 +17,7 @@ const showError = (errorElement, inputElement, config) => {
 const hideError = (errorElement, inputElement, config) => {
   errorElement.textContent = ''; //удалили стандратный текст ошибки
   inputElement.classList.remove(config.inputErrorClass); //удалили класс со стилем ошибки
-}
+};
 
 //функция проверки валидности поля ввода формы
 const checkInputValidity = (formElement, inputElement, config) => {
