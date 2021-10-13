@@ -140,25 +140,30 @@ function renderCard(element) {
   cardListElement.prepend(newElement);
 }
 
+//функция дезактивации кнопки сабмита
+function disableSubmitButton(modal) {
+  const submitButton = modal.querySelector('.form__button'); //нашли переменную с кнопкой
+  submitButton.disabled = 'disabled';// дезактивировали кнопку
+  submitButton.classList.add('form__button_disabled'); //добавили стиль неактивной кнопки
+}
+
 //добавление новой карточки на страницу из попапа добавить карточку
 function createNewCard(event) {
   event.preventDefault();
 
-  const submitButton = event.currentTarget.querySelector('.form__button'); //нашли кнопку сабмита
 //объявляем объект с ключами равными значениям в полях ввода
   const newCards = {
     name: formCardSubtitle.value,
     link: formImageLink.value
   };
 
-  renderCard(newCards);
+  renderCard(newCards); //отображение новой карточки
 
   closePopup(popupCreateCard);
 
-  submitButton.disabled = 'disabled';// дезактивировали кнопку
-  submitButton.classList.add('form__button_disabled'); //добавили стиль неактивной кнопки
+  disableSubmitButton(popupCreateCard); //дезактивация кнопки после закрытия
 
-  event.currentTarget.reset();
+  event.currentTarget.reset(); //обнуление значение полей ввода
 }
 
 initialCards.map(renderCard) //отображаем новый массив карточек на странице
