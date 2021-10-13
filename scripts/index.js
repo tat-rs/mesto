@@ -69,24 +69,24 @@ function closePopup(modal) {
   modal.classList.remove('popup_opened') //удаляем класс модификатора popup_opened
   window.removeEventListener('keydown', closePopupByEsc); //удаляем обработчик закрытия
   modal.removeEventListener('mousedown', closePopupByOverlayClick); //удаляем обработчик закрытия попапа по оверлею
-  if (modal === popupEditProfile || modal === popupCreateCard) {
-    hideErrorStyle(modal);
-    hideError(modal);
-  }
 };
 
 //объявление функции открытия попапа редактирования профиля
 function openEditProfilePopup() {
-  openPopup(popupEditProfile)
-  formInfoName.value = profileName.textContent;
+  openPopup(popupEditProfile);
+  hideError(popupEditProfile);//удалить текст ошибки
+  hideErrorStyle(popupEditProfile); //удалить стили ошибки
+  formInfoName.value = profileName.textContent; //в поле ввода текст со страницы
   formInfoDesc.value = profileDesc.textContent;
 }
 
 //функция открытия попапа добавления новой карточки
 function openCreateCardPopup() {
-  openPopup(popupCreateCard)
-  formCardSubtitle.value = '';
-  formImageLink.value = '';
+  openPopup(popupCreateCard);
+  hideError(popupCreateCard); //удалить текст ошибки
+  hideErrorStyle(popupCreateCard); //удалить стили ошибки
+  formCardSubtitle.value = ''; //обнуляем текст
+  formImageLink.value = ''; //обнуляем ссылку
 }
 
 //объявление функции сохранения новых данных в форме редактирования профиля
