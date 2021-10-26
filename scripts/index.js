@@ -114,11 +114,8 @@ function createNewCard(event) {
   };
 
   const newElement = renderCard(cardsElement); //отображение новой карточки
-
   cardListElement.prepend(newElement)
-
   closePopup(popupCreateCard);
-
   disableSubmitButton(popupCreateCard); //дезактивация кнопки после закрытия
 
   event.currentTarget.reset(); //обнуление значение полей ввода

@@ -25,10 +25,11 @@ export class Card {
 
     this._setEventListeners();
 
-    this._element.querySelector('.cards__subtitle').textContent = this._name;
+    this._cardSubtitle.textContent = this._name;
     //присваиваем значение ссылки на изображение новой карточки равной ключу link массива
     this._cardImage.src = this._link; // добавили адрес изображение из массива карточек
     this._cardImage.alt = this._name; // добавили описание в атрибут alt, равное названию карточки
+
     return this._element;
   }
 

@@ -7,7 +7,7 @@ const validationConfig = {
   inputErrorClass: 'form__item_state_invalid',
 };
 
-//показать ошибку
+/* //показать ошибку
 const showError = (errorElement, inputElement, config) => {
   errorElement.textContent = inputElement.validationMessage; //присвоили стандратный текст ошибки
   inputElement.classList.add(config.inputErrorClass); //добавили класс со стилем ошибки
@@ -80,3 +80,28 @@ const enableValidation = (config) => {
 };
 
 enableValidation(validationConfig) //включение валидации форм на странице
+ */
+
+class FormValidator {
+  constructor(config, formSelector) {
+    this._formSelector = config.formSelector;
+    this._inputSelector = config.inputSelector;
+    this._submitButtonSelector = config.submitButtonSelector;
+    this._inactiveButtonClass = config.inactiveButtonClass;
+    this._inputErrorClass = config.inputErrorClass;
+    this._formSelector = formSelector;
+  }
+
+    //устанавливаем обработчик полям ввода формы
+  _setEventListener() {
+    console.log(this._inputSelector)
+  };
+
+
+
+}
+/* enableValidation(validationConfig) //включение валидации форм на странице */
+
+
+const formVal = new FormValidator(validationConfig, '.popup_type_new-card')
+formVal._setEventListener()
