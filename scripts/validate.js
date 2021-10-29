@@ -1,107 +1,87 @@
 //передаваемый объект настроек всех нужных классов и селекторов элементов
-const validationConfig = {
-  formSelector: '.form',
+export const validationConfig = {
   inputSelector: '.form__item',
   submitButtonSelector: '.form__button',
   inactiveButtonClass: 'form__button_disabled',
   inputErrorClass: 'form__item_state_invalid',
 };
 
-/* //показать ошибку
-const showError = (errorElement, inputElement, config) => {
-  errorElement.textContent = inputElement.validationMessage; //присвоили стандратный текст ошибки
-  inputElement.classList.add(config.inputErrorClass); //добавили класс со стилем ошибки
-}
-
-//скрыть ошибку
-const hideError = (errorElement, inputElement, config) => {
-  errorElement.textContent = ''; //удалили стандратный текст ошибки
-  inputElement.classList.remove(config.inputErrorClass); //удалили класс со стилем ошибки
-};
-
-//функция проверки валидности поля ввода формы
-const checkInputValidity = (formElement, inputElement, config) => {
-  const isInputNotValid = !inputElement.validity.valid; //переменная с невалидным полем
-  const errorElement = formElement.querySelector(`.${inputElement.id}-error`)//находим элемент с ошибкой в момент ввода в поле
-//определяем показывать или скрывать ошибку в зависимости от валидности
-  if (isInputNotValid) {
-    showError(errorElement, inputElement, config);
-  } else {
-    hideError(errorElement, inputElement, config);
-  }
-}
-
-//проверка валидности воля ввода
-const hasInvalidInput = (inputList) => {
-  //перебор каждого элемента массива на валидность
-  return inputList.some((inputElement) => {
-    return !inputElement.validity.valid; //возвращает true, если поле невалидно
-  });
-};
-
-//включение и отключение кнопки в зависимости от валидности формы
-const toggleButtonState = (inputList, button, config) => {
-  // Если есть хотя бы одно поле ввода невалидно
-  if (hasInvalidInput(inputList, config)) {
-    button.classList.add(config.inactiveButtonClass); //добавляем класс со стилем неактивной кнопки
-    button.disabled = 'disabled';
-  } else {
-    button.classList.remove(config.inactiveButtonClass); // иначе убираем класс со стилем неактивной кнопки
-    button.disabled = false;
-  }
-};
-
-//устанавливаем обработчик полям ввода формы
-const setEventListener = (formElement, config) => {
-  const inputList = Array.from(formElement.querySelectorAll(config.inputSelector)); //находм все поля вводы формы в передаваемой форме и создаем массив
-  const submitButton = formElement.querySelector(config.submitButtonSelector)
-  toggleButtonState(inputList, submitButton, config);
-
-  inputList.forEach((inputElement) => {
-    inputElement.addEventListener('input', () => {
-      checkInputValidity(formElement, inputElement, config);
-      toggleButtonState(inputList, submitButton, config); // Вызовем toggleButtonState и передадим ей массив полей и кнопку
-    });
-  });
-
-  //отменяем действия по умолчанию
-  formElement.addEventListener('submit', (evt) => {
-    evt.preventDefault();
-  });
-};
-
-//функция валидации всех форм на странице
-const enableValidation = (config) => {
-  const forms = Array.from(document.querySelectorAll(config.formSelector)); //находим все формы в документе
-  //добавим обработчика для каждого элемента формы
-  forms.forEach(formElement => {
-    setEventListener(formElement, config); //добавляем обработчик всем полям ввода формы
-  });
-};
-
-enableValidation(validationConfig) //включение валидации форм на странице
- */
-
-class FormValidator {
+export class FormValidator {
   constructor(config, formSelector) {
-    this._formSelector = config.formSelector;
     this._inputSelector = config.inputSelector;
     this._submitButtonSelector = config.submitButtonSelector;
     this._inactiveButtonClass = config.inactiveButtonClass;
     this._inputErrorClass = config.inputErrorClass;
     this._formSelector = formSelector;
+    this._form = document.querySelector(this._formSelector);
+    this._button = this._form.querySelector(this._submitButtonSelector);
+    this._inputsList = this._form.querySelectorAll(this._inputSelector);
+  }
+
+  _showError(errorElement, inputElement) {
+    errorElement.textContent = inputElement.validationMessage;
+    inputElement.classList.add(this._inputErrorClass);
+  }
+
+  hideError() {
+    Array.from(this._inputsList).forEach(inputElement => {
+      const errorElement = this._form.querySelector(`.${inputElement.id}-error`);
+      errorElement.textContent = '';
+      inputElement.classList.remove(this._inputErrorClass);
+    });
+  }
+
+  _checkInputValidity(inputElement) {
+    const isInputNotValid = !inputElement.validity.valid;
+    const errorElement = this._form.querySelector(`.${inputElement.id}-error`);
+
+    if(isInputNotValid) {
+      this._showError(errorElement, inputElement)
+    } else {
+      this.hideError()
+    }
+  }
+
+  _hasInvalidInput() {
+    const invalidInput = !this._form.checkValidity();
+    return invalidInput
+  }
+
+  _toggleButtonState() {
+    const invalidInput = this._hasInvalidInput()
+    if(invalidInput) {
+      this._button.classList.add(this._inactiveButtonClass);
+      this._button.disabled = 'disabled';
+    } else {
+      this._button.classList.remove(this._inactiveButtonClass);
+      this._button.disabled = false;
+    }
   }
 
     //устанавливаем обработчик полям ввода формы
   _setEventListener() {
-    console.log(this._inputSelector)
+    this._toggleButtonState()
+
+    Array.from(this._inputsList).forEach(inputElement => {
+      inputElement.addEventListener('input', () => {
+        /* const isFormValid = this._form.checkValidity(); */
+        this._checkInputValidity(inputElement);
+        this._toggleButtonState()
+      })
+    })
+
+    this._form.addEventListener('submit', (evt) => {
+      evt.preventDefault();
+    });
   };
 
-
+  enableValidation() {
+    this._setEventListener();
+  }
 
 }
-/* enableValidation(validationConfig) //включение валидации форм на странице */
 
-
-const formVal = new FormValidator(validationConfig, '.popup_type_new-card')
-formVal._setEventListener()
+const formVal1 = new FormValidator(validationConfig, '.form_type_add')
+const formVal2 = new FormValidator(validationConfig, '.form_type_edit')
+formVal1.enableValidation()
+formVal2.enableValidation()

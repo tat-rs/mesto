@@ -1,6 +1,8 @@
 import { Card } from './Card.js';
 import { initialCards } from './initial-cards.js'
 
+import { FormValidator, validationConfig } from './validate.js';
+
 const popupEditProfile = document.querySelector('.popup_type_edit'); //переменная попап с формой редактированя профиля
 const popupOpenBtn = document.querySelector('.profile__edit'); //переменная кнопки редактирования профиля
 const popupCloseBtn = popupEditProfile.querySelector('.popup__close'); //переменная кнопки закрытия редактирования профиля
@@ -19,7 +21,6 @@ const formCardSubtitle = formCard.querySelector('.form__item_type_image-subtitle
 const formImageLink = formCard.querySelector('.form__item_type_image-link'); //поле ввода ссылки на изображение карточки
 const popupOpenImage = document.querySelector('.popup_type_image'); //попап просмотра изображения
 const popupOpenImageCloseBtn = popupOpenImage.querySelector('.popup__close'); //кнопка закрытия попапа просмотра изображения
-
 
 //функция закрытия попапа по кнопке esc
 function closePopupByEsc (evt) {
@@ -72,18 +73,21 @@ function closePopup(modal) {
 
 //объявление функции открытия попапа редактирования профиля
 function openEditProfilePopup() {
+  const formValidatorAddCard = new FormValidator(validationConfig, '.form_type_edit');
+  formValidatorAddCard.enableValidation()
   openPopup(popupEditProfile);
-  /* hideError(popupEditProfile);//удалить текст ошибки
-  hideErrorStyle(popupEditProfile); //удалить стили ошибки */
+  formValidatorAddCard.hideError();
   formInfoName.value = profileName.textContent; //в поле ввода текст со страницы
   formInfoDesc.value = profileDesc.textContent;
+
 }
 
 //функция открытия попапа добавления новой карточки
 function openCreateCardPopup() {
+  const formValidatorEditProfile = new FormValidator(validationConfig, '.form_type_add');
+  formValidatorEditProfile.enableValidation()
   openPopup(popupCreateCard);
-  /* hideError(popupCreateCard); //удалить текст ошибки
-  hideErrorStyle(popupCreateCard); //удалить стили ошибки */
+  formValidatorEditProfile.hideError();
   formCardSubtitle.value = ''; //обнуляем текст
   formImageLink.value = ''; //обнуляем ссылку
 }
@@ -96,12 +100,12 @@ function submitEditProfileForm(evt) {
   closePopup(popupEditProfile);
 }
 
-//функция дезактивации кнопки сабмита
+/* //функция дезактивации кнопки сабмита
 function disableSubmitButton(modal) {
   const submitButton = modal.querySelector('.form__button'); //нашли переменную с кнопкой
   submitButton.disabled = 'disabled';// дезактивировали кнопку
   submitButton.classList.add('form__button_disabled'); //добавили стиль неактивной кнопки
-}
+} */
 
 //добавление новой карточки на страницу из попапа добавить карточку
 function createNewCard(event) {
@@ -116,7 +120,7 @@ function createNewCard(event) {
   const newElement = renderCard(cardsElement); //отображение новой карточки
   cardListElement.prepend(newElement)
   closePopup(popupCreateCard);
-  disableSubmitButton(popupCreateCard); //дезактивация кнопки после закрытия
+  /* disableSubmitButton(popupCreateCard); //дезактивация кнопки после закрытия */
 
   event.currentTarget.reset(); //обнуление значение полей ввода
 }
