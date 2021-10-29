@@ -1,11 +1,12 @@
-//передаваемый объект настроек всех нужных классов и селекторов элементов
+//передаваемый объект настроек всех нужных классов и селекторов элементов формы
 export const validationConfig = {
-  inputSelector: '.form__item',
-  submitButtonSelector: '.form__button',
-  inactiveButtonClass: 'form__button_disabled',
-  inputErrorClass: 'form__item_state_invalid',
+  inputSelector: '.form__item', //селектор инпута формы
+  submitButtonSelector: '.form__button', //селектор кнопки формы
+  inactiveButtonClass: 'form__button_disabled', //класс кнопки с неактивными стилями
+  inputErrorClass: 'form__item_state_invalid', // класс инпута со стилями ошибки
 };
 
+//создаем класс валидации формы
 export class FormValidator {
   constructor(config, formSelector) {
     this._inputSelector = config.inputSelector;
@@ -13,75 +14,80 @@ export class FormValidator {
     this._inactiveButtonClass = config.inactiveButtonClass;
     this._inputErrorClass = config.inputErrorClass;
     this._formSelector = formSelector;
-    this._form = document.querySelector(this._formSelector);
-    this._button = this._form.querySelector(this._submitButtonSelector);
-    this._inputsList = this._form.querySelectorAll(this._inputSelector);
-  }
+    this._form = document.querySelector(this._formSelector); //нашли саму валидирумую форму
+    this._button = this._form.querySelector(this._submitButtonSelector); //нашли кнопку в форме
+    this._inputsList = this._form.querySelectorAll(this._inputSelector); // нашли все инпуты формы
+  };
 
+  //метод, показывающий ошибку валидации
   _showError(errorElement, inputElement) {
-    errorElement.textContent = inputElement.validationMessage;
-    inputElement.classList.add(this._inputErrorClass);
-  }
+    errorElement.textContent = inputElement.validationMessage; //добавляем текст ошибки
+    inputElement.classList.add(this._inputErrorClass); //добавляем инпуту класс со стилями ошибки
+  };
 
+  //метод, скрывающий ошибки валидации
   hideError() {
+    //перебираем массив инпутов
     Array.from(this._inputsList).forEach(inputElement => {
-      const errorElement = this._form.querySelector(`.${inputElement.id}-error`);
-      errorElement.textContent = '';
-      inputElement.classList.remove(this._inputErrorClass);
+      const errorElement = this._form.querySelector(`.${inputElement.id}-error`); //находим элемент ошибки
+      errorElement.textContent = ''; //обнуляем текст с ошибкой валидации
+      inputElement.classList.remove(this._inputErrorClass); //удаляем класс со стилем ошибки
     });
-  }
+  };
 
+  //метод проверки валидности поля формы
   _checkInputValidity(inputElement) {
-    const isInputNotValid = !inputElement.validity.valid;
-    const errorElement = this._form.querySelector(`.${inputElement.id}-error`);
+    const isInputNotValid = !inputElement.validity.valid; //сохраняем в переменную невалидный инпут
+    const errorElement = this._form.querySelector(`.${inputElement.id}-error`); //находим элемент ошибки инпута
+
 
     if(isInputNotValid) {
-      this._showError(errorElement, inputElement)
+      this._showError(errorElement, inputElement) //вызов метода с ошибкой валидации
     } else {
-      this.hideError()
+      this.hideError() //вызов метода, скрывающий ошибку валидации
     }
-  }
+  };
 
+  //метод, возвращающий валидное поле ввода
   _hasInvalidInput() {
-    const invalidInput = !this._form.checkValidity();
+    const invalidInput = this._form.checkValidity();
     return invalidInput
-  }
+  };
 
+  //метод активации и дезактивации кнопки
   _toggleButtonState() {
-    const invalidInput = this._hasInvalidInput()
-    if(invalidInput) {
-      this._button.classList.add(this._inactiveButtonClass);
+    const invalidInput = this._hasInvalidInput(); //сохраняем в переменную валидное поле ввода
+
+    if(!invalidInput) {
+      this._button.classList.add(this._inactiveButtonClass); //добавляем стили неактивной кнопки для невалидного поля
       this._button.disabled = 'disabled';
     } else {
-      this._button.classList.remove(this._inactiveButtonClass);
+      this._button.classList.remove(this._inactiveButtonClass); //убираем стили неактивной кнопки для невалидного поля
       this._button.disabled = false;
     }
-  }
+  };
 
-    //устанавливаем обработчик полям ввода формы
+  //устанавливаем обработчик полям ввода формы
   _setEventListener() {
-    this._toggleButtonState()
+    this._toggleButtonState(); //блокируем кнопку сабмита до ввода значений в поле формы
 
+    // перебираем массив полей ввода
     Array.from(this._inputsList).forEach(inputElement => {
       inputElement.addEventListener('input', () => {
-        /* const isFormValid = this._form.checkValidity(); */
-        this._checkInputValidity(inputElement);
-        this._toggleButtonState()
-      })
-    })
+        this._checkInputValidity(inputElement); //при вводе в поле ввода провяертся валидность поля
+        this._toggleButtonState(); //блокируем или активизируем кнопку сабмита в зависимости от валидности
+      });
+    });
 
+    //отменяем действия сабмита по умолчанию
     this._form.addEventListener('submit', (evt) => {
       evt.preventDefault();
     });
   };
 
+  //метод валидации формы
   enableValidation() {
     this._setEventListener();
-  }
+  };
 
-}
-
-const formVal1 = new FormValidator(validationConfig, '.form_type_add')
-const formVal2 = new FormValidator(validationConfig, '.form_type_edit')
-formVal1.enableValidation()
-formVal2.enableValidation()
+};
