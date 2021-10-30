@@ -1,7 +1,7 @@
 import { Card } from './Card.js'; //импортируем класс карточки
 import { initialCards } from './initial-cards.js' //импортируем первоначальный массив карточек
 
-import { FormValidator, validationConfig } from './validate.js'; //импортируем класс валидации и объект с общими настройками
+import { FormValidator, validationConfig } from './FormValidator.js'; //импортируем класс валидации и объект с общими настройками
 //переменные попапа формы редактирования
 const popupEditProfile = document.querySelector('.popup_type_edit'); //переменная попап с формой редактированя профиля
 const popupOpenBtn = document.querySelector('.profile__edit'); //переменная кнопки редактирования профиля
