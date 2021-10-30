@@ -104,7 +104,7 @@ function createNewCard(evt) {
 //функция возвращающая новую карточку
 function renderCard(item) {
   const card = new Card(item, '.cards-template');
-  const newCard = card.createCard();
+  const newCard = card.generateCard();
   return newCard
 };
 

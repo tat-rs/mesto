@@ -1,5 +1,9 @@
 import { openPopup } from "./index.js"; //импортируем функцию открытия попапа
 
+const popupOpenImage = document.querySelector('.popup_type_image'); //попап просмотра изображения
+const popupImageName = popupOpenImage.querySelector('.popup__subtitle'); //поле ввода описания картинки в попапе просмотра изображения
+const popupImageLink = popupOpenImage.querySelector('.popup__image'); //поле ввода ссылки на картинку в попапе просмотра изображения
+
 //создаем класс карточки
 export class Card {
   constructor(data, selector) {
@@ -21,7 +25,7 @@ export class Card {
 
   //метод постановки лайка карточке
   _toggleLike() {
-    this._element.querySelector('.cards__button').classList.toggle('cards__button_active'); //добавляем или убираем класс с активным лайком у элемента
+    this._likeButton.classList.toggle('cards__button_active'); //добавляем или убираем класс с активным лайком у элемента
   };
 
   //метод удаления карточки со страницы
@@ -31,9 +35,6 @@ export class Card {
 
   //метод, открываюзий попап с изображением
   _showImage() {
-    const popupOpenImage = document.querySelector('.popup_type_image'); //попап просмотра изображения
-    const popupImageName = popupOpenImage.querySelector('.popup__subtitle'); //поле ввода описания картинки в попапе просмотра изображения
-    const popupImageLink = popupOpenImage.querySelector('.popup__image'); //поле ввода ссылки на картинку в попапе просмотра изображения
     openPopup(popupOpenImage) //открываем попап с изображением
       popupImageName.textContent = this._name; //приравниваем текстовые содержания
       popupImageLink.src = this._link; //приравниваем ссылки на изображения
@@ -42,14 +43,17 @@ export class Card {
 
   //обработчик слушателей
   _setEventListeners() {
-    this._element.querySelector('.cards__button').addEventListener('click', () => this._toggleLike()); //добавляем на кнопку лайк слушатель
-    this._element.querySelector('.cards__delete').addEventListener('click', () => this._deleteCard());//добавили слушатель для удаления карточки
+    this._likeButton.addEventListener('click', () => this._toggleLike()); //добавляем на кнопку лайк слушатель
+    this._deleteButton.addEventListener('click', () => this._deleteCard());//добавили слушатель для удаления карточки
     this._cardImage.addEventListener('click', () => this._showImage()); //добавляем слушатель на изображение для открытия попапа с изображением
   };
 
   //метод созданиия новой карточки
-  createCard() {
+  generateCard() {
     this._element = this._getTemplate(); //сохраняем разметку
+
+    this._likeButton = this._element.querySelector('.cards__button'); //нашли кнопку лайка
+    this._deleteButton = this._element.querySelector('.cards__delete'); //нашли кнопку удалить
 
     this._cardImage = this._element.querySelector('.cards__image'); //находим элемент изображения
     this._cardSubtitle = this._element.querySelector('.cards__subtitle'); //находим элемент описания изображения
