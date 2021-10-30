@@ -20,31 +20,28 @@ export class FormValidator {
   };
 
   //метод, показывающий ошибку валидации
-  _showError(errorElement, inputElement) {
+  _showError(inputElement) {
+    const errorElement = this._form.querySelector(`.${inputElement.id}-error`); //находим элемент ошибки инпут
+
     errorElement.textContent = inputElement.validationMessage; //добавляем текст ошибки
     inputElement.classList.add(this._inputErrorClass); //добавляем инпуту класс со стилями ошибки
   };
 
   //метод, скрывающий ошибки валидации
-  hideError() {
-    //перебираем массив инпутов
-    Array.from(this._inputsList).forEach(inputElement => {
-      const errorElement = this._form.querySelector(`.${inputElement.id}-error`); //находим элемент ошибки
-      errorElement.textContent = ''; //обнуляем текст с ошибкой валидации
-      inputElement.classList.remove(this._inputErrorClass); //удаляем класс со стилем ошибки
-    });
+  _hideError(inputElement) {
+    const errorElement = this._form.querySelector(`.${inputElement.id}-error`); //находим элемент ошибки инпут
+    errorElement.textContent = ''; //обнуляем текст с ошибкой валидации
+    inputElement.classList.remove(this._inputErrorClass); //удаляем класс со стилем ошибки
   };
 
   //метод проверки валидности поля формы
   _checkInputValidity(inputElement) {
     const isInputNotValid = !inputElement.validity.valid; //сохраняем в переменную невалидный инпут
-    const errorElement = this._form.querySelector(`.${inputElement.id}-error`); //находим элемент ошибки инпута
-
-
+    /* const errorElement = this._form.querySelector(`.${inputElement.id}-error`); //находим элемент ошибки инпут */
     if(isInputNotValid) {
-      this._showError(errorElement, inputElement) //вызов метода с ошибкой валидации
+      this._showError(inputElement) //вызов метода с ошибкой валидации
     } else {
-      this.hideError() //вызов метода, скрывающий ошибку валидации
+      this._hideError(inputElement) //вызов метода, скрывающий ошибку валидации
     }
   };
 
@@ -66,6 +63,15 @@ export class FormValidator {
       this._button.disabled = false;
     }
   };
+
+  //метод очистки ошибок и деактивации кнопки
+  resetValidation() {
+    this._toggleButtonState(); //блокируем кнопку сабмита до ввода значений в поле формы
+
+    this._inputsList.forEach((inputElement) => {
+      this._hideError(inputElement)
+    });
+  }
 
   //устанавливаем обработчик полям ввода формы
   _setEventListener() {

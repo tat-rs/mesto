@@ -113,10 +113,18 @@ formValidatorAddCard.enableValidation(); //вызываем валидацию �
 const formValidatorEditProfile = new FormValidator(validationConfig, '.form_type_edit'); //создаем экземпляр валидации формы
 formValidatorEditProfile.enableValidation() //валидириуем форму
 
-popupOpenBtn.addEventListener('click', openEditProfilePopup);//открытие попапа по клику на кнопку редактирования профиля
+//открытие попапа по клику на кнопку редактирования профиля
+popupOpenBtn.addEventListener('click', () => {
+  openEditProfilePopup();
+  formValidatorEditProfile.resetValidation();
+});
 popupCloseBtn.addEventListener('click', () => closePopup(popupEditProfile));//закрытие попапа по клику на кнопку редактирования профиля
 formInfo.addEventListener('submit', submitEditProfileForm);//сохранение внесенных данных по клику
-popupCardOpenBtn.addEventListener('click', openCreateCardPopup); //открыть попап добавления новой карточки
+//открыть попап добавления новой карточки
+popupCardOpenBtn.addEventListener('click', () => {
+  openCreateCardPopup();
+  formValidatorAddCard.resetValidation();
+});
 popupCardCloseBtn.addEventListener('click', () => closePopup(popupCreateCard));//закрыть попап добавления карточки
 formCard.addEventListener('submit', createNewCard); // создание новой карточки
 popupOpenImageCloseBtn.addEventListener('click', () => closePopup(popupOpenImage))//закрыть попап просмотра изображения
