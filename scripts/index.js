@@ -27,18 +27,17 @@ const popupOpenImageCloseBtn = popupOpenImage.querySelector('.popup__close'); //
 
 //функция закрытия попапа по кнопке esc
 function closePopupByEsc (evt) {
-  const popup = document.querySelector('.popup_opened')
   //если событие esc, то попап закрывается
   if (evt.key === 'Escape') {
-      closePopup(popup)
+    const popup = document.querySelector('.popup_opened');
+    closePopup(popup);
     }
 };
 
 //функция закрытия попапа при нажатии на оверлей
 function closePopupByOverlayClick(evt) {
-  const popup = document.querySelector('.popup_opened')
   if (evt.target === evt.currentTarget) {
-    closePopup(popup)
+    closePopup(evt.currentTarget)
   }
 };
 
@@ -58,20 +57,14 @@ function closePopup(modal) {
 
 //объявление функции открытия попапа редактирования профиля
 function openEditProfilePopup() {
-  const formValidatorAddCard = new FormValidator(validationConfig, '.form_type_edit'); //создаем экземпляр валидпции формы
-  formValidatorAddCard.enableValidation() //валидириуем форму
   openPopup(popupEditProfile); //открываем попап с редактирвоанием профиля
-  formValidatorAddCard.hideError(); //очищаем ошибки после открытия
   formInfoName.value = profileName.textContent; //сохраняем в поле ввода текст со страницы
   formInfoDesc.value = profileDesc.textContent; //сохраняем в поле ввода описание профиля со страницы
 };
 
 //функция открытия попапа добавления новой карточки
 function openCreateCardPopup() {
-  const formValidatorEditProfile = new FormValidator(validationConfig, '.form_type_add'); //создаем экземпляр валидации формы
-  formValidatorEditProfile.enableValidation(); //вызываем валидацию формы
   openPopup(popupCreateCard); //открываем попап
-  formValidatorEditProfile.hideError(); //очищаем ошибки, которые были до закрытия попапа
   formCardSubtitle.value = ''; //обнуляем текст
   formImageLink.value = ''; //обнуляем ссылку
 };
@@ -113,6 +106,12 @@ initialCards.forEach((item) => {
   const element = renderCard(item);
   cardListElement.prepend(element);
 });
+
+const formValidatorAddCard = new FormValidator(validationConfig, '.form_type_add'); //создаем экземпляр валидации формы
+formValidatorAddCard.enableValidation(); //вызываем валидацию формы
+
+const formValidatorEditProfile = new FormValidator(validationConfig, '.form_type_edit'); //создаем экземпляр валидации формы
+formValidatorEditProfile.enableValidation() //валидириуем форму
 
 popupOpenBtn.addEventListener('click', openEditProfilePopup);//открытие попапа по клику на кнопку редактирования профиля
 popupCloseBtn.addEventListener('click', () => closePopup(popupEditProfile));//закрытие попапа по клику на кнопку редактирования профиля
