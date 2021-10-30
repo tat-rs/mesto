@@ -22,7 +22,6 @@ export class FormValidator {
   //метод, показывающий ошибку валидации
   _showError(inputElement) {
     const errorElement = this._form.querySelector(`.${inputElement.id}-error`); //находим элемент ошибки инпут
-
     errorElement.textContent = inputElement.validationMessage; //добавляем текст ошибки
     inputElement.classList.add(this._inputErrorClass); //добавляем инпуту класс со стилями ошибки
   };
@@ -37,7 +36,6 @@ export class FormValidator {
   //метод проверки валидности поля формы
   _checkInputValidity(inputElement) {
     const isInputNotValid = !inputElement.validity.valid; //сохраняем в переменную невалидный инпут
-    /* const errorElement = this._form.querySelector(`.${inputElement.id}-error`); //находим элемент ошибки инпут */
     if(isInputNotValid) {
       this._showError(inputElement) //вызов метода с ошибкой валидации
     } else {

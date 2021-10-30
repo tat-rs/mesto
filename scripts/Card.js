@@ -61,8 +61,8 @@ export class Card {
     this._setEventListeners(); //вызываем обработчик слушателей
 
     this._cardSubtitle.textContent = this._name;
-    //присваиваем значение ссылки на изображение новой карточки равной ключу link массива
-    this._cardImage.src = this._link; // добавили адрес изображение из массива карточек
+
+    this._cardImage.src = this._link; //присваиваем значение ссылки на изображение новой карточки
     this._cardImage.alt = this._name; // добавили описание в атрибут alt, равное названию карточки
 
     return this._element;
