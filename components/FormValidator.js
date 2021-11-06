@@ -7,7 +7,7 @@ export const validationConfig = {
 };
 
 //создаем класс валидации формы
-export class FormValidator {
+export default class FormValidator {
   constructor(config, formSelector) {
     this._inputSelector = config.inputSelector;
     this._submitButtonSelector = config.submitButtonSelector;

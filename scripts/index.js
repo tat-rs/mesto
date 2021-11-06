@@ -1,7 +1,8 @@
-import { Card } from './Card.js'; //импортируем класс карточки
-import { initialCards } from './initial-cards.js' //импортируем первоначальный массив карточек
+import Card from '../components/Card.js'; //импортируем класс карточки
+import { initialCards } from '../utils/initial-cards.js' //импортируем первоначальный массив карточек
 
-import { FormValidator, validationConfig } from './FormValidator.js'; //импортируем класс валидации и объект с общими настройками
+import FormValidator from '../components/FormValidator.js'; //импортируем класс валидации
+import { validationConfig } from '../components/FormValidator.js'; //импортируем объект с общими настройками
 
 const popups = document.querySelectorAll('.popup')//нашли массив попапов
 //переменные попапа формы редактирования
