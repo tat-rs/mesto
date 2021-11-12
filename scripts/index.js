@@ -8,6 +8,8 @@ import Section from '../components/Section.js';
 
 import Popup from '../components/Popup.js';
 
+import PopupWithImage from '../components/PopupWithImage.js';
+
 const popups = document.querySelectorAll('.popup')//нашли массив попапов
 //переменные попапа формы редактирования
 const popupEditProfile = document.querySelector('.popup_type_edit'); //переменная попап с формой редактированя профиля
@@ -26,27 +28,6 @@ const popupAddCardOpenBtn = document.querySelector('.profile__button'); //кно
 const formCard = popupCreateCard.querySelector('.form'); //форма отправки данных новой карточки
 const formCardSubtitle = formCard.querySelector('.form__item_type_image-subtitle'); //поле ввода названя карточки
 const formImageLink = formCard.querySelector('.form__item_type_image-link'); //поле ввода ссылки на изображение карточки
-
-//функция закрытия попапа по кнопке esc
-/* function closePopupByEsc (evt) {
-  //если событие esc, то попап закрывается
-  if (evt.key === 'Escape') {
-    const popup = document.querySelector('.popup_opened');
-    closePopup(popup);
-    }
-}; */
-
-/* //объявление функции закрытия попапа
-function closePopup(modal) {
-  modal.classList.remove('popup_opened') //удаляем класс модификатора popup_opened
-  window.removeEventListener('keydown', closePopupByEsc); //удаляем обработчик закрытия
-}; */
-
-/* //объявление функции открытия попапа
-export function openPopup(modal) {
-  modal.classList.add('popup_opened'); //присваиваем класс модификатора popup_opened
-  window.addEventListener('keydown', closePopupByEsc); //присваиваем обработчик закрытия
-}; */
 
 //объявление функции открытия попапа редактирования профиля
 function openEditProfilePopup() {
@@ -138,16 +119,7 @@ popupAddCardOpenBtn.addEventListener('click', () => {
   formValidatorAddCard.resetValidation(); //очищение ошибок и дезактивация кнопки
 });
 
-/* //добавление попапам обработчика закрытия по оверлею и кнопке крестик
-popups.forEach((popup) => {
-  popup.addEventListener('click', (evt) => {
-    if(evt.target.classList.contains('popup_opened')) {
-      closePopup(popup);
-    } if(evt.target.classList.contains('popup__close')) {
-      closePopup(popup);
-    }
-  });
-}); */
-
 formInfo.addEventListener('submit', submitEditProfileForm);//сохранение внесенных данных по клику
 formCard.addEventListener('submit', createNewCard); // создание новой карточки
+
+const popupWithImage = new PopupWithImage('.popup_type_image');
