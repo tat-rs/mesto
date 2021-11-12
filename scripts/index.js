@@ -4,6 +4,8 @@ import { initialCards } from '../utils/initial-cards.js' //импортируе�
 import FormValidator from '../components/FormValidator.js'; //импортируем класс валидации
 import { validationConfig } from '../components/FormValidator.js'; //импортируем объект с общими настройками
 
+import Section from '../components/Section.js';
+
 const popups = document.querySelectorAll('.popup')//нашли массив попапов
 //переменные попапа формы редактирования
 const popupEditProfile = document.querySelector('.popup_type_edit'); //переменная попап с формой редактированя профиля
@@ -15,6 +17,7 @@ const formInfoName = formInfo.querySelector('.form__item_type_name'); //пере
 const formInfoDesc = formInfo.querySelector('.form__item_type_desc'); //переменная значения описания профиля
 
 //переменные попапа добавления карточки
+const cardContainerSelector = '.cards__list'
 const cardListElement = document.querySelector('.cards__list'); //контейнер карточек в разметке
 const popupCreateCard = document.querySelector('.popup_type_new-card'); //попап с добавлением новой картчоки
 const popupAddCardOpenBtn = document.querySelector('.profile__button'); //кнопка открытия попапа добавления карточки
@@ -70,13 +73,21 @@ function createNewCard(evt) {
   evt.preventDefault();
 
 //объявляем объект с ключами равными значениям в полях ввода
-  const cardsElement = {
+  const cardsElement = [{
     name: formCardSubtitle.value,
     link: formImageLink.value
-  };
+  }];
 
-  const newElement = renderCard(cardsElement); //отображение новой карточки
-  cardListElement.prepend(newElement);
+  const newAddedCard = new Section({
+    items: cardsElement,
+    renderer: (item) => {
+      const newElement = renderCard(item);
+      newAddedCard.addItem(newElement);
+    }
+  }, cardContainerSelector)
+
+  newAddedCard.renderItems();
+
   closePopup(popupCreateCard);
 
   evt.currentTarget.reset(); //обнуление значение полей ввода
@@ -89,11 +100,15 @@ function renderCard(item) {
   return newCard
 };
 
-//отображаем массив карточек при загрузке на страницу
-initialCards.forEach((item) => {
-  const element = renderCard(item);
-  cardListElement.prepend(element);
-});
+const defaultCardList = new Section({
+  items: initialCards,
+  renderer: (item) => {
+    const newCard = renderCard(item); //получили разметку карточки
+    defaultCardList.addItem(newCard); //добавили в контейнер
+  }
+}, cardContainerSelector)
+
+defaultCardList.renderItems(); //отрисовали первоначальные карточки на странице
 
 const formValidatorAddCard = new FormValidator(validationConfig, '.form_type_add'); //создаем экземпляр валидации формы добавления карточки
 formValidatorAddCard.enableValidation(); //вызываем валидацию формы
