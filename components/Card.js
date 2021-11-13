@@ -6,10 +6,11 @@ const popupImageLink = popupOpenImage.querySelector('.popup__image'); //поле
 
 //создаем класс карточки
 export default class Card {
-  constructor(data, selector) {
+  constructor({data, handleCardClick}, selector) {
     this._name = data.name;
     this._link = data.link;
     this._selector = selector;
+    this._handleCardClick = handleCardClick;
   };
 
   //метод получения разметки карточки
@@ -33,19 +34,14 @@ export default class Card {
     this._element.closest('.cards__item').remove(); //удаляем блок карточки
   };
 
-/*   //метод, открываюзий попап с изображением
-  _showImage() {
-    openPopup(popupOpenImage) //открываем попап с изображением
-      popupImageName.textContent = this._name; //приравниваем текстовые содержания
-      popupImageLink.src = this._link; //приравниваем ссылки на изображения
-      popupImageLink.alt = this._name; //заполняем альт названием карточки
-  };
- */
+  clickOnImage(item) {
+    this._handleCardClick(item)
+  }
   //обработчик слушателей
   _setEventListeners() {
     this._likeButton.addEventListener('click', () => this._toggleLike()); //добавляем на кнопку лайк слушатель
     this._deleteButton.addEventListener('click', () => this._deleteCard());//добавили слушатель для удаления карточки
-    /* this._cardImage.addEventListener('click', () => this._showImage()); //добавляем слушатель на изображение для открытия попапа с изображением */
+    this._cardImage.addEventListener('click', () => this.clickOnImage()); //добавляем слушатель на изображение для открытия попапа с изображением
   };
 
   //метод созданиия новой карточки

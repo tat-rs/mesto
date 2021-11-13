@@ -80,7 +80,12 @@ function createNewCard(evt) {
 
 //функция возвращающая новую карточку
 function renderCard(item) {
-  const card = new Card(item, '.cards-template');
+  const card = new Card({
+    data: item,
+    handleCardClick: () => {
+      popupWithImage.open({data: item})
+    }
+  }, '.cards-template');
   const newCard = card.generateCard();
   return newCard
 };
@@ -123,3 +128,4 @@ formInfo.addEventListener('submit', submitEditProfileForm);//сохранени�
 formCard.addEventListener('submit', createNewCard); // создание новой карточки
 
 const popupWithImage = new PopupWithImage('.popup_type_image');
+popupWithImage.setEventListeners();
