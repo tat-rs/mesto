@@ -10,6 +10,8 @@ import Popup from '../components/Popup.js';
 
 import PopupWithImage from '../components/PopupWithImage.js';
 
+import PopupWithForm from '../components/PopupWithForm.js';
+
 const popups = document.querySelectorAll('.popup')//нашли массив попапов
 //переменные попапа формы редактирования
 const popupEditProfile = document.querySelector('.popup_type_edit'); //переменная попап с формой редактированя профиля
@@ -49,7 +51,6 @@ function submitEditProfileForm(evt) {
   profileName.textContent = formInfoName.value;
   profileDesc.textContent = formInfoDesc.value;
   openedPopupEdit.close();
-  /* closePopup(popupEditProfile); */
 };
 
 //добавление новой карточки на страницу из попапа добавить карточку
@@ -73,7 +74,6 @@ function createNewCard(evt) {
   newAddedCard.renderItems();
 
   openedPopupAddCard.close();
-  /* closePopup(popupCreateCard); */
 
   evt.currentTarget.reset(); //обнуление значение полей ввода
 }
@@ -109,7 +109,7 @@ formValidatorEditProfile.enableValidation() //валидириуем форму
 const openedPopupEdit = new Popup('.popup_type_edit');//экземпляр класса попапа редактрования профиля
 openedPopupEdit.setEventListeners(); //вызываем слушатель закрытия попапа по клику и оверлею
 
-const openedPopupAddCard = new Popup('.popup_type_new-card');//экземпляр класса попапа добавления новой карточки
+const openedPopupAddCard = new PopupWithForm('.popup_type_new-card', createNewCard);//экземпляр класса попапа добавления новой карточки
 openedPopupAddCard.setEventListeners();//вызываем слушатель закрытия попапа по клику и оверлею
 
 //открытие попапа по клику на кнопку редактирования профиля
