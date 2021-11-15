@@ -1,26 +1,32 @@
 import Popup from "./Popup.js";
 
 export default class PopupWithForm extends Popup {
-  constructor(poopupSelector, submitForm) {
-    super(poopupSelector);
-    this._submitForm = submitForm;
+  constructor({popupSelector, handleFormSubmit}) {
+    super(popupSelector);
+    this._handleFormSubmit = handleFormSubmit;
     this._form = document.querySelector('.form');
   }
 
   // собирает данные всех полей формы
   _getInputValues() {
-    this._inputValues = Array.from(this._popup).querySelectorAll('.form__item');
-    const formPopup = {};
-    this._inputValues.map((input) => {
-      formPopup[input.name] = input.value;
+    // достаём все элементы полей
+    this._inputList = Array.from(this._popup.querySelectorAll('.form__item'));
+    // создаём пустой объект
+    this._formValues = {};
+    // добавляем в этот объект значения всех полей
+    this._inputList.forEach((input) => {
+      this._formValues[input.name] = input.value;
     })
-    console.log('djdjdj')
+    return this._formValues
   }
 
   //обработчик клика по крестику, оверлею и сабмит формы
   setEventListeners() {
     super.setEventListeners();
-    this._form.addEventListener('submit', () => this._submitForm(this._getInputValues()));
+    this._form.addEventListener('submit', (evt) => {
+      evt.preventDefault();
+      this._handleFormSubmit(this._getInputValues())
+    });
   }
 
   //закрытие попапа и сброс формы

@@ -1,10 +1,3 @@
-/* import { openPopup } from "../scripts/index.js"; //импортируем функцию открытия попапа
-
-const popupOpenImage = document.querySelector('.popup_type_image'); //попап просмотра изображения
-const popupImageName = popupOpenImage.querySelector('.popup__subtitle'); //поле ввода описания картинки в попапе просмотра изображения
-const popupImageLink = popupOpenImage.querySelector('.popup__image'); //поле ввода ссылки на картинку в попапе просмотра изображения */
-
-//создаем класс карточки
 export default class Card {
   constructor({data, handleCardClick}, selector) {
     this._name = data.name;

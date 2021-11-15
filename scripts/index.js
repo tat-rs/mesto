@@ -12,6 +12,8 @@ import PopupWithImage from '../components/PopupWithImage.js';
 
 import PopupWithForm from '../components/PopupWithForm.js';
 
+import UserInfo from '../components/UserInfo.js'
+
 const popups = document.querySelectorAll('.popup')//нашли массив попапов
 //переменные попапа формы редактирования
 const popupEditProfile = document.querySelector('.popup_type_edit'); //переменная попап с формой редактированя профиля
@@ -31,11 +33,25 @@ const formCard = popupCreateCard.querySelector('.form'); //форма отпра
 const formCardSubtitle = formCard.querySelector('.form__item_type_image-subtitle'); //поле ввода названя карточки
 const formImageLink = formCard.querySelector('.form__item_type_image-link'); //поле ввода ссылки на изображение карточки
 
+const userInfo = new UserInfo('.profile__name', '.profile__desc')
+userInfo.setUserInfo(profileName.textContent, profileDesc.textContent);
+
 //объявление функции открытия попапа редактирования профиля
 function openEditProfilePopup() {
   openedPopupEdit.open() //открываем попап с редактирвоанием профиля
-  formInfoName.value = profileName.textContent; //сохраняем в поле ввода текст со страницы
-  formInfoDesc.value = profileDesc.textContent; //сохраняем в поле ввода описание профиля со страницы
+  /* formInfoName.value = profileName.textContent; //сохраняем в поле ввода текст со страницы
+  formInfoDesc.value = profileDesc.textContent; //сохраняем в поле ввода описание профиля со страницы */
+  const getUserInfo = userInfo.getUserInfo();
+  formInfoName.value = getUserInfo.name;
+  formInfoDesc.value = getUserInfo.desc;
+};
+
+//объявление функции сохранения новых данных в форме редактирования профиля
+function submitEditProfileForm(evt) {
+  evt.preventDefault(); //обнуляем действие по умолчанию
+  userInfo.setUserInfo(formInfoName.value, formInfoDesc.value);
+  userInfo.updateUserInfo()
+  openedPopupEdit.close();
 };
 
 //функция открытия попапа добавления новой карточки
@@ -43,14 +59,6 @@ function openCreateCardPopup() {
   openedPopupAddCard.open(); //открываем попап
   formCardSubtitle.value = ''; //обнуляем текст
   formImageLink.value = ''; //обнуляем ссылку
-};
-
-//объявление функции сохранения новых данных в форме редактирования профиля
-function submitEditProfileForm(evt) {
-  evt.preventDefault(); //обнуляем действие по умолчанию
-  profileName.textContent = formInfoName.value;
-  profileDesc.textContent = formInfoDesc.value;
-  openedPopupEdit.close();
 };
 
 //добавление новой карточки на страницу из попапа добавить карточку
@@ -109,19 +117,41 @@ formValidatorEditProfile.enableValidation() //валидириуем форму
 const openedPopupEdit = new Popup('.popup_type_edit');//экземпляр класса попапа редактрования профиля
 openedPopupEdit.setEventListeners(); //вызываем слушатель закрытия попапа по клику и оверлею
 
-const openedPopupAddCard = new PopupWithForm('.popup_type_new-card', createNewCard);//экземпляр класса попапа добавления новой карточки
+
+/* const openedPopupEdit = new PopupWithForm({
+  popupSelector: '.popup_type_edit',
+  handleFormSubmit: (evt) => {
+    console.log('nnn')
+    submitEditProfileForm(evt)
+  }
+})*/;//экземпляр класса попапа редактрования профиля
+/* openedPopupEdit.setEventListeners(); //вызываем слушатель закрытия попапа по клику и оверлею */
+
+
+const openedPopupAddCard = new Popup('.popup_type_new-card');//экземпляр класса попапа добавления новой карточки
 openedPopupAddCard.setEventListeners();//вызываем слушатель закрытия попапа по клику и оверлею
+
+/* const openedPopupAddCard = new PopupWithForm({
+  popupSelector: '.popup_type_new-card',
+  handleFormSubmit: (evt) => {
+    console.log(evt)
+    createNewCard()
+  }
+}); *///экземпляр класса попапа добавления новой карточки
+/* openedPopupAddCard.setEventListeners();//вызываем слушатель закрытия попапа по клику и оверлею */
 
 //открытие попапа по клику на кнопку редактирования профиля
 popupEditOpenBtn.addEventListener('click', () => {
   openEditProfilePopup();
   formValidatorEditProfile.resetValidation(); //очищение ошибок
+  /* openedPopupEdit.setEventListeners(); //вызываем слушатель закрытия попапа по клику и оверлею */
 });
 
 //открыть попап добавления новой карточки
 popupAddCardOpenBtn.addEventListener('click', () => {
   openCreateCardPopup();
   formValidatorAddCard.resetValidation(); //очищение ошибок и дезактивация кнопки
+  /* openedPopupAddCard.setEventListeners();//вызываем слушатель закрытия попапа по клику и оверлею */
 });
 
 formInfo.addEventListener('submit', submitEditProfileForm);//сохранение внесенных данных по клику
