@@ -27,6 +27,7 @@ export default class Card {
     this._element.closest('.cards__item').remove(); //удаляем блок карточки
   };
 
+  //метод открытия изображения
   clickOnImage(item) {
     this._handleCardClick(item)
   }

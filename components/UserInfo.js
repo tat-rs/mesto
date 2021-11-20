@@ -14,10 +14,10 @@ export default class UserInfo {
       name: this._name,
       desc: this._job,
     }
-
     return newData
   }
 
+  //метод обновления данных
   updateUserInfo() {
     this._nameProfile.textContent = this._name;
     this._descProfile.textContent = this._job;

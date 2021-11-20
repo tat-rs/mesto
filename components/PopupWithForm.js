@@ -4,13 +4,12 @@ export default class PopupWithForm extends Popup {
   constructor({popupSelector, handleFormSubmit}) {
     super(popupSelector);
     this._handleFormSubmit = handleFormSubmit;
-    this._form = document.querySelector('.form');
+    this._form = this._popup.querySelector('.form');
+    this._inputList = Array.from(this._popup.querySelectorAll('.form__item'));
   }
 
   // собирает данные всех полей формы
   _getInputValues() {
-    // достаём все элементы полей
-    this._inputList = Array.from(this._popup.querySelectorAll('.form__item'));
     // создаём пустой объект
     this._formValues = {};
     // добавляем в этот объект значения всех полей
@@ -23,6 +22,7 @@ export default class PopupWithForm extends Popup {
   //обработчик клика по крестику, оверлею и сабмит формы
   setEventListeners() {
     super.setEventListeners();
+
     this._form.addEventListener('submit', (evt) => {
       evt.preventDefault();
       this._handleFormSubmit(this._getInputValues())

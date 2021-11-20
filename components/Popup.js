@@ -27,7 +27,7 @@ export default class Popup {
 
   //слушатель клика иконки закрытия попапа и по области вокруг
   setEventListeners() {
-    this._popup.addEventListener('click', (evt) => {
+    this._popup.addEventListener('mousedown', (evt) => {
       //закрытие по оверлею
       if(evt.target.classList.contains('popup_opened')) {
         this.close();
