@@ -1,6 +1,5 @@
 import Popup from "./Popup.js";
 
-
 export default class PopupWithImage extends Popup {
   constructor(popupSelector) {
     super(popupSelector);
@@ -14,6 +13,6 @@ export default class PopupWithImage extends Popup {
     this._popupImageLink.src = data.link; //приравниваем ссылки на изображения
     this._popupImageLink.alt = data.name;//приравниеваме alt с названием карточки
     super.open()
-  }
+  };
 }
 

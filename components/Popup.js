@@ -10,20 +10,20 @@ export default class Popup {
   open() {
     this._popup.classList.add('popup_opened');
     window.addEventListener('keydown', this._handleEscCloseBind); //добавили слушатель закрытия по кнопке esc
-  }
+  };
 
   //метод закрытия попапа
   close() {
     this._popup.classList.remove('popup_opened');
     window.removeEventListener('keydown', this._handleEscCloseBind); //удалили слушатель закрытия по кнопке esc
-  }
+  };
 
   //логика закрытия попапа по кнопке esc
   _handleEscClose(evt) {
     if (evt.key === 'Escape') {
       this.close();
     }
-  }
+  };
 
   //слушатель клика иконки закрытия попапа и по области вокруг
   setEventListeners() {
@@ -36,5 +36,5 @@ export default class Popup {
         this.close();
       }
     });
-  }
+  };
 }

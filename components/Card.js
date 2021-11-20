@@ -29,8 +29,9 @@ export default class Card {
 
   //метод открытия изображения
   clickOnImage(item) {
-    this._handleCardClick(item)
-  }
+    this._handleCardClick(item);
+  };
+
   //обработчик слушателей
   _setEventListeners() {
     this._likeButton.addEventListener('click', () => this._toggleLike()); //добавляем на кнопку лайк слушатель

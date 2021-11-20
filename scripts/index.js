@@ -22,7 +22,7 @@ import PopupWithImage from '../components/PopupWithImage.js'; //импортир
 
 import PopupWithForm from '../components/PopupWithForm.js'; //импортируем попап с формой
 
-import UserInfo from '../components/UserInfo.js'
+import UserInfo from '../components/UserInfo.js' //импортируем класс с управлением отображ. инф-ии о профиле
 
 //переменные попапа редактирования профиля
 const popupEditProfile = document.querySelector('.popup_type_edit'); //переменная попап с формой редактированя профиля
@@ -41,7 +41,7 @@ const formCardSubtitle = formCard.querySelector('.form__item_type_image-subtitle
 const formImageLink = formCard.querySelector('.form__item_type_image-link'); //поле ввода ссылки на изображение карточки
 
 //создаем экземпляр класса отоброжаения инф-ии о пользователи
-const userInfo = new UserInfo(selectorProfileName, selectorProfileDesc)
+const userInfo = new UserInfo(selectorProfileName, selectorProfileDesc);
 userInfo.setUserInfo(profileName.textContent, profileDesc.textContent); //передаем содержание инпутов
 
 //создаем экземпляр класса попапа с изображением
@@ -65,8 +65,8 @@ const openedPopupAddCard = new PopupWithForm({
     createNewCard(data); //функция сохранения данных при сабмите карточки
     openedPopupAddCard.close();
   }
-})
-openedPopupAddCard.setEventListeners()
+});
+openedPopupAddCard.setEventListeners();
 
 //создаем экземпляр валидации формы добавления карточки
 const formValidatorAddCard = new FormValidator(validationConfig, selectorFormAddCard);
@@ -74,7 +74,7 @@ formValidatorAddCard.enableValidation(); //вызываем валидацию �
 
 //создаем экземпляр валидации формы редактирования профиля
 const formValidatorEditProfile = new FormValidator(validationConfig, selectorFormEdit);
-formValidatorEditProfile.enableValidation() //валидириуем форму
+formValidatorEditProfile.enableValidation(); //валидириуем форму
 
 //объявление функции открытия попапа редактирования профиля
 function openEditProfilePopup() {
@@ -125,10 +125,10 @@ function createNewCard(data) {
       const newElement = renderCard(item); //получаем разметку карточки
       newAddedCard.addItem(newElement); //добавляем элемент в контейнер
     }
-  }, cardContainerSelector)
+  }, cardContainerSelector);
 
   newAddedCard.renderItems(); //отрисовываем элемент на странице
-}
+};
 
 //экземпляр первоначальных карточек на странице
 const defaultCardList = new Section({
@@ -137,7 +137,7 @@ const defaultCardList = new Section({
     const newCard = renderCard(item); //получили разметку карточки
     defaultCardList.addItem(newCard); //добавили в контейнер
   }
-}, cardContainerSelector)
+}, cardContainerSelector);
 
 defaultCardList.renderItems(); //отрисовали первоначальные карточки на странице
 
