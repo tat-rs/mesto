@@ -44,7 +44,6 @@ const formImageLink = formCard.querySelector('.form__item_type_image-link'); //�
 
 //создаем экземпляр класса отоброжаения инф-ии о пользователи
 const userInfo = new UserInfo(selectorProfileName, selectorProfileDesc);
-userInfo.setUserInfo(profileName.textContent, profileDesc.textContent); //передаем содержание инпутов
 
 //создаем экземпляр класса попапа с изображением
 const popupWithImage = new PopupWithImage(selectorPopupWithImage);
@@ -89,14 +88,11 @@ function openEditProfilePopup() {
 //объявление функции сохранения новых данных в форме редактирования профиля
 function submitEditProfileForm(data) {
   userInfo.setUserInfo(data.name, data.description); //добавляем новые значения
-  userInfo.updateUserInfo(); // обновляем значения
 };
 
 //функция открытия попапа добавления новой карточки
 function openCreateCardPopup() {
   openedPopupAddCard.open(); //открываем попап
-  formCardSubtitle.value = ''; //обнуляем текст
-  formImageLink.value = ''; //обнуляем ссылку
 };
 
 //функция возвращающая новую карточку

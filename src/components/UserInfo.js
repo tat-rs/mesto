@@ -8,21 +8,15 @@ export default class UserInfo {
   //метод, который возвращает объект с данными пользователя
   getUserInfo() {
     const newData = {
-      name: this._name,
-      desc: this._desc,
+      name: this._nameProfile.textContent,
+      desc: this._descProfile.textContent,
     }
     return newData
   };
 
-  //метод обновления данных
-  updateUserInfo() {
-    this._nameProfile.textContent = this._name;
-    this._descProfile.textContent = this._desc;
-  };
-
   //метод, который принимает новые данные пользователя и добавляет их на страницу
   setUserInfo(newName, newDesc) {
-    this._name = newName;
-    this._desc = newDesc;
+    this._nameProfile.textContent = newName;
+    this._descProfile.textContent = newDesc;
   };
 }
