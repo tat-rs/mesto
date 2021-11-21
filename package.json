@@ -1,0 +1,38 @@
+{
+  "name": "mesto",
+  "version": "1.0.0",
+  "description": "Проект \"Mesto\" - это интерактивная страница, которая предполагает возможность редактировать свои данные, добавлять новые фотографии, просматривать их в увеличенном размере, а также удалять загруженные карточки и ставить лайки.\r Все формы, которые редактируют или добавляют информацию на сайт, проходят валидацию, что позволяет пользователю удобно и правильно заполнить поля ввода.\r Страница адаптируется под размеры экрана любого устройства.",
+  "private": true,
+  "scripts": {
+    "dev": "webpack serve --open",
+    "build": "webpack",
+    "build:prod": "npm run build -- --mode=production"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tat-rs/mesto.git"
+  },
+  "author": "Tatiana Roslyakova",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tat-rs/mesto/issues"
+  },
+  "homepage": "https://github.com/tat-rs/mesto#readme",
+  "devDependencies": {
+    "@babel/core": "^7.16.0",
+    "@babel/preset-env": "^7.16.4",
+    "autoprefixer": "^10.4.0",
+    "babel-loader": "^8.2.3",
+    "css-loader": "^6.5.1",
+    "cssnano": "^5.0.11",
+    "file-loader": "^6.2.0",
+    "html-loader": "^3.0.1",
+    "html-webpack-plugin": "^5.5.0",
+    "mini-css-extract-plugin": "^2.4.5",
+    "postcss": "^8.3.11",
+    "postcss-loader": "^6.2.0",
+    "webpack": "^5.64.2",
+    "webpack-cli": "^4.9.1",
+    "webpack-dev-server": "^4.5.0"
+  }
+}

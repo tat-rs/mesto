@@ -1,3 +1,5 @@
+import '../pages/index.css';
+
 import {
   cardContainerSelector,
   selectorProfileName,
@@ -8,10 +10,10 @@ import {
   selectorPopupWithImage,
   selectorFormAddCard,
   selectorFormEdit
-} from '../utils/constants.js'
+} from '../utils/constants.js';
 
 import Card from '../components/Card.js'; //импортируем класс карточки
-import { initialCards } from '../utils/initial-cards.js' //импортируем первоначальный массив карточек
+import { initialCards } from '../utils/initial-cards.js'; //импортируем первоначальный массив карточек
 
 import FormValidator from '../components/FormValidator.js'; //импортируем класс валидации
 import { validationConfig } from '../components/FormValidator.js'; //импортируем объект с общими настройками
@@ -22,7 +24,7 @@ import PopupWithImage from '../components/PopupWithImage.js'; //импортир
 
 import PopupWithForm from '../components/PopupWithForm.js'; //импортируем попап с формой
 
-import UserInfo from '../components/UserInfo.js' //импортируем класс с управлением отображ. инф-ии о профиле
+import UserInfo from '../components/UserInfo.js'; //импортируем класс с управлением отображ. инф-ии о профиле
 
 //переменные попапа редактирования профиля
 const popupEditProfile = document.querySelector('.popup_type_edit'); //переменная попап с формой редактированя профиля
