@@ -111,12 +111,12 @@ function createNewCard(data) {
   }];
 
   //создаем и добавляем разметку новой карточки на страницу
-  const newAddedCard = section(cardsElement);
+  const newAddedCard = getSection(cardsElement);
   newAddedCard.renderItems(); //отрисовываем элемент на странице
 };
 
 //возвращаем экземпляр разметки элемента
-function section(element) {
+function getSection(element) {
   const newElement = new Section({
     items: element,
     renderer: (item) => {
@@ -129,7 +129,7 @@ function section(element) {
 }
 
 //экземпляр первоначальных карточек на странице
-const defaultCardList = section(initialCards);
+const defaultCardList = getSection(initialCards);
 defaultCardList.renderItems();//отрисовали первоначальные карточки на странице
 
 //открытие попапа по клику на кнопку редактирования профиля
