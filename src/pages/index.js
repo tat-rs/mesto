@@ -36,6 +36,17 @@ const formInfoDesc = formInfo.querySelector('.form__item_type_desc'); //пере
 //переменные попапа добавления карточки
 const popupAddCardOpenBtn = document.querySelector('.profile__button'); //кнопка открытия попапа добавления карточки
 
+//экземпляр первоначальных карточек на странице
+const cardList = new Section({
+  items: initialCards,
+  renderer: (item) => {
+    const newCard = renderCard(item); //получили разметку карточки
+    cardList.addItem(newCard); //добавили в контейнер
+  }
+}, cardContainerSelector);
+
+cardList.renderItems();//отрисовали карточки на странице
+
 //создаем экземпляр класса отоброжаения инф-ии о пользователи
 const userInfo = new UserInfo(selectorProfileName, selectorProfileDesc);
 
@@ -57,7 +68,7 @@ openedPopupEdit.setEventListeners(); //вызываем слушатель за�
 const openedPopupAddCard = new PopupWithForm({
   popupSelector: selectorPopupAddCard,
   handleFormSubmit: (data) => {
-    createNewCard(data); //функция сохранения данных при сабмите карточки
+    handleAddCardFormSubmit(data); //функция добавления карточки при сабмите
     openedPopupAddCard.close();
   }
 });
@@ -84,11 +95,6 @@ function submitEditProfileForm(data) {
   userInfo.setUserInfo(data.name, data.description); //добавляем новые значения
 };
 
-//функция открытия попапа добавления новой карточки
-function openCreateCardPopup() {
-  openedPopupAddCard.open(); //открываем попап
-};
-
 //функция возвращающая новую карточку
 function renderCard(item) {
   const card = new Card({
@@ -105,32 +111,20 @@ function renderCard(item) {
 function createNewCard(data) {
 
   //объявляем объект с ключами равными значениям в полях ввода
-  const cardsElement = [{
+  const cardsElement = {
     name: data.subtitle,
     link: data.link,
-  }];
+  };
 
-  //создаем и добавляем разметку новой карточки на страницу
-  const newAddedCard = getSection(cardsElement);
-  newAddedCard.renderItems(); //отрисовываем элемент на странице
+  //сохраняем карточку
+  const card = renderCard(cardsElement);
+  return card
 };
 
-//возвращаем экземпляр разметки элемента
-function getSection(element) {
-  const newElement = new Section({
-    items: element,
-    renderer: (item) => {
-      const newCard = renderCard(item); //получили разметку карточки
-      newElement.addItem(newCard); //добавили в контейнер
-    }
-  }, cardContainerSelector);
-
-  return newElement
+//функция добавления новой карточки при сабмите
+function handleAddCardFormSubmit(data) {
+  cardList.addItem(createNewCard(data)); //добавили карточку в контейнер
 }
-
-//экземпляр первоначальных карточек на странице
-const defaultCardList = getSection(initialCards);
-defaultCardList.renderItems();//отрисовали первоначальные карточки на странице
 
 //открытие попапа по клику на кнопку редактирования профиля
 popupEditOpenBtn.addEventListener('click', () => {
@@ -140,6 +134,6 @@ popupEditOpenBtn.addEventListener('click', () => {
 
 //открыть попап добавления новой карточки
 popupAddCardOpenBtn.addEventListener('click', () => {
-  openCreateCardPopup();
+  openedPopupAddCard.open(); //открываем попап
   formValidatorAddCard.resetValidation(); //очищение ошибок и дезактивация кнопки
 });
