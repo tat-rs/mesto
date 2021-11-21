@@ -34,9 +34,7 @@ const formInfoName = formInfo.querySelector('.form__item_type_name'); //пере
 const formInfoDesc = formInfo.querySelector('.form__item_type_desc'); //переменная значения описания профиля
 
 //переменные попапа добавления карточки
-const popupCreateCard = document.querySelector('.popup_type_new-card'); //попап с добавлением новой картчоки
 const popupAddCardOpenBtn = document.querySelector('.profile__button'); //кнопка открытия попапа добавления карточки
-const formCard = popupCreateCard.querySelector('.form'); //форма отправки данных новой карточки
 
 //создаем экземпляр класса отоброжаения инф-ии о пользователи
 const userInfo = new UserInfo(selectorProfileName, selectorProfileDesc);
