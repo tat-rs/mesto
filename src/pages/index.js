@@ -29,8 +29,6 @@ import UserInfo from '../components/UserInfo.js'; //импортируем кл�
 //переменные попапа редактирования профиля
 const popupEditProfile = document.querySelector('.popup_type_edit'); //переменная попап с формой редактированя профиля
 const popupEditOpenBtn = document.querySelector('.profile__edit'); //переменная кнопки редактирования профиля
-const profileName = document.querySelector('.profile__name'); //переменная имени пользователя
-const profileDesc = document.querySelector('.profile__desc'); //переменная описания профиля
 const formInfo = popupEditProfile.querySelector('.form'); //переменная формы редактирования профиля
 const formInfoName = formInfo.querySelector('.form__item_type_name'); //переменная значения имени профиля
 const formInfoDesc = formInfo.querySelector('.form__item_type_desc'); //переменная значения описания профиля
@@ -39,8 +37,6 @@ const formInfoDesc = formInfo.querySelector('.form__item_type_desc'); //пере
 const popupCreateCard = document.querySelector('.popup_type_new-card'); //попап с добавлением новой картчоки
 const popupAddCardOpenBtn = document.querySelector('.profile__button'); //кнопка открытия попапа добавления карточки
 const formCard = popupCreateCard.querySelector('.form'); //форма отправки данных новой карточки
-const formCardSubtitle = formCard.querySelector('.form__item_type_image-subtitle'); //поле ввода названя карточки
-const formImageLink = formCard.querySelector('.form__item_type_image-link'); //поле ввода ссылки на изображение карточки
 
 //создаем экземпляр класса отоброжаения инф-ии о пользователи
 const userInfo = new UserInfo(selectorProfileName, selectorProfileDesc);
@@ -116,28 +112,27 @@ function createNewCard(data) {
     link: data.link,
   }];
 
-  //создаем и добавляем разметку карточки на страницу
-  const newAddedCard = new Section({
-    items: cardsElement,
-    renderer: (item) => {
-      const newElement = renderCard(item); //получаем разметку карточки
-      newAddedCard.addItem(newElement); //добавляем элемент в контейнер
-    }
-  }, cardContainerSelector);
-
+  //создаем и добавляем разметку новой карточки на страницу
+  const newAddedCard = section(cardsElement);
   newAddedCard.renderItems(); //отрисовываем элемент на странице
 };
 
-//экземпляр первоначальных карточек на странице
-const defaultCardList = new Section({
-  items: initialCards,
-  renderer: (item) => {
-    const newCard = renderCard(item); //получили разметку карточки
-    defaultCardList.addItem(newCard); //добавили в контейнер
-  }
-}, cardContainerSelector);
+//возвращаем экземпляр разметки элемента
+function section(element) {
+  const newElement = new Section({
+    items: element,
+    renderer: (item) => {
+      const newCard = renderCard(item); //получили разметку карточки
+      newElement.addItem(newCard); //добавили в контейнер
+    }
+  }, cardContainerSelector);
 
-defaultCardList.renderItems(); //отрисовали первоначальные карточки на странице
+  return newElement
+}
+
+//экземпляр первоначальных карточек на странице
+const defaultCardList = section(initialCards);
+defaultCardList.renderItems();//отрисовали первоначальные карточки на странице
 
 //открытие попапа по клику на кнопку редактирования профиля
 popupEditOpenBtn.addEventListener('click', () => {
