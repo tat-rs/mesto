@@ -1,5 +1,3 @@
-import '../pages/index.css';
-
 import {
   cardContainerSelector,
   selectorProfileName,
@@ -13,7 +11,6 @@ import {
 } from '../utils/constants.js';
 
 import Card from '../components/Card.js'; //импортируем класс карточки
-import { initialCards } from '../utils/initial-cards.js'; //импортируем первоначальный массив карточек
 
 import FormValidator from '../components/FormValidator.js'; //импортируем класс валидации
 import { validationConfig } from '../components/FormValidator.js'; //импортируем объект с общими настройками
@@ -26,6 +23,8 @@ import PopupWithForm from '../components/PopupWithForm.js'; //импортиру
 
 import UserInfo from '../components/UserInfo.js'; //импортируем класс с управлением отображ. инф-ии о профиле
 
+import Api from '../components/Api.js';
+
 //переменные попапа редактирования профиля
 const popupEditProfile = document.querySelector('.popup_type_edit'); //переменная попап с формой редактированя профиля
 const popupEditOpenBtn = document.querySelector('.profile__edit'); //переменная кнопки редактирования профиля
@@ -36,7 +35,33 @@ const formInfoDesc = formInfo.querySelector('.form__item_type_desc'); //пере
 //переменные попапа добавления карточки
 const popupAddCardOpenBtn = document.querySelector('.profile__button'); //кнопка открытия попапа добавления карточки
 
-//экземпляр первоначальных карточек на странице
+//Api
+const api = new Api({
+  url: 'https://mesto.nomoreparties.co/v1/cohort-30/cards/',
+  headers: {
+    authorization: '3ace1836-34ae-4def-81c7-968efe5e4e17',
+    "content-type": "application/json",
+  }
+})
+
+//добавляем массив карточек с сервера на страницу
+api.getAllCards()
+.then((data) => {
+
+  //экземпляр первоначальных карточек на странице
+  const cardList = new Section({
+    items: data,
+    renderer: (item) => {
+      const newCard = renderCard(item); //получили разметку карточки
+      cardList.addItem(newCard); //добавили в контейнер
+    }
+  }, cardContainerSelector);
+
+  cardList.renderItems();//отрисовали карточки на странице
+
+})
+
+/* //экземпляр первоначальных карточек на странице
 const cardList = new Section({
   items: initialCards,
   renderer: (item) => {
@@ -45,7 +70,7 @@ const cardList = new Section({
   }
 }, cardContainerSelector);
 
-cardList.renderItems();//отрисовали карточки на странице
+cardList.renderItems();//отрисовали карточки на странице */
 
 //создаем экземпляр класса отоброжаения инф-ии о пользователи
 const userInfo = new UserInfo(selectorProfileName, selectorProfileDesc);
