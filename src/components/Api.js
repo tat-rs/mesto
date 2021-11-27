@@ -41,7 +41,23 @@ export default class Api {
     .then(onResponce)
   }
   //заменить данные пользователя (PATCH)
+
   //заменить аватар (PATCH)
   //“залайкать” карточку (PUT)
+  setCardlike(cardId) {
+    return fetch(`${this._url}cards/likes/${cardId}`, {
+      method: "PUT",
+      headers: this._headers,
+    })
+    .then(onResponce)
+  }
   //удалить лайк карточки (DELETE)
+  //DELETE https://mesto.nomoreparties.co/v1/cohortId/cards/likes/cardId
+  deleteCardlike(cardId) {
+    return fetch(`${this._url}cards/likes/${cardId}`, {
+      method: "DELETE",
+      headers: this._headers,
+    })
+    .then(onResponce)
+  }
 }

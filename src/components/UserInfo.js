@@ -14,6 +14,15 @@ export default class UserInfo {
     return newData
   };
 
+  //метод, который возвращает объект с данными пользователя
+  /* getUserInfo(info) {
+    const newData = {
+      name: info.name,
+      about: info.about,
+    }
+    return newData
+  }; */
+
   //метод, который принимает новые данные пользователя и добавляет их на страницу
   setUserInfo(data) {
     this._nameProfile.textContent = data.name;

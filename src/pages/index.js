@@ -36,6 +36,17 @@ const formInfoDesc = formInfo.querySelector('.form__item_type_desc'); //пере
 //переменные попапа добавления карточки
 const popupAddCardOpenBtn = document.querySelector('.profile__button'); //кнопка открытия попапа добавления карточки
 
+//создаем экземпляр класса отоброжаения инф-ии о пользователи
+const userInfo = new UserInfo(selectorProfileName, selectorProfileDesc, selectorAvatarProfile);
+
+//экземпляр первоначальных карточек на странице
+const cardList = new Section({
+  renderer: (data) => {
+    const newCard = renderCard(data); //получили разметку карточки
+    cardList.addItem(newCard); //добавили в контейнер
+  }
+}, cardContainerSelector);
+
 let userId = null;
 //Api
 const api = new Api({
@@ -53,17 +64,14 @@ Promise.all([api.getAllCards(), api.getUserInfo()])
   userInfo.setUserInfo(dataUser); //добавляем новые значения
   cardList.renderItems(dataCards);//отрисовали карточки на странице
 })
+.catch(err => console.log(err))
 
-//экземпляр первоначальных карточек на странице
-const cardList = new Section({
-  renderer: (data) => {
-    const newCard = renderCard(data); //получили разметку карточки
-    cardList.addItem(newCard); //добавили в контейнер
-  }
-}, cardContainerSelector);
-
-//создаем экземпляр класса отоброжаения инф-ии о пользователи
-const userInfo = new UserInfo(selectorProfileName, selectorProfileDesc, selectorAvatarProfile);
+/* api.editUserInfo()
+.then((data) => {
+  console.log(data)
+  userInfo.setUserInfo(data);
+})
+.catch(err => console.log(err)) */
 
 //создаем экземпляр класса попапа с изображением
 const popupWithImage = new PopupWithImage(selectorPopupWithImage);
@@ -109,20 +117,43 @@ function openEditProfilePopup() {
 //объявление функции сохранения новых данных в форме редактирования профиля
 function submitEditProfileForm(data) {
   userInfo.setUserInfo(data); //добавляем новые значения
-  console.log(data)
 };
 
 //функция возвращающая новую карточку
-function renderCard(item) {
+/* function renderCard(item) {
   const card = new Card({
     data: item,
     handleCardClick: () => {
       popupWithImage.open({data: item})
+    },
+  }, selectorCardTemplate);
+  const newCard = card.generateCard();
+  return newCard
+}; */
+
+function renderCard(data) {
+  const card = new Card({
+    //расширяем объект новым полем - id пользователя
+    data: {...data, currentUserId: userId},
+    handleCardClick: () => {
+      popupWithImage.open(data)
+    },
+    handleLikeClick: () => {
+      if(card.isLiked()) {
+        api.deleteCardlike(card.cardId)
+        .then(dataCard => card.setLikes(dataCard.likes))
+        .catch(err => console.log(err))
+      } else {
+        api.setCardlike(card.cardId)
+        .then(dataCard => card.setLikes(dataCard.likes))
+        .catch(err => console.log(err))
+      }
     }
   }, selectorCardTemplate);
   const newCard = card.generateCard();
   return newCard
 };
+
 
 //добавление новой карточки на страницу из попапа добавить карточку
 function createNewCard(data) {
