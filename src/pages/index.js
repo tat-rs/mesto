@@ -62,7 +62,6 @@ Promise.all([api.getAllCards(), api.getUserInfo()])
 .then(([dataCards, dataUser]) => {
   userId = dataUser._id;
   userInfo.setUserInfo(dataUser); //добавляем новые значения
-  console.log(dataUser)
   cardList.renderItems(dataCards);//отрисовали карточки на странице
 })
 .catch(err => console.log(err))
@@ -136,8 +135,10 @@ function renderCard(data) {
     handleCardClick: () => {
       popupWithImage.open(data)
     },
-    handleLikeClick: () => {
+    handleLikeClick: (card) => {
+      console.log(card.isLiked())
       if(card.isLiked()) {
+        /* console.log(card.isLiked()) */
         api.deleteCardlike(card.cardId)
         .then(dataCard => card.setLikes(dataCard.likes))
         .catch(err => console.log(err))
@@ -152,13 +153,11 @@ function renderCard(data) {
   return newCard
 };
 
-
 //добавление новой карточки на страницу из попапа добавить карточку
 function createNewCard(data) {
-
   //объявляем объект с ключами равными значениям в полях ввода
   const cardsElement = {
-    name: data.subtitle,
+    name: data.name,
     link: data.link,
   };
 
@@ -169,7 +168,13 @@ function createNewCard(data) {
 
 //функция добавления новой карточки при сабмите
 function handleAddCardFormSubmit(data) {
-  cardList.addItem(createNewCard(data)); //добавили карточку в контейнер
+  console.log('должен быть объект данных', data)
+  /* cardList.addItem(createNewCard(data)); //добавили карточку в контейнер */
+  api.addNewCard(data)
+  .then(newCard => {
+    cardList.addItem(createNewCard(newCard)) //добавили карточку в контейнер
+  })
+  .catch(err => console.log(err))
 }
 
 //открытие попапа по клику на кнопку редактирования профиля

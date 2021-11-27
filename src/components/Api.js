@@ -17,20 +17,18 @@ export default class Api {
     .then(onResponce)
   }
 
-  /* //добавить карточку (POST)
-  addNewCard(data) {
-    return fetch(this._url, {
+  //добавить карточку (POST)
+  addNewCard(newCard) {
+    return fetch(`${this._url}cards`, {
       method: "POST",
       headers: this._headers,
-      body: JSON.stringify(data), //данные в формате строки
+      body: JSON.stringify({
+        name: newCard.subtitle,
+        link: newCard.link,
+      })
     })
-    .then((res) => {
-      if(res.ok) {
-        return res.json()
-      }
-      return Promise.reject('Что-то пошло не так')
-    })
-  } */
+    .then(onResponce)
+  }
   //удалить карточку (DELETE)
   //получить данные пользователя (GET)
   getUserInfo() {

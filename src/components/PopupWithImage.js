@@ -8,7 +8,7 @@ export default class PopupWithImage extends Popup {
   }
 
   //метод открытия попапа изображения
-  open({data}) {
+  open(data) {
     this._popupImageName.textContent = data.name; //пиравниваем название карточки
     this._popupImageLink.src = data.link; //приравниваем ссылки на изображения
     this._popupImageLink.alt = data.name;//приравниеваме alt с названием карточки

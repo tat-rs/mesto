@@ -23,17 +23,19 @@ export default class Card {
   };
 
   //метод постановки лайка карточке
-  _toggleLike() {
+  /* _toggleLike() {
     this._likeButton.classList.toggle('cards__button_active'); //добавляем или убираем класс с активным лайком у элемента
-  };
+  }; */
 
-  isLiked() {
-    return this._arrayLikes.some(user => user._id === this._currentUserId)
-  }
 
   setLikes(dataLikes) {
     this._arrayLikes = dataLikes;
     this._updateLike()
+  }
+
+  isLiked() {
+    /* console.log(this._currentUserId) */
+    return this._arrayLikes.some(user => user._id === this._currentUserId)
   }
 
   _updateLike() {
@@ -51,7 +53,7 @@ export default class Card {
 
   //обработчик слушателей
   _setEventListeners() {
-    this._likeButton.addEventListener('click', () => this._handlLikeClick()); //добавляем на кнопку лайк слушатель
+    this._likeButton.addEventListener('click', () => this._handlLikeClick(this)); //добавляем на кнопку лайк слушатель
     this._deleteButton.addEventListener('click', () => this._deleteCard());//добавили слушатель для удаления карточки
     this._cardImage.addEventListener('click', () => this._handleCardClick()); //добавляем слушатель на изображение для открытия попапа с изображением
   };
