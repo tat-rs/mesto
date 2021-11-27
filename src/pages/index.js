@@ -62,16 +62,10 @@ Promise.all([api.getAllCards(), api.getUserInfo()])
 .then(([dataCards, dataUser]) => {
   userId = dataUser._id;
   userInfo.setUserInfo(dataUser); //добавляем новые значения
+  console.log(dataUser)
   cardList.renderItems(dataCards);//отрисовали карточки на странице
 })
 .catch(err => console.log(err))
-
-/* api.editUserInfo()
-.then((data) => {
-  console.log(data)
-  userInfo.setUserInfo(data);
-})
-.catch(err => console.log(err)) */
 
 //создаем экземпляр класса попапа с изображением
 const popupWithImage = new PopupWithImage(selectorPopupWithImage);
@@ -116,7 +110,11 @@ function openEditProfilePopup() {
 
 //объявление функции сохранения новых данных в форме редактирования профиля
 function submitEditProfileForm(data) {
-  userInfo.setUserInfo(data); //добавляем новые значения
+  api.editUserInfo(data)//добавляем новые значения
+  .then((newUserInfo) => {
+  userInfo.setUserInfo(newUserInfo)
+  })
+  .catch(err => console.log(err))
 };
 
 //функция возвращающая новую карточку
