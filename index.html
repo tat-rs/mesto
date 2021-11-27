@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mesto</title>
+<script defer src="main.js"></script><link href="main.css" rel="stylesheet"></head>
+<body class="page">
+  <header class="header page__header">
+    <a class="logo link" href="#" target="_blank"></a>
+  </header>
+
+  <main class="content page__section">
+    <section class="profile page__profile">
+      <div class="profile__container">
+        <img class="profile__image" src="6163c2039d1f0eb8d7ca.jpg" alt="Аватар пользователя">
+        <div class="profile__info">
+          <h1 class="profile__name"></h1>
+          <button class="profile__edit link" type="button" aria-label="Редактировать данные профиля"></button>
+          <p class="profile__desc"></p>
+        </div>
+      </div>
+      <button class="profile__button link" type="button" aria-label="Добавить новую карточку"></button>
+    </section>
+
+    <section class="cards page__cards" aria-label="Карточки с изображениями">
+      <ul class="cards__list">
+
+      </ul>
+    </section>
+  </main>
+
+  <footer class="footer page__section">
+    <p class="footer__author">&copy; 2020 Mesto Russia</p>
+  </footer>
+
+  <div class="popup popup_type_edit">
+    <div class="popup__container">
+      <button class="popup__close link" type="button" aria-label="Закрыть форму"></button>
+      <form class="popup__form form form_type_edit" name="form-edit" novalidate>
+        <h2 class="form__title">Редактировать профиль</h2>
+        <input class="form__item form__item_type_name" id="name-profile" type="text" name="name" placeholder="Имя" minlength="2" maxlength="40" required>
+        <span class="form__error name-profile-error"></span>
+        <input class="form__item form__item_type_desc" id="desc-profile" type="text" name="about" placeholder="О себе" minlength="2" maxlength="200" required>
+        <span class="form__error desc-profile-error"></span>
+        <button class="form__button" type="submit">Сохранить</button>
+      </form>
+    </div>
+  </div>
+  <div class="popup popup_type_new-card">
+    <div class="popup__container">
+      <button class="popup__close link" type="button" aria-label="Закрыть форму"></button>
+      <form class="popup__form form form_type_add" name="form-add" novalidate>
+        <h2 class="form__title">Новое место</h2>
+        <input class="form__item form__item_type_image-subtitle" id="image-subtitle" type="text" name="subtitle" placeholder="Название" minlength="2" maxlength="30" required>
+        <span class="form__error image-subtitle-error"></span>
+        <input class="form__item form__item_type_image-link" id="image-link" type="url" name="link" placeholder="Ссылка на картинку" required>
+        <span class="form__error image-link-error"></span>
+        <button class="form__button form__button_place_new-card" type="submit">Создать</button>
+      </form>
+    </div>
+  </div>
+  <div class="popup popup_type_image">
+    <div class="popup__container popup__container_transparent">
+      <button class="popup__close link" type="button" aria-label="Закрыть"></button>
+      <img class="popup__image" src="#" alt="">
+      <h2 class="popup__subtitle"></h2>
+    </div>
+  </div>
+  <template class="cards-template">
+    <li class="cards__item">
+      <button class="cards__delete" type="button" aria-label="Удалить"></button>
+      <img class="cards__image" src="#" alt="">
+      <div class="cards__desc">
+        <h2 class="cards__subtitle"></h2>
+        <button class="cards__button" type="button" aria-label="Лайк"></button>
+      </div>
+    </li>
+  </template>
+</body>
+</html>
