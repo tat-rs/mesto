@@ -9,14 +9,14 @@ export default class UserInfo {
   getUserInfo() {
     const newData = {
       name: this._nameProfile.textContent,
-      desc: this._descProfile.textContent,
+      about: this._descProfile.textContent,
     }
     return newData
   };
 
   //метод, который принимает новые данные пользователя и добавляет их на страницу
-  setUserInfo(newName, newDesc) {
-    this._nameProfile.textContent = newName;
-    this._descProfile.textContent = newDesc;
+  setUserInfo(data) {
+    this._nameProfile.textContent = data.name;
+    this._descProfile.textContent = data.about;
   };
 }

@@ -7,7 +7,8 @@ import {
   selectorPopupAddCard,
   selectorPopupWithImage,
   selectorFormAddCard,
-  selectorFormEdit
+  selectorFormEdit,
+  selectorAvatarProfile,
 } from '../utils/constants.js';
 
 import Card from '../components/Card.js'; //импортируем класс карточки
@@ -35,45 +36,34 @@ const formInfoDesc = formInfo.querySelector('.form__item_type_desc'); //пере
 //переменные попапа добавления карточки
 const popupAddCardOpenBtn = document.querySelector('.profile__button'); //кнопка открытия попапа добавления карточки
 
+let userId = null;
 //Api
 const api = new Api({
-  url: 'https://mesto.nomoreparties.co/v1/cohort-30/cards/',
+  url: 'https://mesto.nomoreparties.co/v1/cohort-30/',
   headers: {
     authorization: '3ace1836-34ae-4def-81c7-968efe5e4e17',
     "content-type": "application/json",
   }
 })
 
-//добавляем массив карточек с сервера на страницу
-api.getAllCards()
-.then((data) => {
-
-  //экземпляр первоначальных карточек на странице
-  const cardList = new Section({
-    items: data,
-    renderer: (item) => {
-      const newCard = renderCard(item); //получили разметку карточки
-      cardList.addItem(newCard); //добавили в контейнер
-    }
-  }, cardContainerSelector);
-
-  cardList.renderItems();//отрисовали карточки на странице
-
+//добавляем первоначальную информацию на страницу
+Promise.all([api.getAllCards(), api.getUserInfo()])
+.then(([dataCards, dataUser]) => {
+  userId = dataUser._id;
+  userInfo.setUserInfo(dataUser); //добавляем новые значения
+  cardList.renderItems(dataCards);//отрисовали карточки на странице
 })
 
-/* //экземпляр первоначальных карточек на странице
+//экземпляр первоначальных карточек на странице
 const cardList = new Section({
-  items: initialCards,
-  renderer: (item) => {
-    const newCard = renderCard(item); //получили разметку карточки
+  renderer: (data) => {
+    const newCard = renderCard(data); //получили разметку карточки
     cardList.addItem(newCard); //добавили в контейнер
   }
 }, cardContainerSelector);
 
-cardList.renderItems();//отрисовали карточки на странице */
-
 //создаем экземпляр класса отоброжаения инф-ии о пользователи
-const userInfo = new UserInfo(selectorProfileName, selectorProfileDesc);
+const userInfo = new UserInfo(selectorProfileName, selectorProfileDesc, selectorAvatarProfile);
 
 //создаем экземпляр класса попапа с изображением
 const popupWithImage = new PopupWithImage(selectorPopupWithImage);
@@ -112,12 +102,14 @@ function openEditProfilePopup() {
   openedPopupEdit.open() //открываем попап с редактирвоанием профиля
   const getUserInfo = userInfo.getUserInfo(); //сохраняем объект с новыми данными
   formInfoName.value = getUserInfo.name; //присваиваем новое значение имени профиля
-  formInfoDesc.value = getUserInfo.desc; //присваиваем новое значение описания профиля
+  formInfoDesc.value = getUserInfo.about; //присваиваем новое значение описания профиля
+  console.log(getUserInfo)
 };
 
 //объявление функции сохранения новых данных в форме редактирования профиля
 function submitEditProfileForm(data) {
-  userInfo.setUserInfo(data.name, data.description); //добавляем новые значения
+  userInfo.setUserInfo(data); //добавляем новые значения
+  console.log(data)
 };
 
 //функция возвращающая новую карточку
