@@ -106,7 +106,6 @@ function openEditProfilePopup() {
   const getUserInfo = userInfo.getUserInfo(); //сохраняем объект с новыми данными
   formInfoName.value = getUserInfo.name; //присваиваем новое значение имени профиля
   formInfoDesc.value = getUserInfo.about; //присваиваем новое значение описания профиля
-  console.log(getUserInfo)
 };
 
 //объявление функции сохранения новых данных в форме редактирования профиля
@@ -118,18 +117,6 @@ function submitEditProfileForm(data) {
   .catch(err => console.log(err))
 };
 
-//функция возвращающая новую карточку
-/* function renderCard(item) {
-  const card = new Card({
-    data: item,
-    handleCardClick: () => {
-      popupWithImage.open({data: item})
-    },
-  }, selectorCardTemplate);
-  const newCard = card.generateCard();
-  return newCard
-}; */
-
 function renderCard(data) {
   const card = new Card({
     //расширяем объект новым полем - id пользователя
@@ -138,9 +125,7 @@ function renderCard(data) {
       popupWithImage.open(data)
     },
     handleLikeClick: (card) => {
-      console.log(card.isLiked())
       if(card.isLiked()) {
-        /* console.log(card.isLiked()) */
         api.deleteCardlike(card.cardId)
         .then(dataCard => card.setLikes(dataCard.likes))
         .catch(err => console.log(err))
@@ -157,20 +142,13 @@ function renderCard(data) {
 
 //добавление новой карточки на страницу из попапа добавить карточку
 function createNewCard(data) {
-  //объявляем объект с ключами равными значениям в полях ввода
-  const cardsElement = {
-    name: data.name,
-    link: data.link,
-  };
-
   //сохраняем карточку
-  const card = renderCard(cardsElement);
+  const card = renderCard(data);
   return card
 };
 
 //функция добавления новой карточки при сабмите
 function handleAddCardFormSubmit(data) {
-  console.log('должен быть объект данных', data)
   /* cardList.addItem(createNewCard(data)); //добавили карточку в контейнер */
   api.addNewCard(data)
   .then(newCard => {
