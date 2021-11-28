@@ -6,6 +6,8 @@ export default class PopupWithForm extends Popup {
     this._handleFormSubmit = handleFormSubmit;
     this._form = this._popup.querySelector('.form');
     this._inputList = Array.from(this._popup.querySelectorAll('.form__item')); //массив с инпутами
+    this._button = this._form.querySelector('.form__button');
+    this._defaultTextofButton = this._button.textContent
   }
 
   // собирает данные всех полей формы
@@ -19,12 +21,20 @@ export default class PopupWithForm extends Popup {
     return this._formValues
   };
 
+  renderLoading(isLoading) {
+    if(isLoading) {
+      this._button.textContent = "Сохранение..."
+    } else {
+      this._button.textContent = this._defaultTextofButton
+    }
+  }
   //обработчик клика по крестику, оверлею и сабмит формы
   setEventListeners() {
     super.setEventListeners();
 
     this._form.addEventListener('submit', (evt) => {
       evt.preventDefault();
+      this.renderLoading(true)
       this._handleFormSubmit(this._getInputValues())
     });
   };

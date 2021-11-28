@@ -107,6 +107,7 @@ const openedPopupEditAvatar = new PopupWithForm({
       userInfo.setUserInfo(newAvatar)
     })
     .catch(err => console.log(err))
+    .finally(() => openedPopupEditAvatar.renderLoading(false))
     openedPopupEditAvatar.close();
   }
 })
@@ -156,6 +157,7 @@ function submitEditProfileForm(data) {
   userInfo.setUserInfo(newUserInfo)
   })
   .catch(err => console.log(err))
+  .finally(() => openedPopupEdit.renderLoading(false))
 };
 
 function renderCard(data) {
@@ -202,6 +204,7 @@ function handleAddCardFormSubmit(data) {
     cardList.addItem(createNewCard(newCard)) //добавили карточку в контейнер
   })
   .catch(err => console.log(err))
+  .finally(() => openedPopupAddCard.renderLoading(false))
 }
 
 //открытие попапа по клику на кнопку редактирования профиля
