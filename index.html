@@ -14,7 +14,9 @@
   <main class="content page__section">
     <section class="profile page__profile">
       <div class="profile__container">
-        <img class="profile__image" src="6163c2039d1f0eb8d7ca.jpg" alt="Аватар пользователя">
+        <button class="profile__image-edit">
+          <img class="profile__image" src="#" alt="Фото пользователя">
+        </button>
         <div class="profile__info">
           <h1 class="profile__name"></h1>
           <button class="profile__edit link" type="button" aria-label="Редактировать данные профиля"></button>
@@ -68,13 +70,37 @@
       <h2 class="popup__subtitle"></h2>
     </div>
   </div>
+  <div class="popup popup_type_delete">
+    <div class="popup__container">
+      <button class="popup__close link" type="button" aria-label="Закрыть форму"></button>
+      <form class="popup__form form form_type_delete" name="form-add" novalidate>
+        <h2 class="form__title form__title_place_delete">Вы уверены?</h2>
+        <button class="form__button form__button_place_delete" type="submit">Да</button>
+      </form>
+    </div>
+  </div>
+  <div class="popup popup_type_edit-avatar">
+    <div class="popup__container">
+      <button class="popup__close link" type="button" aria-label="Закрыть форму"></button>
+      <form class="popup__form form form_type_edit-avatar" name="form-edit" novalidate>
+        <h2 class="form__title">Обновить аватар</h2>
+        <input class="form__item form__item_type_image-link" id="image-link" type="url" name="avatar" placeholder="Ссылка на фото профиля" required>
+        <span class="form__error image-link-error"></span>
+        <button class="form__button" type="submit">Сохранить</button>
+      </form>
+    </div>
+  </div>
   <template class="cards-template">
     <li class="cards__item">
       <button class="cards__delete" type="button" aria-label="Удалить"></button>
       <img class="cards__image" src="#" alt="">
       <div class="cards__desc">
         <h2 class="cards__subtitle"></h2>
-        <button class="cards__button" type="button" aria-label="Лайк"></button>
+        <div class="cards__container-likes">
+          <button class="cards__button" type="button" aria-label="Лайк"></button>
+          <p class="cards__sum-likes"></p>
+        </div>
+
       </div>
     </li>
   </template>

@@ -53,7 +53,11 @@
 /*!***********************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js!./src/blocks/profile/__image/profile__image.css ***!
   \***********************************************************************************************************************************************************************/
-.profile__image{border-radius:50%;display:block;height:120px;margin-right:30px;-o-object-fit:cover;object-fit:cover;width:120px}@media (max-width:590px){.profile__image{margin:0 0 26px}}
+.profile__image{border-radius:50%;display:block;height:120px;-o-object-fit:cover;object-fit:cover;width:120px}
+/*!*********************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js!./src/blocks/profile/__image-edit/profile__image-edit.css ***!
+  \*********************************************************************************************************************************************************************************/
+.profile__image-edit{background-color:transparent;border:0;color:#fff;cursor:pointer;height:120px;margin-right:30px;padding:0;position:relative;transition:opacity .2s;width:120px}.profile__image-edit:hover:after{align-items:center;background-color:rgba(0,0,0,.8);bottom:0;content:url(ae1a976ddb506239e9f0.svg);display:flex;justify-content:center;left:0;opacity:.8;position:absolute;right:0;top:0}@media (max-width:590px){.profile__image-edit{margin:0 0 22px}}
 /*!*********************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js!./src/blocks/profile/__info/profile__info.css ***!
   \*********************************************************************************************************************************************************************/
@@ -81,7 +85,11 @@
 /*!*********************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js!./src/blocks/cards/__delete/cards__delete.css ***!
   \*********************************************************************************************************************************************************************/
-.cards__delete{background-color:transparent;background-image:url(e3c42771bff3aaa52f76.svg);background-position:50%;background-repeat:no-repeat;background-size:18px 19.3px;border:0;cursor:pointer;min-height:19.3px;padding:0;position:absolute;right:15px;top:15px;transition:opacity .2s;width:18px;z-index:5}.cards__delete:hover{opacity:.6}
+.cards__delete{background-color:transparent;background-image:url(e3c42771bff3aaa52f76.svg);background-position:50%;background-repeat:no-repeat;background-size:18px 19.3px;border:0;cursor:pointer;min-height:19.3px;opacity:0;padding:0;position:absolute;right:15px;top:15px;transition:opacity .2s;visibility:hidden;width:18px;z-index:5}.cards__delete:hover{opacity:.6}
+/*!***************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js!./src/blocks/cards/__delete/_visibile/cards__delete_visible.css ***!
+  \***************************************************************************************************************************************************************************************/
+.cards__delete_visible{opacity:1;visibility:visible}
 /*!*****************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js!./src/blocks/cards/__list/cards__list.css ***!
   \*****************************************************************************************************************************************************************/
@@ -97,15 +105,23 @@
 /*!*****************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js!./src/blocks/cards/__desc/cards__desc.css ***!
   \*****************************************************************************************************************************************************************/
-.cards__desc{align-items:flex-end;box-sizing:border-box;display:flex;justify-content:space-between;padding:25px 15px 31px 21px;width:100%}@media (max-width:590px){.cards__desc{padding-bottom:26px}}
+.cards__desc{align-items:center;box-sizing:border-box;display:flex;justify-content:space-between;padding:25px 20px 31px 21px;width:100%}@media (max-width:590px){.cards__desc{padding-bottom:26px}}
 /*!*************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js!./src/blocks/cards/__subtitle/cards__subtitle.css ***!
   \*************************************************************************************************************************************************************************/
 .cards__subtitle{font-size:24px;font-weight:900;line-height:29px;margin:0;max-width:calc(100% - 52px);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}@media (max-width:765px){.cards__subtitle{font-size:18px;line-height:23px}}@media (max-width:590px){.cards__subtitle{font-size:24px;line-height:29px}}
+/*!***************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js!./src/blocks/cards/__container-likes/cards__container-likes.css ***!
+  \***************************************************************************************************************************************************************************************/
+.cards__container-likes{align-items:center;display:flex;flex-direction:column}
+/*!***************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js!./src/blocks/cards/__sum-likes/cards__sum-likes.css ***!
+  \***************************************************************************************************************************************************************************/
+.cards__sum-likes{font-size:13px;font-style:normal;font-weight:400;line-height:16px;margin:0}
 /*!*********************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js!./src/blocks/cards/__button/cards__button.css ***!
   \*********************************************************************************************************************************************************************/
-.cards__button{align-self:center;background-color:inherit;background-image:url(1ad06e85f169668a1f36.svg);background-position:50%;background-repeat:no-repeat;background-size:22px 19px;border:0;cursor:pointer;margin-right:5px;min-height:19px;padding:0;transition:opacity .2s;width:22px}.cards__button:hover{opacity:.5}
+.cards__button{background-color:inherit;background-image:url(1ad06e85f169668a1f36.svg);background-position:50%;background-repeat:no-repeat;background-size:22px 19px;border:0;cursor:pointer;margin-bottom:3px;min-height:19px;padding:0;transition:opacity .2s;width:22px}.cards__button:hover{opacity:.5}
 /*!************************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js!./src/blocks/cards/__button/_active/cards__button_active.css ***!
   \************************************************************************************************************************************************************************************/
@@ -133,6 +149,14 @@
 /*!*********************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js!./src/blocks/popup/_type/popup_type_image.css ***!
   \*********************************************************************************************************************************************************************/
+
+/*!**********************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js!./src/blocks/popup/_type/popup_type_delete.css ***!
+  \**********************************************************************************************************************************************************************/
+
+/*!***************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js!./src/blocks/popup/_type/popup_type_edit-avatar.css ***!
+  \***************************************************************************************************************************************************************************/
 
 /*!*******************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js!./src/blocks/popup/_opened/popup_opened.css ***!
@@ -174,10 +198,22 @@
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js!./src/blocks/form/_type/form_type_edit.css ***!
   \******************************************************************************************************************************************************************/
 
+/*!********************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js!./src/blocks/form/_type/form_type_delete.css ***!
+  \********************************************************************************************************************************************************************/
+
+/*!*************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js!./src/blocks/form/_type/form_type_edit-avatar.css ***!
+  \*************************************************************************************************************************************************************************/
+
 /*!*****************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js!./src/blocks/form/__title/form__title.css ***!
   \*****************************************************************************************************************************************************************/
 .form__title{font-size:24px;font-weight:900;line-height:29px;margin:0 0 54px}@media (max-width:590px){.form__title{font-size:18px;line-height:22px;margin-bottom:75px}}
+/*!*************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js!./src/blocks/form/__title/_place/form__title_place_delete.css ***!
+  \*************************************************************************************************************************************************************************************/
+.form__title_place_delete{margin-bottom:38px}
 /*!***************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js!./src/blocks/form/__item/form__item.css ***!
   \***************************************************************************************************************************************************************/
@@ -218,6 +254,10 @@
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js!./src/blocks/form/__button/_place/form__button_place_new-card.css ***!
   \*****************************************************************************************************************************************************************************************/
 .form__button_place_new-card{padding:14px 143px}@media (max-width:590px){.form__button_place_new-card{padding:14px 91px}}
+/*!***************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js!./src/blocks/form/__button/_place/form__button_place_delete.css ***!
+  \***************************************************************************************************************************************************************************************/
+.form__button_place_delete{padding:13px 168px 18px}@media (max-width:590px){.form__button_place_delete{padding:12px 140px}}@media (max-width:400px){.form__button_place_delete{padding:12px 115px}}
 /*!******************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js!./src/blocks/name-profile-error/name-profile-error.css ***!
   \******************************************************************************************************************************************************************************/
