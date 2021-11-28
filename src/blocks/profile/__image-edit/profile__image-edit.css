@@ -8,6 +8,7 @@
   cursor: pointer;
   margin-right: 30px;
   background-color: transparent;
+  color: #fff;
 }
 
 .profile__image-edit:hover::after {
