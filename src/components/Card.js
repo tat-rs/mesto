@@ -47,18 +47,6 @@ export default class Card {
     this._sumOfLikes.textContent = this._arrayLikes.length
   }
 
-  /* _updateNUMBERLike(evt) {
-    let counter = this._arrayLikes.length
-    this._sumOfLikes.textContent = counter
-    if(!evt.target._id === this._currentUserId) {
-      counter++
-      this._sumOfLikes.textContent = counter
-    } else {
-      let counter = counter - 1
-      this._sumOfLikes.textContent = counter
-    }
-  } */
-
   //метод удаления карточки со страницы
   _deleteCard() {
     this._element.closest('.cards__item').remove(); //удаляем блок карточки
@@ -69,7 +57,7 @@ export default class Card {
     this._likeButton.addEventListener('click', () => this._handlLikeClick(this)); //добавляем на кнопку лайк слушатель
     this._deleteButton.addEventListener('click', () => this._deleteCard());//добавили слушатель для удаления карточки
     this._cardImage.addEventListener('click', () => this._handleCardClick()); //добавляем слушатель на изображение для открытия попапа с изображением
-    /* this._likeButton.addEventListener('click', (evt) => this._updateNUMBERLike(evt)) */
+
   };
 
   //метод созданиия новой карточки

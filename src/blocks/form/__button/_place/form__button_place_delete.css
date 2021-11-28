@@ -1,0 +1,15 @@
+.form__button_place_delete {
+  padding: 13px 168px 18px;
+}
+
+@media (max-width:590px) {
+  .form__button_place_delete {
+    padding: 12px 140px;
+  }
+}
+
+@media (max-width:400px) {
+  .form__button_place_delete {
+    padding: 12px 115px;
+  }
+}
