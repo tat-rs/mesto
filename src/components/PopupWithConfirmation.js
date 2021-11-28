@@ -1,5 +1,5 @@
 import Popup from "./Popup.js";
-//попап с предупреждением
+//попап с подтверждением
 export default class PopupWithConfirmation extends Popup {
   constructor({popupSelector, handleFormSubmit}) {
     super(popupSelector);

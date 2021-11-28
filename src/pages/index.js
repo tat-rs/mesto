@@ -43,6 +43,8 @@ const formInfoDesc = formInfo.querySelector('.form__item_type_desc'); //пере
 //переменные попапа добавления карточки
 const popupAddCardOpenBtn = document.querySelector('.profile__button'); //кнопка открытия попапа добавления карточки
 
+const btnAvatarEdit = document.querySelector('.profile__image-edit'); //кнопка редактирования фото профиля
+
 //создаем экземпляр класса отоброжаения инф-ии о пользователи
 const userInfo = new UserInfo(selectorProfileName, selectorProfileDesc, selectorAvatarProfile);
 
@@ -220,7 +222,8 @@ popupAddCardOpenBtn.addEventListener('click', () => {
   formValidatorAddCard.resetValidation(); //очищение ошибок и дезактивация кнопки
 });
 
-document.querySelector('.profile__image-edit').addEventListener('click', () => {
+//открыть попап редактирования профиля
+btnAvatarEdit.addEventListener('click', () => {
   openedPopupEditAvatar.open();
   formValidatorEditAvatar.resetValidation()
 })
