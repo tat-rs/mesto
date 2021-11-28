@@ -8,8 +8,7 @@
   background-repeat: no-repeat;
   background-position: center;
   background-size: 22px 19px;
-  margin-right: 5px;
-  align-self: center;
+  margin-bottom: 3px;
   transition: opacity 0.2s;
   cursor: pointer;
 }

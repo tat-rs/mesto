@@ -34,7 +34,7 @@ export default class Card {
   }
 
   isLiked() {
-    /* console.log(this._currentUserId) */
+    console.log(this._currentUserId)
     return this._arrayLikes.some(user => user._id === this._currentUserId)
   }
 
@@ -44,7 +44,20 @@ export default class Card {
     } else {
       this._likeButton.classList.add('cards__button_active');
     }
+    this._sumOfLikes.textContent = this._arrayLikes.length
   }
+
+  /* _updateNUMBERLike(evt) {
+    let counter = this._arrayLikes.length
+    this._sumOfLikes.textContent = counter
+    if(!evt.target._id === this._currentUserId) {
+      counter++
+      this._sumOfLikes.textContent = counter
+    } else {
+      let counter = counter - 1
+      this._sumOfLikes.textContent = counter
+    }
+  } */
 
   //метод удаления карточки со страницы
   _deleteCard() {
@@ -56,6 +69,7 @@ export default class Card {
     this._likeButton.addEventListener('click', () => this._handlLikeClick(this)); //добавляем на кнопку лайк слушатель
     this._deleteButton.addEventListener('click', () => this._deleteCard());//добавили слушатель для удаления карточки
     this._cardImage.addEventListener('click', () => this._handleCardClick()); //добавляем слушатель на изображение для открытия попапа с изображением
+    /* this._likeButton.addEventListener('click', (evt) => this._updateNUMBERLike(evt)) */
   };
 
   //метод созданиия новой карточки
@@ -63,6 +77,7 @@ export default class Card {
     this._element = this._getTemplate(); //сохраняем разметку
 
     this._likeButton = this._element.querySelector('.cards__button'); //нашли кнопку лайка
+    this._sumOfLikes = this._element.querySelector('.cards__sum-likes')
     this._deleteButton = this._element.querySelector('.cards__delete'); //нашли кнопку удалить
 
     this._cardImage = this._element.querySelector('.cards__image'); //находим элемент изображения
@@ -75,6 +90,8 @@ export default class Card {
 
     this._cardImage.src = this._link; //присваиваем значение ссылки на изображение новой карточки
     this._cardImage.alt = this._name; // добавили описание в атрибут alt, равное названию карточки
+
+    this._sumOfLikes.textContent = this._arrayLikes.length;
 
     return this._element;
   };
