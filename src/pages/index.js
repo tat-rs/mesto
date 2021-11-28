@@ -28,6 +28,8 @@ import UserInfo from '../components/UserInfo.js'; //импортируем кл�
 
 import Api from '../components/Api.js';
 
+import PopupWithConfirmation from '../components/PopupWithConfirmation.js';
+
 //переменные попапа редактирования профиля
 const popupEditProfile = document.querySelector('.popup_type_edit'); //переменная попап с формой редактированя профиля
 const popupEditOpenBtn = document.querySelector('.profile__edit'); //переменная кнопки редактирования профиля
@@ -92,6 +94,15 @@ const openedPopupAddCard = new PopupWithForm({
 });
 openedPopupAddCard.setEventListeners();
 
+const popupWithConfirmation = new PopupWithConfirmation({
+  popupSelector: '.popup_type_delete',
+  handleFormSubmit: (data) => {
+    console.log('dddd', data)
+  }
+})
+
+popupWithConfirmation.setEventListeners()
+
 //создаем экземпляр валидации формы добавления карточки
 const formValidatorAddCard = new FormValidator(validationConfig, selectorFormAddCard);
 formValidatorAddCard.enableValidation(); //вызываем валидацию формы
@@ -134,11 +145,15 @@ function renderCard(data) {
         .then(dataCard => card.setLikes(dataCard.likes))
         .catch(err => console.log(err))
       }
+    },
+    handleDeleteOnClick: () => {
+      popupWithConfirmation.open()
     }
   }, selectorCardTemplate);
   const newCard = card.generateCard();
   return newCard
 };
+
 
 //добавление новой карточки на страницу из попапа добавить карточку
 function createNewCard(data) {

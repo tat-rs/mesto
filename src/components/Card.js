@@ -1,14 +1,16 @@
 export default class Card {
-  constructor({ data, handleCardClick, handleLikeClick }, selector) {
+  constructor({ data, handleCardClick, handleLikeClick, handleDeleteOnClick }, selector) {
     /* console.log(data) */
     this.cardId = data._id; //айди карточки
     this._name = data.name;
     this._link = data.link;
     this._arrayLikes = data.likes; //массив объекта лайк
     this._currentUserId = data.currentUserId; // айди пользователя
+    this._cardOwnerId = data.owner._id;
     this._selector = selector;
     this._handleCardClick = handleCardClick;
     this._handlLikeClick = handleLikeClick;
+    this._handleDeleteOnClick = handleDeleteOnClick;
   };
 
   //метод получения разметки карточки
@@ -34,7 +36,6 @@ export default class Card {
   }
 
   isLiked() {
-    console.log(this._currentUserId)
     return this._arrayLikes.some(user => user._id === this._currentUserId)
   }
 
@@ -48,14 +49,20 @@ export default class Card {
   }
 
   //метод удаления карточки со страницы
-  _deleteCard() {
+  deleteCard() {
     this._element.closest('.cards__item').remove(); //удаляем блок карточки
   };
+
+  deleteIcon() {
+    if(this._cardOwnerId === this._currentUserId) {
+      this._deleteButton.classList.add('cards__delete_visible');
+    }
+  }
 
   //обработчик слушателей
   _setEventListeners() {
     this._likeButton.addEventListener('click', () => this._handlLikeClick(this)); //добавляем на кнопку лайк слушатель
-    this._deleteButton.addEventListener('click', () => this._deleteCard());//добавили слушатель для удаления карточки
+    this._deleteButton.addEventListener('click', () => this._handleDeleteOnClick(this));//добавили слушатель для удаления карточки
     this._cardImage.addEventListener('click', () => this._handleCardClick()); //добавляем слушатель на изображение для открытия попапа с изображением
 
   };
@@ -70,7 +77,7 @@ export default class Card {
 
     this._cardImage = this._element.querySelector('.cards__image'); //находим элемент изображения
     this._cardSubtitle = this._element.querySelector('.cards__subtitle'); //находим элемент описания изображения
-
+    this.deleteIcon()
     this._setEventListeners(); //вызываем обработчик слушателей
     this._updateLike();
 
