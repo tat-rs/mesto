@@ -96,12 +96,19 @@ openedPopupAddCard.setEventListeners();
 
 const popupWithConfirmation = new PopupWithConfirmation({
   popupSelector: '.popup_type_delete',
-  handleFormSubmit: (data) => {
-    console.log('dddd', data)
+  handleFormSubmit: () => {
+    /* handleFormSubmitDelete() */
+    console.log('delete')
+    popupWithConfirmation.close()
   }
 })
 
 popupWithConfirmation.setEventListeners()
+
+/* function handleFormSubmitDelete() {
+
+} */
+
 
 //создаем экземпляр валидации формы добавления карточки
 const formValidatorAddCard = new FormValidator(validationConfig, selectorFormAddCard);
@@ -150,6 +157,7 @@ function renderCard(data) {
       popupWithConfirmation.open()
     }
   }, selectorCardTemplate);
+
   const newCard = card.generateCard();
   return newCard
 };
@@ -160,6 +168,7 @@ function createNewCard(data) {
   //сохраняем карточку
   const card = renderCard(data);
   return card
+
 };
 
 //функция добавления новой карточки при сабмите
