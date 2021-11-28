@@ -1,4 +1,4 @@
-import './index.css';
+import './index.css'; //импорт стилей
 
 import {
   cardContainerSelector,
@@ -13,7 +13,8 @@ import {
   selectorAvatarProfile,
   selectorFormEditAvatar,
   selectorPopupEditAvatar,
-} from '../utils/constants.js';
+  selectorPopupDelete,
+} from '../utils/constants.js'; //импорт селекторов
 
 import Card from '../components/Card.js'; //импортируем класс карточки
 
@@ -28,9 +29,9 @@ import PopupWithForm from '../components/PopupWithForm.js'; //импортиру
 
 import UserInfo from '../components/UserInfo.js'; //импортируем класс с управлением отображ. инф-ии о профиле
 
-import Api from '../components/Api.js';
+import Api from '../components/Api.js'; //импортируем класс с запросами к серверу
 
-import PopupWithConfirmation from '../components/PopupWithConfirmation.js';
+import PopupWithConfirmation from '../components/PopupWithConfirmation.js'; //импортируем класс предупреждения
 
 //переменные попапа редактирования профиля
 const popupEditProfile = document.querySelector('.popup_type_edit'); //переменная попап с формой редактированя профиля
@@ -41,8 +42,6 @@ const formInfoDesc = formInfo.querySelector('.form__item_type_desc'); //пере
 
 //переменные попапа добавления карточки
 const popupAddCardOpenBtn = document.querySelector('.profile__button'); //кнопка открытия попапа добавления карточки
-
-const popupEditAvatar = document.querySelector('.profile__image-container')
 
 //создаем экземпляр класса отоброжаения инф-ии о пользователи
 const userInfo = new UserInfo(selectorProfileName, selectorProfileDesc, selectorAvatarProfile);
@@ -55,8 +54,9 @@ const cardList = new Section({
   }
 }, cardContainerSelector);
 
-let userId = null;
-//Api
+let userId = null; //idd пользователя
+
+//экземпляр класса Api
 const api = new Api({
   url: 'https://mesto.nomoreparties.co/v1/cohort-30/',
   headers: {
@@ -68,8 +68,8 @@ const api = new Api({
 //добавляем первоначальную информацию на страницу
 Promise.all([api.getAllCards(), api.getUserInfo()])
 .then(([dataCards, dataUser]) => {
-  userId = dataUser._id;
-  userInfo.setUserInfo(dataUser); //добавляем новые значения
+  userId = dataUser._id; //присваиваем id пользователя
+  userInfo.setUserInfo(dataUser); //добавляем новые значения профиля
   cardList.renderItems(dataCards);//отрисовали карточки на странице
 })
 .catch(err => console.log(err))
@@ -96,68 +96,70 @@ const openedPopupAddCard = new PopupWithForm({
     openedPopupAddCard.close();
   }
 });
-openedPopupAddCard.setEventListeners();
+openedPopupAddCard.setEventListeners(); //вызываем слушатель закрытия попапа по клику и оверлею
 
+//создаем экземпляр попапа редактирования фото профиля
 const openedPopupEditAvatar = new PopupWithForm({
   popupSelector: selectorPopupEditAvatar,
   handleFormSubmit: (data) => {
-    api.editUserAvatar(data)//добавляем новые значения
+    api.editUserAvatar(data)
     .then((newAvatar) => {
-      userInfo.setUserInfo(newAvatar)
+      userInfo.setUserInfo(newAvatar) //добавляем новое фото пользователя
     })
     .catch(err => console.log(err))
-    .finally(() => openedPopupEditAvatar.renderLoading(false))
+    .finally(() => openedPopupEditAvatar.renderLoading(false)) //возвращаем первоначальный текст кнопки
     openedPopupEditAvatar.close();
   }
 })
+openedPopupEditAvatar.setEventListeners(); //вызываем слушатель закрытия попапа по клику и оверлею
 
-openedPopupEditAvatar.setEventListeners()
-
+//создаем экземпляр класса с подтверждением об удалении
 const popupWithConfirmation = new PopupWithConfirmation({
-  popupSelector: '.popup_type_delete',
+  popupSelector: selectorPopupDelete,
   handleFormSubmit: (card) => {
-    api.deleteCard(card.cardId)
+    api.deleteCard(card.cardId) //запрос на удаление карточки
     .then(() => {
-      card.element.remove();
+      card.element.remove();//удаляем карточку
     })
     .catch(err => console.log(err));
-
     popupWithConfirmation.close()
   }
 })
+popupWithConfirmation.setEventListeners()//вызываем слушатель закрытия попапа по клику и оверлею
 
-popupWithConfirmation.setEventListeners()
-
+//функция созданя карточки
 function renderCard(data) {
   const card = new Card({
     //расширяем объект новым полем - id пользователя
     data: {...data, currentUserId: userId},
+    //функция открытия попапа с изображением
     handleCardClick: () => {
       popupWithImage.open(data)
     },
+    //функция постановки лайка
     handleLikeClick: (card) => {
+      //если лайк был, то делаем запрос на удаление
       if(card.isLiked()) {
         api.deleteCardlike(card.cardId)
         .then(dataCard => card.setLikes(dataCard.likes))
         .catch(err => console.log(err))
       } else {
+        //если лайка не было, то делаем запрос на добавление
         api.setCardlike(card.cardId)
         .then(dataCard => card.setLikes(dataCard.likes))
         .catch(err => console.log(err))
       }
     },
+    //функция открытия попапа с подтверждением удаления
     handleDeleteOnClick: (card) => {
-      //у каждой кнопки свой колбэк, который отправляет запрос на сервер
       popupWithConfirmation.open()
-      /* console.log(card, card.cardId) */
-      popupWithConfirmation.setActionSubmit(card) //получили айди текущей карточки
+      popupWithConfirmation.setDataSubmit(card) //получили айди текущей карточки
     }
   }, selectorCardTemplate);
 
   const newCard = card.generateCard();
   return newCard
 };
-
 
 //создаем экземпляр валидации формы добавления карточки
 const formValidatorAddCard = new FormValidator(validationConfig, selectorFormAddCard);
@@ -181,12 +183,12 @@ function openEditProfilePopup() {
 
 //объявление функции сохранения новых данных в форме редактирования профиля
 function submitEditProfileForm(data) {
-  api.editUserInfo(data)//добавляем новые значения
+  api.editUserInfo(data)//добавляем новые значения имени и описания
   .then((newUserInfo) => {
   userInfo.setUserInfo(newUserInfo)
   })
   .catch(err => console.log(err))
-  .finally(() => openedPopupEdit.renderLoading(false))
+  .finally(() => openedPopupEdit.renderLoading(false)) //возвращаем первоначальный текст кнопки
 };
 
 //добавление новой карточки на страницу из попапа добавить карточку
@@ -194,18 +196,16 @@ function createNewCard(data) {
   //сохраняем карточку
   const card = renderCard(data);
   return card
-
 };
 
 //функция добавления новой карточки при сабмите
 function handleAddCardFormSubmit(data) {
-  /* cardList.addItem(createNewCard(data)); //добавили карточку в контейнер */
-  api.addNewCard(data)
+  api.addNewCard(data)//запрос к серверу
   .then(newCard => {
     cardList.addItem(createNewCard(newCard)) //добавили карточку в контейнер
   })
   .catch(err => console.log(err))
-  .finally(() => openedPopupAddCard.renderLoading(false))
+  .finally(() => openedPopupAddCard.renderLoading(false)) //возвращаем первоначальный текст кнопки
 }
 
 //открытие попапа по клику на кнопку редактирования профиля
@@ -220,7 +220,7 @@ popupAddCardOpenBtn.addEventListener('click', () => {
   formValidatorAddCard.resetValidation(); //очищение ошибок и дезактивация кнопки
 });
 
-popupEditAvatar.addEventListener('click', () => {
+document.querySelector('.profile__image-edit').addEventListener('click', () => {
   openedPopupEditAvatar.open();
   formValidatorEditAvatar.resetValidation()
 })

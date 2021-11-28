@@ -1,7 +1,6 @@
 //класс с отрисовкой элементов на странице
 export default class Section {
   constructor({renderer}, elementSelector) {
-    /* this._items = items; */
     this._renderer = renderer;
     this._container = document.querySelector(elementSelector);
   }

@@ -6,6 +6,7 @@ export const selectorCardTemplate = '.cards-template';//селектор раз�
 export const selectorPopupProfileEdit = '.popup_type_edit';//селектор попапа редактирования профиля
 export const selectorPopupAddCard = '.popup_type_new-card';//селектор попапа редактирования профиля
 export const selectorPopupWithImage = '.popup_type_image';//селектор попапа с изображением
+export const selectorPopupDelete = '.popup_type_delete'; //селектор попапа с подтверждением удаления
 export const selectorPopupEditAvatar = '.popup_type_edit-avatar'; // селектор попапа редактирования фото профиля
 export const selectorFormAddCard = '.form_type_add'; //селектор формы добавления карточки
 export const selectorFormEdit = '.form_type_edit';// селектор формы редактирования

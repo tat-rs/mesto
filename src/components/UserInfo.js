@@ -9,9 +9,9 @@ export default class UserInfo {
   //метод, который возвращает объект с данными пользователя
   getUserInfo() {
     const newData = {
-      name: this._nameProfile.textContent,
-      about: this._descProfile.textContent,
-      avatar: this._userAvatar.src,
+      name: this._nameProfile.textContent, //имя профиля
+      about: this._descProfile.textContent,//описание профиля
+      avatar: this._userAvatar.src,//ссылка на фото пользователя
     }
     return newData
   };

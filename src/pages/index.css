@@ -53,7 +53,6 @@
 @import url(../blocks/popup/__close/popup__close.css);
 @import url(../blocks/popup/__form/popup__form.css);
 @import url(../blocks/popup/__image/popup__image.css);
-@import url(../blocks/profile/__image-container/profile__image-container.css);
 @import url(../blocks/popup/__subtitle/popup__subtitle.css);
 
 @import url(../blocks/form/form.css);
@@ -79,9 +78,3 @@
 @import url(../blocks/desc-profile-error/desc-profile-error.css);
 @import url(../blocks/image-subtitle-error/image-subtitle-error.css);
 @import url(../blocks/image-link-error/image-link-error.css);
-
-* {
-  outline-style: solid;
-  outline-width: 1px;
-  outline-color: red;
-}
