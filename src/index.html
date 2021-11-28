@@ -77,6 +77,17 @@
       </form>
     </div>
   </div>
+  <div class="popup popup_type_edit-avatar">
+    <div class="popup__container">
+      <button class="popup__close link" type="button" aria-label="Закрыть форму"></button>
+      <form class="popup__form form" name="form-edit" novalidate>
+        <h2 class="form__title">Обновить аватар</h2>
+        <input class="form__item form__item_type_image-link" id="image-link" type="url" name="link" placeholder="Ссылка на фото профиля" required>
+        <span class="form__error image-link-error"></span>
+        <button class="form__button" type="submit">Сохранить</button>
+      </form>
+    </div>
+  </div>
   <template class="cards-template">
     <li class="cards__item">
       <button class="cards__delete" type="button" aria-label="Удалить"></button>
