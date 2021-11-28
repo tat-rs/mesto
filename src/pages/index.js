@@ -11,6 +11,7 @@ import {
   selectorFormAddCard,
   selectorFormEdit,
   selectorAvatarProfile,
+  selectorFormEditAvatar,
 } from '../utils/constants.js';
 
 import Card from '../components/Card.js'; //импортируем класс карточки
@@ -40,8 +41,10 @@ const formInfoDesc = formInfo.querySelector('.form__item_type_desc'); //пере
 //переменные попапа добавления карточки
 const popupAddCardOpenBtn = document.querySelector('.profile__button'); //кнопка открытия попапа добавления карточки
 
+const popupEditAvatar = document.querySelector('.profile__image-container')
+
 //создаем экземпляр класса отоброжаения инф-ии о пользователи
-const userInfo = new UserInfo(selectorProfileName, selectorProfileDesc, selectorAvatarProfile);
+const userInfo = new UserInfo(selectorProfileName, selectorProfileDesc, '.profile__image');
 
 //экземпляр первоначальных карточек на странице
 const cardList = new Section({
@@ -65,6 +68,7 @@ const api = new Api({
 Promise.all([api.getAllCards(), api.getUserInfo()])
 .then(([dataCards, dataUser]) => {
   userId = dataUser._id;
+  console.log(dataUser)
   userInfo.setUserInfo(dataUser); //добавляем новые значения
   cardList.renderItems(dataCards);//отрисовали карточки на странице
 })
@@ -94,6 +98,21 @@ const openedPopupAddCard = new PopupWithForm({
 });
 openedPopupAddCard.setEventListeners();
 
+const openedPopupEditAvatar = new PopupWithForm({
+  popupSelector: '.popup_type_edit-avatar',
+  handleFormSubmit: (data) => {
+    api.editUserAvatar(data)//добавляем новые значения
+    .then((newAvatar) => {
+      console.log(newAvatar)
+      userInfo.setUserInfo(newAvatar)
+    })
+    .catch(err => console.log(err))
+    openedPopupEditAvatar.close();
+  }
+})
+
+openedPopupEditAvatar.setEventListeners()
+
 const popupWithConfirmation = new PopupWithConfirmation({
   popupSelector: '.popup_type_delete',
   handleFormSubmit: () => {
@@ -117,6 +136,10 @@ formValidatorAddCard.enableValidation(); //вызываем валидацию �
 //создаем экземпляр валидации формы редактирования профиля
 const formValidatorEditProfile = new FormValidator(validationConfig, selectorFormEdit);
 formValidatorEditProfile.enableValidation(); //валидириуем форму
+
+//создаем экземпляр валидации формы редактирования фото профиля
+const formValidatorEditAvatar = new FormValidator(validationConfig, selectorFormEditAvatar);
+formValidatorEditAvatar.enableValidation(); //валидириуем форму
 
 //объявление функции открытия попапа редактирования профиля
 function openEditProfilePopup() {
@@ -192,3 +215,8 @@ popupAddCardOpenBtn.addEventListener('click', () => {
   openedPopupAddCard.open(); //открываем попап
   formValidatorAddCard.resetValidation(); //очищение ошибок и дезактивация кнопки
 });
+
+popupEditAvatar.addEventListener('click', () => {
+  openedPopupEditAvatar.open();
+  formValidatorEditAvatar.resetValidation()
+})

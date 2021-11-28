@@ -53,6 +53,18 @@ export default class Api {
 
 
   //заменить аватар (PATCH)
+  editUserAvatar(userAvatar) {
+    return fetch(`${this._url}users/me/avatar/`, {
+      method: "PATCH",
+      headers: this._headers,
+      body: JSON.stringify({
+        avatar: userAvatar.avatar,
+      })
+    })
+    .then(onResponce)
+  }
+
+
   //“залайкать” карточку (PUT)
   setCardlike(cardId) {
     return fetch(`${this._url}cards/likes/${cardId}`, {
