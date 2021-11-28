@@ -49,10 +49,10 @@ export default class Card {
   }
 
   //метод удаления карточки со страницы
-  deleteCard() {
+  /* deleteCard() {
     this._element.closest('.cards__item').remove(); //удаляем блок карточки
   };
-
+ */
   deleteIcon() {
     if(this._cardOwnerId === this._currentUserId) {
       this._deleteButton.classList.add('cards__delete_visible');
@@ -69,14 +69,14 @@ export default class Card {
 
   //метод созданиия новой карточки
   generateCard() {
-    this._element = this._getTemplate(); //сохраняем разметку
+    this.element = this._getTemplate(); //сохраняем разметку
 
-    this._likeButton = this._element.querySelector('.cards__button'); //нашли кнопку лайка
-    this._sumOfLikes = this._element.querySelector('.cards__sum-likes')
-    this._deleteButton = this._element.querySelector('.cards__delete'); //нашли кнопку удалить
+    this._likeButton = this.element.querySelector('.cards__button'); //нашли кнопку лайка
+    this._sumOfLikes = this.element.querySelector('.cards__sum-likes')
+    this._deleteButton = this.element.querySelector('.cards__delete'); //нашли кнопку удалить
 
-    this._cardImage = this._element.querySelector('.cards__image'); //находим элемент изображения
-    this._cardSubtitle = this._element.querySelector('.cards__subtitle'); //находим элемент описания изображения
+    this._cardImage = this.element.querySelector('.cards__image'); //находим элемент изображения
+    this._cardSubtitle = this.element.querySelector('.cards__subtitle'); //находим элемент описания изображения
     this.deleteIcon()
     this._setEventListeners(); //вызываем обработчик слушателей
     this._updateLike();
@@ -88,7 +88,7 @@ export default class Card {
 
     this._sumOfLikes.textContent = this._arrayLikes.length;
 
-    return this._element;
+    return this.element;
   };
 
 }

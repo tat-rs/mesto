@@ -12,6 +12,7 @@ import {
   selectorFormEdit,
   selectorAvatarProfile,
   selectorFormEditAvatar,
+  selectorPopupEditAvatar,
 } from '../utils/constants.js';
 
 import Card from '../components/Card.js'; //импортируем класс карточки
@@ -44,7 +45,7 @@ const popupAddCardOpenBtn = document.querySelector('.profile__button'); //кно
 const popupEditAvatar = document.querySelector('.profile__image-container')
 
 //создаем экземпляр класса отоброжаения инф-ии о пользователи
-const userInfo = new UserInfo(selectorProfileName, selectorProfileDesc, '.profile__image');
+const userInfo = new UserInfo(selectorProfileName, selectorProfileDesc, selectorAvatarProfile);
 
 //экземпляр первоначальных карточек на странице
 const cardList = new Section({
@@ -68,7 +69,6 @@ const api = new Api({
 Promise.all([api.getAllCards(), api.getUserInfo()])
 .then(([dataCards, dataUser]) => {
   userId = dataUser._id;
-  console.log(dataUser)
   userInfo.setUserInfo(dataUser); //добавляем новые значения
   cardList.renderItems(dataCards);//отрисовали карточки на странице
 })
@@ -99,11 +99,10 @@ const openedPopupAddCard = new PopupWithForm({
 openedPopupAddCard.setEventListeners();
 
 const openedPopupEditAvatar = new PopupWithForm({
-  popupSelector: '.popup_type_edit-avatar',
+  popupSelector: selectorPopupEditAvatar,
   handleFormSubmit: (data) => {
     api.editUserAvatar(data)//добавляем новые значения
     .then((newAvatar) => {
-      console.log(newAvatar)
       userInfo.setUserInfo(newAvatar)
     })
     .catch(err => console.log(err))
@@ -116,18 +115,48 @@ openedPopupEditAvatar.setEventListeners()
 
 const popupWithConfirmation = new PopupWithConfirmation({
   popupSelector: '.popup_type_delete',
-  handleFormSubmit: () => {
-    /* handleFormSubmitDelete() */
-    console.log('delete')
+  handleFormSubmit: (card) => {
+    api.deleteCard(card.cardId)
+    .then(() => {
+      card.element.remove();
+    })
+    .catch(err => console.log(err));
+
     popupWithConfirmation.close()
   }
 })
 
 popupWithConfirmation.setEventListeners()
 
-/* function handleFormSubmitDelete() {
+function renderCard(data) {
+  const card = new Card({
+    //расширяем объект новым полем - id пользователя
+    data: {...data, currentUserId: userId},
+    handleCardClick: () => {
+      popupWithImage.open(data)
+    },
+    handleLikeClick: (card) => {
+      if(card.isLiked()) {
+        api.deleteCardlike(card.cardId)
+        .then(dataCard => card.setLikes(dataCard.likes))
+        .catch(err => console.log(err))
+      } else {
+        api.setCardlike(card.cardId)
+        .then(dataCard => card.setLikes(dataCard.likes))
+        .catch(err => console.log(err))
+      }
+    },
+    handleDeleteOnClick: (card) => {
+      //у каждой кнопки свой колбэк, который отправляет запрос на сервер
+      popupWithConfirmation.open()
+      /* console.log(card, card.cardId) */
+      popupWithConfirmation.setActionSubmit(card) //получили айди текущей карточки
+    }
+  }, selectorCardTemplate);
 
-} */
+  const newCard = card.generateCard();
+  return newCard
+};
 
 
 //создаем экземпляр валидации формы добавления карточки
@@ -159,34 +188,6 @@ function submitEditProfileForm(data) {
   .catch(err => console.log(err))
   .finally(() => openedPopupEdit.renderLoading(false))
 };
-
-function renderCard(data) {
-  const card = new Card({
-    //расширяем объект новым полем - id пользователя
-    data: {...data, currentUserId: userId},
-    handleCardClick: () => {
-      popupWithImage.open(data)
-    },
-    handleLikeClick: (card) => {
-      if(card.isLiked()) {
-        api.deleteCardlike(card.cardId)
-        .then(dataCard => card.setLikes(dataCard.likes))
-        .catch(err => console.log(err))
-      } else {
-        api.setCardlike(card.cardId)
-        .then(dataCard => card.setLikes(dataCard.likes))
-        .catch(err => console.log(err))
-      }
-    },
-    handleDeleteOnClick: () => {
-      popupWithConfirmation.open()
-    }
-  }, selectorCardTemplate);
-
-  const newCard = card.generateCard();
-  return newCard
-};
-
 
 //добавление новой карточки на страницу из попапа добавить карточку
 function createNewCard(data) {

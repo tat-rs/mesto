@@ -7,13 +7,17 @@ export default class PopupWithConfirmation extends Popup {
     this._form = this._popup.querySelector('.form');
   }
 
+  setActionSubmit(action) {
+    this._deletedCardId = action
+  }
   //обработчик клика по крестику, оверлею и сабмит формы
   setEventListeners() {
     super.setEventListeners();
 
     this._form.addEventListener('submit', (evt) => {
       evt.preventDefault();
-      this._handleFormSubmit(this)
+      console.log(this._deletedCardId)
+      this._handleFormSubmit(this._deletedCardId)
     });
   };
 }

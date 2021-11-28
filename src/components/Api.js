@@ -30,6 +30,15 @@ export default class Api {
     .then(onResponce)
   }
   //удалить карточку (DELETE)
+  deleteCard(cardId) {
+    return fetch(`${this._url}cards/${cardId}`, {
+      method: "DELETE",
+      headers: this._headers,
+    })
+    .then(onResponce)
+  }
+
+
   //получить данные пользователя (GET)
   getUserInfo() {
     return fetch(`${this._url}users/me`, {
