@@ -1,0 +1,20 @@
+.profile__image-edit {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  border: 0;
+  background-image: url('../../../images/avatar-edit.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 26px;
+  opacity: 0;
+  transition: opacity 0.2s;
+  cursor: pointer;
+}
+
+.profile__image-edit:hover {
+  opacity: .8;
+}
