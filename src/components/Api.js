@@ -8,7 +8,6 @@ export default class Api {
   //метод проверки результата запроса к серверу
   _checkResponse(res) {
     if (res.ok) {
-      console.log('проверка')
       return res.json(); //возвращаем резульат, если нет ошибок
     }
     return Promise.reject(`Ошибка: ${res.status}`); //возвращаем статус ошибки

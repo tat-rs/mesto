@@ -85,7 +85,6 @@ const openedPopupEdit = new PopupWithForm({
   popupSelector: selectorPopupProfileEdit,
   handleFormSubmit: (data) => {
     submitEditProfileForm(data); //функция сохранения данных при сабмите
-    openedPopupEdit.close();
   }
 });
 openedPopupEdit.setEventListeners(); //вызываем слушатель закрытия попапа по клику и оверлею
@@ -95,7 +94,6 @@ const openedPopupAddCard = new PopupWithForm({
   popupSelector: selectorPopupAddCard,
   handleFormSubmit: (data) => {
     handleAddCardFormSubmit(data); //функция добавления карточки при сабмите
-    openedPopupAddCard.close();
   }
 });
 openedPopupAddCard.setEventListeners(); //вызываем слушатель закрытия попапа по клику и оверлею
@@ -107,10 +105,10 @@ const openedPopupEditAvatar = new PopupWithForm({
     api.editUserAvatar(data)
     .then((newAvatar) => {
       userInfo.setUserInfo(newAvatar) //добавляем новое фото пользователя
+      openedPopupEditAvatar.close();
     })
     .catch(err => console.log(err))
     .finally(() => openedPopupEditAvatar.renderLoading(false)) //возвращаем первоначальный текст кнопки
-    openedPopupEditAvatar.close();
   }
 })
 openedPopupEditAvatar.setEventListeners(); //вызываем слушатель закрытия попапа по клику и оверлею
@@ -122,9 +120,9 @@ const popupWithConfirmation = new PopupWithConfirmation({
     api.deleteCard(card.cardId) //запрос на удаление карточки
     .then(() => {
       card.element.remove();//удаляем карточку
+      popupWithConfirmation.close();
     })
     .catch(err => console.log(err));
-    popupWithConfirmation.close()
   }
 })
 popupWithConfirmation.setEventListeners()//вызываем слушатель закрытия попапа по клику и оверлею
@@ -187,7 +185,8 @@ function openEditProfilePopup() {
 function submitEditProfileForm(data) {
   api.editUserInfo(data)//добавляем новые значения имени и описания
   .then((newUserInfo) => {
-  userInfo.setUserInfo(newUserInfo)
+  userInfo.setUserInfo(newUserInfo);
+  openedPopupEdit.close();
   })
   .catch(err => console.log(err))
   .finally(() => openedPopupEdit.renderLoading(false)) //возвращаем первоначальный текст кнопки
@@ -205,6 +204,7 @@ function handleAddCardFormSubmit(data) {
   api.addNewCard(data)//запрос к серверу
   .then(newCard => {
     cardList.addItem(createNewCard(newCard)) //добавили карточку в контейнер
+    openedPopupAddCard.close();
   })
   .catch(err => console.log(err))
   .finally(() => openedPopupAddCard.renderLoading(false)) //возвращаем первоначальный текст кнопки
