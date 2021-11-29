@@ -1,11 +1,3 @@
-//обрабатываем результат запроса к серверу
-function onResponce(res) {
-  if (res.ok) {
-    return res.json(); //возвращаем резульат, если нет ошибок
-  }
-  return Promise.reject(`Ошибка: ${res.status}`); //возвращаем статус ошибки
-};
-
 //класс запроса к серверу
 export default class Api {
   constructor({url, headers}) {
@@ -13,13 +5,22 @@ export default class Api {
     this._headers = headers; //заголовок
   }
 
+  //метод проверки результата запроса к серверу
+  _checkResponse(res) {
+    if (res.ok) {
+      console.log('проверка')
+      return res.json(); //возвращаем резульат, если нет ошибок
+    }
+    return Promise.reject(`Ошибка: ${res.status}`); //возвращаем статус ошибки
+  };
+
   //метод, получающий список всех карточек с сервера
   getAllCards() {
     return fetch(`${this._url}cards`, {
       method: "GET",
       headers: this._headers,
     })
-    .then(onResponce)
+    .then(this._checkResponse)
   }
 
   //метод добавления новой карточки на страницу
@@ -32,7 +33,7 @@ export default class Api {
         link: newCard.link, //новая ссыока
       })
     })
-    .then(onResponce)
+    .then(this._checkResponse)
   }
 
   //метод удаления карточки со страницы
@@ -41,7 +42,7 @@ export default class Api {
       method: "DELETE",
       headers: this._headers,
     })
-    .then(onResponce)
+    .then(this._checkResponse)
   }
 
   //получаем данные пользователя
@@ -50,7 +51,7 @@ export default class Api {
       method: "GET",
       headers: this._headers,
     })
-    .then(onResponce)
+    .then(this._checkResponse)
   }
 
   //метод редактирования данных пользователя
@@ -63,7 +64,7 @@ export default class Api {
         about: info.about,
       })
     })
-    .then(onResponce)
+    .then(this._checkResponse)
   }
 
   //метод редактирования фото профиля
@@ -75,7 +76,7 @@ export default class Api {
         avatar: userAvatar.avatar,
       })
     })
-    .then(onResponce)
+    .then(this._checkResponse)
   }
 
   //метод постановки лайка
@@ -84,7 +85,7 @@ export default class Api {
       method: "PUT",
       headers: this._headers,
     })
-    .then(onResponce)
+    .then(this._checkResponse)
   }
 
   //метод удаления лайка
@@ -93,6 +94,6 @@ export default class Api {
       method: "DELETE",
       headers: this._headers,
     })
-    .then(onResponce)
+    .then(this._checkResponse)
   }
 }
