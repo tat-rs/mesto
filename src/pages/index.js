@@ -185,9 +185,9 @@ function openEditProfilePopup() {
 function submitEditProfileForm(data) {
   api.editUserInfo(data)//добавляем новые значения имени и описания
   .then((newUserInfo) => {
-  userInfo.setUserInfo(newUserInfo);
-  openedPopupEdit.close();
-  })
+    userInfo.setUserInfo(newUserInfo);
+    openedPopupEdit.close();
+    })
   .catch(err => console.log(err))
   .finally(() => openedPopupEdit.renderLoading(false)) //возвращаем первоначальный текст кнопки
 };
