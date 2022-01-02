@@ -13,7 +13,13 @@ export default class Section {
   };
 
   //добавление DOM-элемента в контейнер
-  addItem(element) {
-    this._container.prepend(element);
+  addItem(element, place = 'after') {
+    if(place === 'before') {
+      this._container.prepend(element);
+    }
+
+    if(place === 'after') {
+      this._container.append(element);
+    }
   };
 }

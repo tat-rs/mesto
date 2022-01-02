@@ -203,7 +203,7 @@ function createNewCard(data) {
 function handleAddCardFormSubmit(data) {
   api.addNewCard(data)//запрос к серверу
   .then(newCard => {
-    cardList.addItem(createNewCard(newCard)) //добавили карточку в контейнер
+    cardList.addItem(createNewCard(newCard), 'before') //добавили карточку в контейнер
     openedPopupAddCard.close();
   })
   .catch(err => console.log(err))
