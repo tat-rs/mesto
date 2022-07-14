@@ -40,6 +40,6 @@ __4. Собрать проект__
 
 `npm run build`
 
-## Сылка на проект
+## Сcылка на проект
 
-<a href="https://tat-rs.github.io/mesto/" target="_blank" rel="noopener">Ссылка на проект на Github Pages</a>
+<a href="https://tat-rs.github.io/mesto/" target="_blank" rel="noopener">Ссылка на Github Pages</a>
