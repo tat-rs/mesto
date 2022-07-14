@@ -42,4 +42,4 @@ __4. Собрать проект__
 
 ## Сылка на проект
 
-<a href="https://tat-rs.github.io/mesto/" target="_blank" rel="noopener"></a>
+<a href="https://tat-rs.github.io/mesto/" target="_blank" rel="noopener">Ссылка на проект на Github Pages</a>
