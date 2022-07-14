@@ -7,7 +7,7 @@ export default class PopupWithForm extends Popup {
     this._form = this._popup.querySelector('.form');
     this._inputList = Array.from(this._popup.querySelectorAll('.form__item')); //массив с инпутами
     this._button = this._form.querySelector('.form__button');
-    this._defaultTextofButton = this._button.textContent
+    this._defaultTextofButton = this._button.textContent;
   }
 
   // собирает данные всех полей формы
@@ -24,6 +24,7 @@ export default class PopupWithForm extends Popup {
   renderLoading(isLoading) {
     if(isLoading) {
       this._button.textContent = "Сохранение..."
+      this._button.classList.add('loader')
     } else {
       this._button.textContent = this._defaultTextofButton
     }
